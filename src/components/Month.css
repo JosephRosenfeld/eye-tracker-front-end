@@ -1,0 +1,41 @@
+.month-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.month-name {
+  color: #5a5e63;
+  font-weight: 650;
+  font-size: 14px;
+}
+
+.month-week-day {
+  color: #81888f;
+  text-decoration: underline;
+  cursor: default;
+}
+
+.neighbor-month-day {
+  color: #abb3bb;
+}
+
+.cur-month-day {
+  color: #3c4043;
+}
+
+.month-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.month-day,
+.month-week-day {
+  padding: 6px 7.5px;
+}
+
+.month-day:hover {
+  border: 1px solid grey;
+  margin: -1px;
+  cursor: pointer;
+}

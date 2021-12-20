@@ -1,8 +1,22 @@
 .header {
+  /*make it stick to top*/
+  position: sticky;
+  top: 0;
+
   display: flex;
   justify-content: space-around;
+  width: 100%;
   align-items: center;
   min-height: 10vh;
-  background-color: grey;
-  color: white;
+  color: black;
+  background-color: rgb(255, 255, 255, 1);
+  border-bottom: 1px solid #dadce0;
+}
+
+.right-arrow {
+  cursor: pointer;
+}
+
+.left-arrow {
+  cursor: pointer;
 }

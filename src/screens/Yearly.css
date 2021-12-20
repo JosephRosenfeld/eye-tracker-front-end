@@ -1,0 +1,10 @@
+.year-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 40px 50px 60px;
+  justify-items: center;
+  align-items: center;
+  row-gap: 60px;
+  column-gap: 50px;
+  font-size: 13px;
+}

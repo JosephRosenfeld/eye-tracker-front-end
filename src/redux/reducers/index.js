@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { placeholderReducer } from "./placeholderReducer";
+import { viewDtReducer } from "./viewDateReducer";
 
 const reducers = combineReducers({
-  placeholder: placeholderReducer,
+  viewDt: viewDtReducer,
 });
 
 export default reducers;
