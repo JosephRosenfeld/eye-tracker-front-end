@@ -1,32 +1,21 @@
 .month-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .month-name {
-  color: #5a5e63;
-  font-weight: 650;
-  font-size: 14px;
-}
-
-.month-week-day {
-  color: #81888f;
-  text-decoration: underline;
-  cursor: default;
-}
-
-.neighbor-month-day {
-  color: #abb3bb;
-}
-
-.cur-month-day {
-  color: #3c4043;
+  /*color: hsl(213, 5%, 37%);*/
+  color: rgb(60, 64, 67);
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .month-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  font-size: 13px;
 }
 
 .month-day,
@@ -34,8 +23,55 @@
   padding: 6px 7.5px;
 }
 
+.month-week-day {
+  position: relative; /*So I can position the tooltip off of this element*/
+  display: flex;
+  flex-direction: column;
+  color: /*#81888f;*/ rgba(60, 64, 67, 1);
+  cursor: default;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(60, 64, 67, 0.5);
+  padding-bottom: 0px;
+  margin-bottom: 5px;
+}
+
+[data-tip]:before {
+  position: absolute;
+  visibility: hidden;
+  top: 150%;
+  left: 50%; /*Based on parent container*/
+  transform: translateX(-50%); /*Based on selected el*/
+  z-index: 1;
+  padding: 5px;
+  border-radius: 2px;
+  color: #fff;
+  background-color: rgba(60, 64, 67, 0.788);
+  content: attr(data-tip);
+  font-size: 13px;
+  text-align: center;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+[data-tip]:hover:before {
+  visibility: visible;
+  opacity: 1;
+}
+
+.neighbor-month-day {
+  color: rgba(60, 64, 67, 0.5);
+}
+
+.cur-month-day {
+  color: rgba(60, 64, 67, 1);
+}
+
 .month-day:hover {
-  border: 1px solid grey;
-  margin: -1px;
+  /*border: 1px solid grey;*/
+  text-decoration: underline;
+  text-underline-offset: 1px;
+  /*  margin: -1px;*/
   cursor: pointer;
 }

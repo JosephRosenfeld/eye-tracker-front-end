@@ -13,6 +13,7 @@ const initialState = {
   year: curDate.getFullYear(),
   month: curDate.getMonth(),
   day: curDate.getDate(),
+  increased: true,
 };
 
 export const viewDtReducer = (state = initialState, action) => {

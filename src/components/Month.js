@@ -40,19 +40,32 @@ const Month = ({ m }) => {
     };
     if (dtArr[i]) pointerDt.setDate(pointerDt.getDate() + 1);
   }
-  console.log(dtArr);
   //get view date somehow.
   return (
     <div className='month-container'>
       <div className='month-name'>{months[m]}</div>
       <div className='month-days'>
-        <div className='month-week-day'>S</div>
-        <div className='month-week-day'>M</div>
-        <div className='month-week-day'>T</div>
-        <div className='month-week-day'>W</div>
-        <div className='month-week-day'>T</div>
-        <div className='month-week-day'>F</div>
-        <div className='month-week-day'>S</div>
+        <div className='month-week-day' data-tip='Sunday'>
+          S
+        </div>
+        <div className='month-week-day' data-tip='Monday'>
+          M
+        </div>
+        <div className='month-week-day' data-tip='Tuesday'>
+          T
+        </div>
+        <div className='month-week-day' data-tip='Wednesday'>
+          W
+        </div>
+        <div className='month-week-day' data-tip='Thursday'>
+          T
+        </div>
+        <div className='month-week-day' data-tip='Friday'>
+          F
+        </div>
+        <div className='month-week-day' data-tip='Saturday'>
+          S
+        </div>
         {dtArr.map((el) => (
           <div
             className={`month-day ${

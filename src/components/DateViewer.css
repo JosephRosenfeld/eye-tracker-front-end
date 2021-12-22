@@ -1,0 +1,19 @@
+.date-viewer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 25px;
+}
+
+.right-arrow {
+  cursor: pointer;
+}
+
+.left-arrow {
+  cursor: pointer;
+}
+
+.right-arrow span,
+.left-arrow span {
+  font-size: 30px;
+}

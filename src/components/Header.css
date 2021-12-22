@@ -2,21 +2,30 @@
   /*make it stick to top*/
   position: sticky;
   top: 0;
+  z-index: 100; /*Make it show over relatively positioned elements*/
 
+  /*Flex-box*/
   display: flex;
-  justify-content: space-around;
-  width: 100%;
+  justify-content: space-between;
   align-items: center;
+
+  padding: 10px 8%;
   min-height: 10vh;
   color: black;
   background-color: rgb(255, 255, 255, 1);
   border-bottom: 1px solid #dadce0;
 }
 
-.right-arrow {
-  cursor: pointer;
+.header-left {
+  /*Flex*/
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
-.left-arrow {
-  cursor: pointer;
+.header-right {
+  /*Flex*/
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
