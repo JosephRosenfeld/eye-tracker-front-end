@@ -6,21 +6,33 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeDt } from "../redux/actions/viewDateActions";
 
 const DateViewer = () => {
+  //Retrieve and extract view date values
   const viewDt = useSelector((state) => state.viewDt);
-  console.log(viewDt);
-  const year = viewDt.year;
-  const month = viewDt.month;
-  const day = viewDt.day;
+  let year = viewDt.year;
+  let month = viewDt.month;
+  let day = viewDt.day;
+  const tempDt = new Date(year, month, day);
+  const monthTxt = tempDt.toLocaleString("en-us", { month: "long" });
+  console.log(monthTxt);
 
+  //Figure out what view is displayed
+  const page = window.location.href.includes("/year")
+    ? "year"
+    : window.location.href.includes("/week")
+    ? "week"
+    : window.location.href.includes("/3day")
+    ? "3day"
+    : null;
+
+  //initialize dispatch
   const dispatch = useDispatch();
 
   const changeViewDt = (change) => {
-    if (window.location.href.includes("/year")) {
+    if (page == "year") {
       year += 1 * change;
-      //logic for shift
-    } else if (window.location.href.includes("/week")) {
+    } else if (page == "week") {
       day += 7 * change;
-    } else if (window.location.href.includes("/3day")) {
+    } else if ((page = "3day")) {
       day += 3 * change;
     }
 
@@ -36,15 +48,24 @@ const DateViewer = () => {
     );
   };
 
+  //Formate shown date
+  const shownDate = page == "year" ? year : monthTxt;
+
   return (
     <div className='date-viewer'>
-      <div className='left-arrow' onClick={() => changeViewDt(-1)}>
-        <span class='material-icons'>chevron_left</span>
-      </div>
-      <div className='view-date'>{`${month + 1}-${day}-${year}`}</div>
-      <div className='right-arrow' onClick={() => changeViewDt(1)}>
-        <span class='material-icons'>chevron_right</span>
-      </div>
+      <span
+        className='left-arrow material-icons'
+        onClick={() => changeViewDt(-1)}
+      >
+        chevron_left
+      </span>
+      <div className='view-date'>{shownDate}</div>
+      <span
+        className='right-arrow material-icons'
+        onClick={() => changeViewDt(1)}
+      >
+        chevron_right
+      </span>
     </div>
   );
 };

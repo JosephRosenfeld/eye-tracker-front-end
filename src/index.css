@@ -1,3 +1,7 @@
+:root {
+  --text-color: rgb(60, 64, 67);
+}
+
 body {
   font-family: "Roboto", sans-serif;
 }

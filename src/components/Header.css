@@ -9,23 +9,154 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 10px 8%;
-  min-height: 10vh;
-  color: black;
+  padding: 5px 3% 5px 3%;
+  color: var(--text-color);
   background-color: rgb(255, 255, 255, 1);
   border-bottom: 1px solid #dadce0;
+
+  user-select: none;
 }
+
+/*HEADER LEFT SECTION*/
 
 .header-left {
   /*Flex*/
   display: flex;
   align-items: center;
-  gap: 30px;
 }
+
+.header-left > * {
+  padding: 10px;
+}
+
+.logo {
+  width: 50px;
+}
+
+.site-title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.header-left .date-viewer {
+  padding-left: 3vw;
+}
+
+/*HEADER RIGHT SECTION*/
 
 .header-right {
   /*Flex*/
   display: flex;
   align-items: center;
   gap: 30px;
+}
+
+.add-icon {
+  font-size: 30px;
+  color: #37b051;
+  border: 2px solid #37b051;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgb(0, 0, 0, 0.3);
+  transition: transform 0.5s, box-shadow 0.5s;
+
+  cursor: pointer;
+}
+
+.add-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 8px rgb(0, 0, 0, 0.3);
+}
+
+.plus-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plus-icon img {
+  width: 30px;
+  filter: invert(54%) sepia(90%) saturate(359%) hue-rotate(81deg)
+    brightness(89%) contrast(87%);
+  cursor: pointer;
+}
+
+.plus-icon img:hover {
+  width: 32px;
+  cursor: pointer;
+}
+
+/*Period dropdown*/
+
+.dropdown-container {
+  position: relative;
+}
+
+.period-dropdown {
+  /*Flex*/
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  /*Position & Border-Box*/
+  position: relative;
+  padding: 7px 10px;
+  border: 1px solid rgba(60, 64, 67, 0.35);
+  border-radius: 3px;
+
+  cursor: pointer;
+}
+
+.period-dropdown:hover {
+  background-color: rgba(180, 180, 180, 0.075);
+}
+
+.period-dropdown::after {
+  transform: translateY(
+    25%
+  ); /*because the arrow is only the top quarter of the after el*/
+  content: " ";
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(60, 64, 67, 0.83) transparent transparent transparent;
+}
+
+.period-options {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 150%;
+  background-color: white;
+  position: absolute;
+  top: 140%;
+  left: -25%;
+  z-index: 101; /*make it show over the header*/
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.period-options a {
+  text-decoration: none !important;
+}
+
+.period-option {
+  text-align: left;
+  padding: 7px 10px;
+  color: var(--text-color);
+}
+
+.period-option:hover {
+  background-color: rgba(180, 180, 180, 0.15);
+}
+
+/*Reminders button*/
+.reminders {
+  padding: 7px 10px;
+  border: 1px solid rgba(60, 64, 67, 0.35);
+  border-radius: 3px;
+
+  cursor: pointer;
+}
+
+.reminders:hover {
+  background-color: rgba(180, 180, 180, 0.075);
 }

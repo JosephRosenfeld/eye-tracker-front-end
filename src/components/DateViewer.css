@@ -1,19 +1,24 @@
 .date-viewer {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 25px;
+  font-size: 22px;
 }
 
-.right-arrow {
-  cursor: pointer;
-}
-
+.right-arrow,
 .left-arrow {
+  position: relative;
   cursor: pointer;
 }
 
-.right-arrow span,
-.left-arrow span {
-  font-size: 30px;
+.right-arrow:hover::after,
+.left-arrow:hover::after {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  width: 70%;
+  height: 85%;
+  content: "";
+  background-color: rgba(20, 22, 22, 0.123);
+  border-radius: 1px;
 }
