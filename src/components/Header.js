@@ -28,7 +28,7 @@ const Header = () => {
 
   //Adding event listener for outside clicks on document
   useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
+    let handler = (event) => {
       if (
         dropOptionsRef.current &&
         !dropOptionsRef.current.contains(event.target) &&
@@ -37,7 +37,10 @@ const Header = () => {
       ) {
         setIsOpen(false);
       }
-    });
+    };
+    document.addEventListener("mousedown", handler);
+
+    return () => window.removeEventListener("mousedown", handler);
   });
 
   const toggleMenuDropdown = () => {
@@ -54,15 +57,10 @@ const Header = () => {
       </div>
 
       <div className='header-right'>
-        {/*
-        <div className='plus-icon'>
-          <img src='/assets/collapse-plus.svg'></img>
-        </div>*/}
-        <span class='material-icons add-icon'>add</span>
-        <span className='material-icons'>help_outline</span>
-        <span className='material-icons'>settings</span>
-        <div className='reminders'>Reminders</div>
-
+        <span className='material-icons header-icon'>add_box</span>
+        <span className='material-icons header-icon'>notifications</span>
+        <span className='material-icons header-icon help'>help</span>
+        <span className='material-icons header-icon'>settings</span>
         <div className='dropdown-container'>
           <div
             ref={dropdownRef}
@@ -71,13 +69,18 @@ const Header = () => {
           >
             {page.charAt(0).toUpperCase() + page.slice(1)}
           </div>
+
           {isOpen && (
             <div ref={dropOptionsRef} className='period-options'>
               <Link to='/year'>
-                <div className='period-option'>Year</div>
+                <div className='period-option' onClick={toggleMenuDropdown}>
+                  Year
+                </div>
               </Link>
               <Link to='week'>
-                <div className='period-option'>Week</div>
+                <div className='period-option' onClick={toggleMenuDropdown}>
+                  Week
+                </div>
               </Link>
             </div>
           )}

@@ -8,8 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding: 5px 3% 5px 3%;
+  padding: 5px 3%;
   color: var(--text-color);
   background-color: rgb(255, 255, 255, 1);
   border-bottom: 1px solid #dadce0;
@@ -39,7 +38,7 @@
 }
 
 .header-left .date-viewer {
-  padding-left: 3vw;
+  padding-left: 2.5vw;
 }
 
 /*HEADER RIGHT SECTION*/
@@ -48,43 +47,19 @@
   /*Flex*/
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 16px;
 }
 
-.add-icon {
-  font-size: 30px;
-  color: #37b051;
-  border: 2px solid #37b051;
-  border-radius: 50%;
-  box-shadow: 0 0 4px rgb(0, 0, 0, 0.3);
-  transition: transform 0.5s, box-shadow 0.5s;
-
+.header-icon {
+  font-size: 25px;
+  padding: 7px;
+  border-radius: 3px;
   cursor: pointer;
 }
 
-.add-icon:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 8px rgb(0, 0, 0, 0.3);
+.header-icon:hover {
+  background-color: rgba(180, 180, 180, 0.15);
 }
-
-.plus-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.plus-icon img {
-  width: 30px;
-  filter: invert(54%) sepia(90%) saturate(359%) hue-rotate(81deg)
-    brightness(89%) contrast(87%);
-  cursor: pointer;
-}
-
-.plus-icon img:hover {
-  width: 32px;
-  cursor: pointer;
-}
-
 /*Period dropdown*/
 
 .dropdown-container {
@@ -146,17 +121,4 @@
 
 .period-option:hover {
   background-color: rgba(180, 180, 180, 0.15);
-}
-
-/*Reminders button*/
-.reminders {
-  padding: 7px 10px;
-  border: 1px solid rgba(60, 64, 67, 0.35);
-  border-radius: 3px;
-
-  cursor: pointer;
-}
-
-.reminders:hover {
-  background-color: rgba(180, 180, 180, 0.075);
 }
