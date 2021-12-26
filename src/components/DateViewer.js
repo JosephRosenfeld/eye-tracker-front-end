@@ -15,7 +15,7 @@ const DateViewer = () => {
   const monthTxt = tempDt.toLocaleString("en-us", { month: "long" });
 
   //Figure out what view is displayed //Needs to be replaced;
-  const page = window.location.href.includes("/year")
+  let page = window.location.href.includes("/year")
     ? "year"
     : window.location.href.includes("/week")
     ? "week"
@@ -36,7 +36,6 @@ const DateViewer = () => {
     }
 
     let newDt = new Date(year, month, day);
-    console.log(newDt.getFullYear(), newDt.getMonth(), newDt.getDate());
     dispatch(
       changeDt({
         year: newDt.getFullYear(),

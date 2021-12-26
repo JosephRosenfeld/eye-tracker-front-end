@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,13 +8,15 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import { changePage } from "./redux/actions/pageActions";
+
 //component imports
 import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
 
 function App() {
-  //Functionality for storing the window's width as a state variable
+  /*--- Window Width into State ---*/
   const [inWidth, setInWidth] = useState(window.innerWidth);
   useEffect(() => {
     const shiftWidth = () => {
@@ -22,6 +25,14 @@ function App() {
     window.addEventListener("resize", shiftWidth);
     return () => window.removeEventListener("resize", shiftWidth);
   });
+  /*Might put the above state into the redux store later if I need it elsewhere in the app*/
+
+  /*--- Pathname into Global State (Redux) ---*/
+  /*The reason we are storing the pathname in state in the first place is because we need
+  to trigger a rerender when the path changes. The easiest way to do that is store the path
+  in state. State changes and voilà our component rerenders.
+  The reason global state was chosen instead of component state is because we need this
+  rerendering to occur in multiple components*/
 
   return (
     <Router>

@@ -1,7 +1,8 @@
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { changePage } from "../redux/actions/pageActions";
 
 //component imports
 import DateViewer from "./DateViewer";
@@ -10,22 +11,12 @@ import DateViewer from "./DateViewer";
 import { changeDt } from "../redux/actions/viewDateActions";
 
 const Header = () => {
-  //Figure out what view is displayed
-  /*This is using a state variable and an event listener because when you navigate to
-    a url that redirects you, the header will still initially render with the old invalid
-    url. By putting the location url into a state variable, we guarentee that the header
-    will rerender once the location changes (after redirect)*/
-  const location = useLocation(); //get location obj
-  const [page, setPage] = useState(location.pathname);
-  console.log(page);
-
+  /*--- Period Drop Down Config ---*/
   //initializing menu toggle state to false
   const [isOpen, setIsOpen] = useState(false);
-
   //declaring ref to be used in outside click function
   const dropdownRef = useRef();
   const dropOptionsRef = useRef();
-
   //Adding event listener for outside clicks on document
   useEffect(() => {
     let handler = (event) => {
@@ -39,14 +30,27 @@ const Header = () => {
       }
     };
     document.addEventListener("mousedown", handler);
-
     return () => window.removeEventListener("mousedown", handler);
   });
 
   const toggleMenuDropdown = () => {
     setIsOpen(!isOpen);
-    console.log("react event listener toggle ran");
   };
+
+  /*--- Pulling Page from Global Store ---*/
+  const dispatch = useDispatch();
+  const setPageEventListener = () => {
+    console.log("we are firing");
+    dispatch(changePage(window.location.pathname));
+  };
+  useEffect(() => {
+    console.log("added event listener");
+    window.addEventListener("locationchange", setPageEventListener);
+    return () =>
+      window.removeEventListener("locationchange", setPageEventListener);
+  }, []);
+  const page = useSelector((state) => state.page);
+  console.log(page);
 
   return (
     <header className='header'>
@@ -79,7 +83,8 @@ const Header = () => {
             className='period-dropdown'
             onClick={toggleMenuDropdown}
           >
-            {page.charAt(0).toUpperCase() + page.slice(1)}
+            {/*page.charAt(0).toUpperCase() + page.slice(1)*/}
+            {page}
           </div>
 
           {isOpen && (
