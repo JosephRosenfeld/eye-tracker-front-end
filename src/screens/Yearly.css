@@ -6,7 +6,14 @@
   align-items: center;
   row-gap: 60px;
   column-gap: 50px;
-  overflow: auto;
+
+  position: absolute;
+  top: 70.625px; /*Offset of header*/ /*This is manually calculated which is kinda messy.
+  Will need to adjust it if header changes size on diff screen sizes*/
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow-y: auto; /*Scrollbar dissapears with auto if its not needed*/
 }
 
 @media (max-width: 1100px) {

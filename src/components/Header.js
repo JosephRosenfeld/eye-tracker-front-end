@@ -1,7 +1,7 @@
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 //component imports
 import DateViewer from "./DateViewer";
@@ -11,13 +11,13 @@ import { changeDt } from "../redux/actions/viewDateActions";
 
 const Header = () => {
   //Figure out what view is displayed
-  const page = window.location.href.includes("/year")
-    ? "year"
-    : window.location.href.includes("/week")
-    ? "week"
-    : window.location.href.includes("/3day")
-    ? "3day"
-    : null;
+  /*This is using a state variable and an event listener because when you navigate to
+    a url that redirects you, the header will still initially render with the old invalid
+    url. By putting the location url into a state variable, we guarentee that the header
+    will rerender once the location changes (after redirect)*/
+  const location = useLocation(); //get location obj
+  const [page, setPage] = useState(location.pathname);
+  console.log(page);
 
   //initializing menu toggle state to false
   const [isOpen, setIsOpen] = useState(false);
@@ -57,10 +57,22 @@ const Header = () => {
       </div>
 
       <div className='header-right'>
-        <span className='material-icons header-icon'>add_box</span>
-        <span className='material-icons header-icon'>notifications</span>
-        <span className='material-icons header-icon help'>help</span>
-        <span className='material-icons header-icon'>settings</span>
+        <div className='header-icon-container'>
+          <span className='material-icons header-icon'>add_box</span>
+          <span className='header-icon-tip'>Add</span>
+        </div>
+        <div className='header-icon-container'>
+          <span className='material-icons header-icon'>notifications</span>
+          <span className='header-icon-tip'>Reminders</span>
+        </div>
+        <div className='header-icon-container'>
+          <span className='material-icons header-icon'>help</span>
+          <span className='header-icon-tip'>Help</span>
+        </div>
+        <div className='header-icon-container'>
+          <span className='material-icons header-icon'>settings</span>
+          <span className='header-icon-tip'>Settings</span>
+        </div>
         <div className='dropdown-container'>
           <div
             ref={dropdownRef}

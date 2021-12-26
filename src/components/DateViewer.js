@@ -13,9 +13,8 @@ const DateViewer = () => {
   let day = viewDt.day;
   const tempDt = new Date(year, month, day);
   const monthTxt = tempDt.toLocaleString("en-us", { month: "long" });
-  console.log(monthTxt);
 
-  //Figure out what view is displayed
+  //Figure out what view is displayed //Needs to be replaced;
   const page = window.location.href.includes("/year")
     ? "year"
     : window.location.href.includes("/week")

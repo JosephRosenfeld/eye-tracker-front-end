@@ -50,16 +50,55 @@
   gap: 16px;
 }
 
+/*Only added a container so that the tooltip can position off something*/
+.header-icon-container {
+  position: relative;
+}
+
 .header-icon {
   font-size: 25px;
   padding: 7px;
   border-radius: 3px;
+  color: rgba(60, 64, 67, 0.753);
   cursor: pointer;
+  transition: background-color 0.25s;
 }
 
 .header-icon:hover {
-  background-color: rgba(180, 180, 180, 0.15);
+  background-color: rgba(180, 180, 180, 0.25);
 }
+
+.header-icon-tip {
+  /*Based on the tooltip for weekdays: 
+  -removed the z-index and it seems to be working fine
+  -for some reason had to add the font-family, might be because material ui icons have a different font
+  -The top is 120% instead of the 150% it was in weekdays
+  */
+  font-family: "Roboto", sans-serif;
+  z-index: 101; /*one over the header's z index*/
+  position: absolute;
+  top: 120%; /*Based on the tooltip for weekdays. The top is 120% instead of 150%*/
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  border-radius: 2px;
+  color: #fff;
+  background-color: rgba(60, 64, 67, 0.788);
+  font-size: 13px;
+  text-align: center;
+
+  /* CSS info for initial hide and fade out*/
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s 0s, visibility 0.1s 0s;
+}
+
+.header-icon:hover + .header-icon-tip {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s 0.5s, visibility 0.5s 0.5s; /*CSS Info for fade in*/
+}
+
 /*Period dropdown*/
 
 .dropdown-container {
@@ -75,7 +114,7 @@
   /*Position & Border-Box*/
   position: relative;
   padding: 7px 10px;
-  border: 1px solid rgba(60, 64, 67, 0.35);
+  border: 1px solid rgba(60, 64, 67, 0.199);
   border-radius: 3px;
 
   cursor: pointer;
@@ -99,14 +138,16 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 150%;
   background-color: white;
   position: absolute;
+  width: 150%;
   top: 140%;
   left: -25%;
   z-index: 101; /*make it show over the header*/
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
+
+  animation: fadeIn 0.15s ease-in-out;
 }
 
 .period-options a {
@@ -121,4 +162,21 @@
 
 .period-option:hover {
   background-color: rgba(180, 180, 180, 0.15);
+}
+
+/*Key frames*/
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    width: 100%;
+    left: 0%;
+    transform: translateY(-2rem);
+  }
+  100% {
+    opacity: 1;
+    width: 150%;
+    left: -25%;
+    transform: translateY(0);
+  }
 }

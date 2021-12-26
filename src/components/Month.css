@@ -42,9 +42,8 @@
   margin-bottom: 5px;
 }
 
-[data-tip]:before {
+.month-week-day-tip {
   position: absolute;
-  visibility: hidden;
   top: 150%;
   left: 50%; /*Based on parent container*/
   transform: translateX(-50%); /*Based on selected el*/
@@ -53,16 +52,16 @@
   border-radius: 2px;
   color: #fff;
   background-color: rgba(60, 64, 67, 0.788);
-  content: attr(data-tip);
   font-size: 13px;
   text-align: center;
 
   /* Fade in tooltip */
   opacity: 0;
-  transition: opacity 0.15s;
+  visibility: hidden;
+  transition: opacity 0.15s, visibility 0.15s;
 }
 
-[data-tip]:hover:before {
+.month-week-day-txt:hover + .month-week-day-tip {
   visibility: visible;
   opacity: 1;
 }
@@ -77,8 +76,10 @@
 
 .month-day:hover {
   /*border: 1px solid grey;*/
-  text-decoration: underline;
-  text-underline-offset: 1px;
-  /*  margin: -1px;*/
+  /*text-decoration: underline;
+  text-underline-offset: 1px;*/
+  /*margin: -1px;*/
   cursor: pointer;
+  background-color: rgba(180, 180, 180, 0.25);
+  border-radius: 50%;
 }

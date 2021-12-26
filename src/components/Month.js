@@ -45,26 +45,33 @@ const Month = ({ m }) => {
     <div className='month-container'>
       <div className='month-name'>{months[m]}</div>
       <div className='month-days'>
-        <div className='month-week-day' data-tip='Sunday'>
-          S
+        <div className='month-week-day'>
+          <span className='month-week-day-txt'>S</span>
+          <span className='month-week-day-tip'>Sunday</span>
         </div>
-        <div className='month-week-day' data-tip='Monday'>
-          M
+        <div className='month-week-day'>
+          <span className='month-week-day-txt'>M</span>
+          <span className='month-week-day-tip'>Monday</span>
         </div>
-        <div className='month-week-day' data-tip='Tuesday'>
-          T
+        <div className='month-week-day'>
+          <span className='month-week-day-txt'>T</span>
+          <span className='month-week-day-tip'>Tuesday</span>
         </div>
-        <div className='month-week-day' data-tip='Wednesday'>
-          W
+        <div className='month-week-day'>
+          <span className='month-week-day-txt'>W</span>
+          <span className='month-week-day-tip'>Wednesday</span>
         </div>
-        <div className='month-week-day' data-tip='Thursday'>
-          T
+        <div className='month-week-day'>
+          <span className='month-week-day-txt'>T</span>
+          <span className='month-week-day-tip'>Thursday</span>
         </div>
-        <div className='month-week-day' data-tip='Friday'>
-          F
+        <div className='month-week-day'>
+          <span className='month-week-day-txt'>F</span>
+          <span className='month-week-day-tip'>Friday</span>
         </div>
-        <div className='month-week-day' data-tip='Saturday'>
-          S
+        <div className='month-week-day'>
+          <span className='month-week-day-txt'>S</span>
+          <span className='month-week-day-tip'>Saturday</span>
         </div>
         {dtArr.map((el) => (
           <div
