@@ -1,9 +1,9 @@
 import "./Month.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-/*--- Importing Components --- */
-import { Link, useNavigate } from "react-router-dom";
-import MultiDay from "../screens/MultiDay";
+/*--- Importing Actions ---*/
+import { changeDt } from "../redux/actions/viewDateActions";
 
 const Month = ({ m }) => {
   /*--- Extracting and Destructuring Global State Vars --- */
@@ -12,14 +12,22 @@ const Month = ({ m }) => {
 
   /*--- Double Click Handler ---*/
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const goToMulti = (newViewDt) => {
-    //dispatch(changeDt(el)); //change view date
+    //change view date
+    dispatch(
+      changeDt({
+        year,
+        month: parseInt(newViewDt.month),
+        day: parseInt(newViewDt.day),
+      })
+    );
     navigate("../week", { newViewDt });
   };
 
   /*--- Creating Date Array ---*/
   const firstOfMonth = new Date(year, m, 1);
-  const monthTxt = firstOfMonth.toLocaleString("en-us", { month: "long" });
+  const monthTxt = firstOfMonth.toLocaleString("en-us", { month: "long" }); //Creating monthTxt
   const pointerDt = new Date(year, m, -firstOfMonth.getDay() + 1);
   const dtArr = new Array(42);
   for (let i = 0; i < dtArr.length; i++) {

@@ -60,7 +60,6 @@ const DateViewer = () => {
         year: newDt.getFullYear(),
         month: newDt.getMonth(),
         day: newDt.getDate(),
-        increase: change > 0,
       })
     );
   };
