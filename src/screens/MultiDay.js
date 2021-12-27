@@ -11,6 +11,7 @@ const MultiDay = ({ newViewDt = null }) => {
   let { year, month, day } = useSelector((state) => state.viewDt);
 
   //if newViewDt isn't null (didn't navigate here by clicking a yearly link)
+
   if (newViewDt) {
     year = newViewDt.year;
     month = newViewDt.month;
@@ -45,6 +46,7 @@ const MultiDay = ({ newViewDt = null }) => {
             month={el.month}
             day={el.day}
             dt={`${el.day}/${el.month + 1}/${el.year}`}
+            key={el.day + el.month + el.year + ""}
           />
         ))}
       </div>

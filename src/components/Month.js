@@ -28,7 +28,10 @@ const Month = ({ m }) => {
 
   /*--- Double Click Handler ---*/
   const navigate = useNavigate();
-  const goToMulti = (dt) => {};
+  const goToMulti = (newViewDt) => {
+    //dispatch(changeDt(el)); //change view date
+    navigate("../week", { newViewDt });
+  };
 
   /*--- Creating Date Array ---*/
   let firstOfMonth = new Date(year, m, 1);
@@ -88,6 +91,7 @@ const Month = ({ m }) => {
               el.month == m ? "cur-month-day" : "neighbor-month-day"
             }`}
             date={`${el.year}-${el.month}-${el.day}`}
+            key={`${el.year}-${el.month}-${el.day}`}
             onDoubleClick={() => goToMulti(el)}
           >
             {parseInt(el.day)}

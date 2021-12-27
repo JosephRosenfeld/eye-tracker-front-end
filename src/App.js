@@ -17,6 +17,8 @@ import Header from "./components/Header";
 
 function App() {
   /*--- Window Width into State ---*/
+  /*We do this so we can conditionally route to pages based on screen sizes in other
+  components*/
   const [inWidth, setInWidth] = useState(window.innerWidth);
   useEffect(() => {
     const shiftWidth = () => {
@@ -25,7 +27,6 @@ function App() {
     window.addEventListener("resize", shiftWidth);
     return () => window.removeEventListener("resize", shiftWidth);
   }, []);
-  /*Might put the above state into the redux store later if I need it elsewhere in the app*/
 
   /*--- Pathname into Global State (Redux) ---*/
   /*The reason we are storing the pathname in state in the first place is because we need
