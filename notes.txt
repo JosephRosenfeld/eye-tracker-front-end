@@ -1,1 +1,48 @@
-Favicon color: rgb(52, 175, 78)
+/*--- General Info ---*/
+/*Favicon color: rgb(52, 175, 78);*/
+
+
+/*--- locationchange Event Listener Explanation ---*/
+/*You can arrive at a page either externally or internally. If we're arriving externally we
+don't have control of where to direct them, and if they try to access the wrong page 
+for their screen size, we need to have some logic to take that request and route them
+elsewhere. We accomplish this using React Router DOM's navigate object.*/
+
+/*This works well but we still need logic to determine where we should direct someone
+internally, to one page or another, based on some factors (for our purposes that factor is
+screen size but it could be other factors). Well we could rely on React Router Dom's
+logic for this and just link to the page. Assuming our redirect logic is standard for 
+this component as it is in the App level routes then it should redirect just fine, using 
+an a tag(yet to confirm) or Link component(yet to confirm) or the useNavigate hook.
+  - The problem with the above method is that it relies on app level redirects which
+  aren't as clean, reduce SEO, and still initially renders the wrong page. This is a 
+  more complex and less clean method for achieving redirects.*/
+
+/*The solution would be to conditionally redirect based on some logic or state that
+the component is privy to. In our case that piece of state would be the screen-size.
+Essentially this is the reason why we store our screen size in our Global State, so 
+we can access it from any component that might need to make a conditional redirect based
+on that information.*/
+
+/*Well if redirects happen with screen size logic, and that screen size is in our
+global state so if it changes it will force a rerender on all relevant components, then
+why should we also have a global state for the page (window.location.pathname)? I mean
+afterall, if we want to know what page we're on we can just look at the screen size and 
+deduce it from there right? Well not quite
+  - We want this app to be as extensible and scalable as possible. Right now we're only
+  doing redirects and conditional routing based on screen size, but what if that changes
+  in the future.
+  - There's also a greater chance for disconnect or bugs as we're assuming all
+  other components have correctly routed you to this page based on the correct logic.
+  - Essentially we want an answer thats closer to the truth, which for us would be our
+  page global state which is set with the custom event 'locationchange'. This allows
+  us to:
+    1. Rerender relevant components based on locationchange (therefore forces the 
+    component to have the most up to date info on its page) (were we rerendering based
+    on screen size alone we may have missed any locationchanges due to other logic)
+    2. Have the most accurate source of our page information in relevant components 
+    (rather than relying on screen size as a proxy to calculate our page info)*/
+    
+/*All in all, I'm still not 100% sure if url redirects based on screen size is best
+practice and what other implications this could have (SEO, crawling, UI/UX, etc.). However,
+it's a clever solution for now and I will continue to research this going forward.*/

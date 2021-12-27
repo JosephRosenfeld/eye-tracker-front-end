@@ -30,9 +30,14 @@ function App() {
   /*--- Pathname into Global State (Redux) ---*/
   /*The reason we are storing the pathname in state in the first place is because we need
   to trigger a rerender when the path changes. The easiest way to do that is store the path
-  in state. State changes and voilà our component rerenders.
-  The reason global state was chosen instead of component state is because we need this
+  in state. State changes and voilà our component rerenders.*/
+  /*The reason global state was chosen instead of component state is because we need this
   rerendering to occur in multiple components*/
+  /*Additionally, because screen width is stored in state at the App level component,
+  the entire App will be rerendered when screen width changes. And because the routing
+  is done in the App component, the route can change per rerender, making it possible 
+  for redirects to happen whenever the screen size changes*/
+  /*For more info read 'locationchange Event Listener Explained in the notes section*/
   const dispatch = useDispatch();
   const setPageEventListener = () => {
     dispatch(changePage(window.location.pathname));
