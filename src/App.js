@@ -1,6 +1,6 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,25 +8,30 @@ import {
   Navigate,
 } from "react-router-dom";
 
+//Actions Imports
 import { changePage } from "./redux/actions/pageActions";
+import { changeScreenSize } from "./redux/actions/screenSizeActions";
 
-//component imports
+//Component Imports
 import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
 
 function App() {
-  /*--- Window Width into State ---*/
+  //Initialize Dispatch
+  const dispatch = useDispatch();
+
+  /*--- Window Width into Global State (Redux) ---*/
   /*We do this so we can conditionally route to pages based on screen sizes in other
   components*/
-  const [inWidth, setInWidth] = useState(window.innerWidth);
+  const resizeEvListener = () => {
+    dispatch(changeScreenSize(window.innerWidth));
+  };
   useEffect(() => {
-    const shiftWidth = () => {
-      setInWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", shiftWidth);
-    return () => window.removeEventListener("resize", shiftWidth);
+    window.addEventListener("resize", resizeEvListener);
+    return () => window.removeEventListener("resize", resizeEvListener);
   }, []);
+  const inWidth = useSelector((state) => state.screenSize);
 
   /*--- Pathname into Global State (Redux) ---*/
   /*The reason we are storing the pathname in state in the first place is because we need
@@ -39,7 +44,6 @@ function App() {
   is done in the App component, the route can change per rerender, making it possible 
   for redirects to happen whenever the screen size changes*/
   /*For more info read 'locationchange Event Listener Explained in the notes section*/
-  const dispatch = useDispatch();
   const setPageEventListener = () => {
     dispatch(changePage(window.location.pathname));
   };

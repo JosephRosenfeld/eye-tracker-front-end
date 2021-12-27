@@ -5,22 +5,6 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import MultiDay from "../screens/MultiDay";
 
-//Dictionary of months
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
 const Month = ({ m }) => {
   /*--- Extracting and Destructuring Global State Vars --- */
   const viewDt = useSelector((state) => state.viewDt);
@@ -34,7 +18,8 @@ const Month = ({ m }) => {
   };
 
   /*--- Creating Date Array ---*/
-  let firstOfMonth = new Date(year, m, 1);
+  const firstOfMonth = new Date(year, m, 1);
+  const monthTxt = firstOfMonth.toLocaleString("en-us", { month: "long" });
   const pointerDt = new Date(year, m, -firstOfMonth.getDay() + 1);
   const dtArr = new Array(42);
   for (let i = 0; i < dtArr.length; i++) {
@@ -55,7 +40,7 @@ const Month = ({ m }) => {
 
   return (
     <div className='month-container'>
-      <div className='month-name'>{months[m]}</div>
+      <div className='month-name'>{monthTxt}</div>
       <div className='month-days'>
         <div className='month-week-day'>
           <span className='month-week-day-txt'>S</span>
