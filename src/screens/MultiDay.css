@@ -1,0 +1,12 @@
+.multi-day-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.multi-days {
+  display: flex;
+  gap: 20px;
+}

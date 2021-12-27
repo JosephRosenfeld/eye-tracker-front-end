@@ -50,7 +50,7 @@ const DateViewer = () => {
       year += 1 * change;
     } else if (page == "/week") {
       day += 7 * change;
-    } else if ((page = "/3day")) {
+    } else if (page == "/3day") {
       day += 3 * change;
     }
 

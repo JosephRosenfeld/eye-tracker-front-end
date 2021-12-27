@@ -1,27 +1,36 @@
 import "./Month.css";
 import { useSelector } from "react-redux";
 
-const Month = ({ m }) => {
-  let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+/*--- Importing Components --- */
+import { Link, useNavigate } from "react-router-dom";
+import MultiDay from "../screens/MultiDay";
 
-  //get view date
+//Dictionary of months
+let months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const Month = ({ m }) => {
+  /*--- Extracting and Destructuring Global State Vars --- */
   const viewDt = useSelector((state) => state.viewDt);
   const year = viewDt.year;
 
-  //get month start sunday
+  /*--- Double Click Handler ---*/
+  const navigate = useNavigate();
+  const goToMulti = (dt) => {};
+
+  /*--- Creating Date Array ---*/
   let firstOfMonth = new Date(year, m, 1);
   const pointerDt = new Date(year, m, -firstOfMonth.getDay() + 1);
   const dtArr = new Array(42);
@@ -38,9 +47,9 @@ const Month = ({ m }) => {
           ? pointerDt.getDate()
           : "0" + pointerDt.getDate(),
     };
-    if (dtArr[i]) pointerDt.setDate(pointerDt.getDate() + 1);
+    pointerDt.setDate(pointerDt.getDate() + 1);
   }
-  //get view date somehow.
+
   return (
     <div className='month-container'>
       <div className='month-name'>{months[m]}</div>
@@ -79,6 +88,7 @@ const Month = ({ m }) => {
               el.month == m ? "cur-month-day" : "neighbor-month-day"
             }`}
             date={`${el.year}-${el.month}-${el.day}`}
+            onDoubleClick={() => goToMulti(el)}
           >
             {parseInt(el.day)}
           </div>
