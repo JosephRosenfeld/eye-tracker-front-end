@@ -4,9 +4,19 @@
   align-items: center;
 }
 
+/*Add in gap for Multi-Day view so we can adjust for diff month lengths*/
+.date-viewer:not([data-period="year"]) {
+  gap: 1px;
+}
+
+/*Add in rule for May because its long*/
+.date-viewer:not([data-period="year"])[data-month="4"] {
+  gap: 0px;
+}
+
 /*Add in rule for July(6) on Multi-Day view because its so short*/
 .date-viewer:not([data-period="year"])[data-month="6"] {
-  gap: 3px;
+  gap: 4px;
 }
 
 .view-date {
@@ -35,7 +45,7 @@
   border-radius: 2px;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 01s;
+  transition: opacity 0.2s;
 }
 
 .right-arrow:hover::after,
