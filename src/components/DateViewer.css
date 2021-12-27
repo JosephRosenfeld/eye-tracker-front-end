@@ -1,6 +1,15 @@
 .date-viewer {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+/*Add in rule for July(6) on Multi-Day view because its so short*/
+.date-viewer:not([data-period="year"])[data-month="6"] {
+  gap: 3px;
+}
+
+.view-date {
   font-size: 22px;
 }
 
@@ -8,17 +17,29 @@
 .left-arrow {
   position: relative;
   cursor: pointer;
+  font-size: 25px;
+  padding: 3px;
+  border-radius: 3px;
 }
 
-.right-arrow:hover::after,
-.left-arrow:hover::after {
+.right-arrow::after,
+.left-arrow::after {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
   top: 50%;
-  width: 70%;
-  height: 85%;
+  width: 75%;
+  height: 80%;
   content: "";
-  background-color: rgba(20, 22, 22, 0.123);
-  border-radius: 1px;
+  background-color: rgba(180, 180, 180, 0.25);
+  border-radius: 2px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 01s;
+}
+
+.right-arrow:hover::after,
+.left-arrow:hover::after {
+  visibility: visible;
+  opacity: 1;
 }

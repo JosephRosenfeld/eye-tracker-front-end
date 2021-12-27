@@ -1,14 +1,10 @@
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { changePage } from "../redux/actions/pageActions";
 
 //component imports
 import DateViewer from "./DateViewer";
-
-//actions import
-import { changeDt } from "../redux/actions/viewDateActions";
 
 const Header = () => {
   /*--- Period Drop Down Config ---*/
@@ -32,25 +28,14 @@ const Header = () => {
     document.addEventListener("mousedown", handler);
     return () => window.removeEventListener("mousedown", handler);
   });
-
+  //defining jsx click handler
   const toggleMenuDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   /*--- Pulling Page from Global Store ---*/
-  const dispatch = useDispatch();
-  const setPageEventListener = () => {
-    console.log("we are firing");
-    dispatch(changePage(window.location.pathname));
-  };
-  useEffect(() => {
-    console.log("added event listener");
-    window.addEventListener("locationchange", setPageEventListener);
-    return () =>
-      window.removeEventListener("locationchange", setPageEventListener);
-  }, []);
-  const page = useSelector((state) => state.page);
-  console.log(page);
+  //In the store it starts with a '/'
+  const page = useSelector((state) => state.page.substring(1));
 
   return (
     <header className='header'>
@@ -83,8 +68,7 @@ const Header = () => {
             className='period-dropdown'
             onClick={toggleMenuDropdown}
           >
-            {/*page.charAt(0).toUpperCase() + page.slice(1)*/}
-            {page}
+            {page.charAt(0).toUpperCase() + page.slice(1)}
           </div>
 
           {isOpen && (

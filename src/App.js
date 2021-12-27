@@ -24,7 +24,7 @@ function App() {
     };
     window.addEventListener("resize", shiftWidth);
     return () => window.removeEventListener("resize", shiftWidth);
-  });
+  }, []);
   /*Might put the above state into the redux store later if I need it elsewhere in the app*/
 
   /*--- Pathname into Global State (Redux) ---*/
@@ -33,6 +33,15 @@ function App() {
   in state. State changes and voilà our component rerenders.
   The reason global state was chosen instead of component state is because we need this
   rerendering to occur in multiple components*/
+  const dispatch = useDispatch();
+  const setPageEventListener = () => {
+    dispatch(changePage(window.location.pathname));
+  };
+  useEffect(() => {
+    window.addEventListener("locationchange", setPageEventListener);
+    return () =>
+      window.removeEventListener("locationchange", setPageEventListener);
+  }, []);
 
   return (
     <Router>
@@ -42,13 +51,13 @@ function App() {
           <Route
             path='/3day'
             element={
-              inWidth > 700 ? <Navigate to='/week' replace /> : <MultiDay />
+              inWidth > 800 ? <Navigate to='/week' replace /> : <MultiDay />
             }
           />
           <Route
             path='/week'
             element={
-              inWidth <= 700 ? <Navigate to='/3day' replace /> : <MultiDay />
+              inWidth <= 800 ? <Navigate to='/3day' replace /> : <MultiDay />
             }
           />
           <Route path='/year' element={<Yearly />} />
