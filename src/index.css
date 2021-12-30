@@ -1,5 +1,9 @@
 :root {
   --text-color: rgb(60, 64, 67);
+  --global-header-height: 70.625px;
+  --multi-header-height: 19.39px;
+  --multi-hr-height: 5rem;
+  --time-scale-width: 3rem;
 }
 
 body {

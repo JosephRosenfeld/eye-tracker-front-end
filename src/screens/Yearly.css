@@ -8,8 +8,7 @@
   column-gap: 50px;
 
   position: absolute;
-  top: 70.625px; /*Offset of header*/ /*This is manually calculated which is kinda messy.
-  Will need to adjust it if header changes size on diff screen sizes*/
+  top: var(--global-header-height); /*Offset of header*/
   left: 0px;
   right: 0px;
   bottom: 0px;

@@ -1,0 +1,8 @@
+.full-day {
+  flex-grow: 1; /*Makes each day expand evenly to take up space*/
+}
+
+.full-day-hr {
+  height: var(--multi-hr-height);
+  border: 1px solid grey;
+}

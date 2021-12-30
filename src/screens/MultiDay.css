@@ -1,12 +1,25 @@
-.multi-day-container {
+/*Whole page*/
+.multi-day-container > div {
+  padding: 0px 5px;
+}
+
+.multi-day-and-time {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+
+  position: absolute;
+  top: calc(var(--global-header-height) + var(--multi-header-height));
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
 }
 
 .multi-days {
   display: flex;
-  gap: 20px;
+  width: 100%;
+}
+
+.child-big {
+  background-color: blue;
+  height: 5000px;
 }

@@ -1,0 +1,17 @@
+.multi-header {
+  border-bottom: 1px solid grey;
+  display: flex;
+}
+
+.time-scale-offset {
+  width: var(--time-scale-width);
+}
+
+.multi-header-days {
+  display: flex;
+  width: 100%;
+}
+
+.multi-header-day {
+  flex-grow: 1;
+}

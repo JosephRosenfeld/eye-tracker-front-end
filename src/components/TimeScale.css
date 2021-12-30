@@ -1,0 +1,8 @@
+.time-scale {
+  width: var(--time-scale-width);
+}
+
+.time-scale-hr {
+  height: var(--multi-hr-height);
+  border: 1px solid grey;
+}
