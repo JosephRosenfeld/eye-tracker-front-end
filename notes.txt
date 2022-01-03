@@ -73,4 +73,32 @@ with the corrent content and offset.*/
 
 
 /*--- Getting Creative with the Borders ---*/
-/*An interesting challenge I ran into while constructing the Multi-Day view*/
+/*An interesting challenge I ran into while constructing the Multi-Day view was
+the problem of aligning each and every component that wasn't already in some shared
+div. This included the TimeScale component on the left, the MultiHeader component
+on top, and then the MultiDays grid in the middle.
+
+None of these components were nested in a way so as to allow easy css styling with flexbox
+or grid. I made this concious decision in order to stay as true as possible to React and
+thinking in React terms. While I could have broken up, say for example the MultiHeader 
+component, and taken its pieces and put them in another component with which it needed to
+be aligned with, this would have been very counter intuitive from a UI perspective.
+Afterall, a header is very clearly a component, doesn't it seem a bit off if under the hood
+the one component we call a header is actually being constructed by 7 different pieces 
+all from other components?
+
+For those reasons above I decided to keep these components as seperate distinct components,
+however now the problem became: How can I ensure that all of these seperate components
+line up with each other down to the pixel? Well the short answer is, I didn't. 
+
+After hours of trying to get every single little pixel line up I realized that I was making
+things harder than I needed to be. Instead of trying to line up two seperate things, why
+don't I instead have one component of this table (not referring to an html table here, 
+just that the multi day view looks like a table) as the source of truth and when I need to 
+do little stylings down to the pixel I'll just create an element inside of the source of 
+truth and move it with absolute positioning so its outside of its parent container!
+
+This is essentially what I did in order to have all the divisional borders on the Multi
+Header line up with all the borders in the Multi Day grid. I also relied on this to line
+up the cosmetic lines on the timescale component with the borders in the Multi Day grid.
+All in all a fun little trick I discovered that could certainly be handy in the future!*/
