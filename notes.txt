@@ -46,3 +46,27 @@ deduce it from there right? Well not quite
 /*All in all, I'm still not 100% sure if url redirects based on screen size is best
 practice and what other implications this could have (SEO, crawling, UI/UX, etc.). However,
 it's a clever solution for now and I will continue to research this going forward.*/
+
+
+/*--- Multi Day Header Scrollbar Offset ---*/
+/*Essentially, the main challenge with this one is the fact that different browsers
+have different scrollbar width's. The main content in the Multi Day page has a scrollbar,
+therefore its content is offset to the left by that scrollbar's width. The header however
+doesn't have a scrollbar, so even once we've offset the header by the timescale width 
+(available via a global css variable) we still run into the header and the content being
+misaligned.
+
+In order to solve this we essentially need to add another element on the right to offset
+the header and this offset element needs to have the same exact width of the scrollbar
+in the content below it. Thus the content below the header is offset to the left due to
+the scrollbar and the content in the header is offset to the left due to this offset 
+element.
+
+Now in order to get as close to the source of truth as possible it could be done so that
+the offset width is calculated based on the width of the scrollbar in the main content.
+However this seperates Multi-Day Header logic from the Multi Day Header component and 
+seeing how the scrollbar's almost never varies within the same browser, it didn't seem 
+necessary to base the offset element's width on the specific scroll bar in the
+Multi-Day content div. Instead a transparent div is initially rendered in the header with
+a scrollbar, once that scrollbar width has been calculated, the component rerenders
+with the corrent content and offset.*/

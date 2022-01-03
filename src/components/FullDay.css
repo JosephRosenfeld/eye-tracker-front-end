@@ -4,5 +4,17 @@
 
 .full-day-hr {
   height: var(--multi-hr-height);
-  border: 1px solid grey;
+  border-top: 1px solid var(--header-border-color);
+  border-left: 1px solid var(--header-border-color);
+}
+
+.full-day-hr:first-child,
+.full-day-hr:last-child {
+  /*show 15mins of prev day as a sort of buffer*/
+  height: calc(var(--multi-hr-height) / 4);
+}
+
+.full-day-hr:first-child {
+  /*show 15mins of prev day as a sort of buffer*/
+  border-top: none;
 }

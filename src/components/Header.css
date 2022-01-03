@@ -11,7 +11,7 @@
   padding: 5px 3%;
   color: var(--text-color);
   background-color: rgb(255, 255, 255, 1);
-  border-bottom: 1px solid #dadce0;
+  border-bottom: 1px solid var(--header-border-color);
 
   user-select: none;
 }
@@ -29,7 +29,7 @@
 }
 
 .logo {
-  width: 50px;
+  height: 41px;
 }
 
 .site-title {
@@ -53,6 +53,7 @@
 /*Only added a container so that the tooltip can position off something*/
 .header-icon-container {
   position: relative;
+  cursor: pointer;
 }
 
 .header-icon {
@@ -135,15 +136,19 @@
 }
 
 .period-options {
+  /*Flex*/
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background-color: white;
+
+  /*Positioning*/
   position: absolute;
   width: 150%;
+  min-width: max-content;
   top: 140%;
   left: -25%;
   z-index: 101; /*make it show over the header*/
+  background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
 

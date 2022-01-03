@@ -15,11 +15,7 @@
 }
 
 .multi-days {
-  display: flex;
-  width: 100%;
-}
+  flex-grow: 1; /*grow to fit extra space*/
 
-.child-big {
-  background-color: blue;
-  height: 5000px;
+  display: flex;
 }

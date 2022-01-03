@@ -1,8 +1,20 @@
 .time-scale {
   width: var(--time-scale-width);
+  font-size: 11px;
 }
 
 .time-scale-hr {
   height: var(--multi-hr-height);
-  border: 1px solid grey;
+  border-bottom: 1px solid var(--header-border-color);
+}
+
+.time-scale-hr:first-child,
+.time-scale-hr:last-child {
+  /*show 15mins of prev day as a sort of buffer*/
+  height: calc(var(--multi-hr-height) / 4);
+}
+
+.time-scale-hr:first-child {
+  /*show 15mins of prev day as a sort of buffer*/
+  border-top: none;
 }

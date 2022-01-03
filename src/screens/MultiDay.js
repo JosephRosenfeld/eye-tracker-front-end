@@ -24,6 +24,7 @@ const MultiDay = ({ newViewDt = null }) => {
   //Calculate lookback
   const lookBack = page == "/week" ? 7 : page == "/3day" ? 3 : 3;
 
+  //Creating dtArr
   const dtArr = new Array(lookBack);
   let pointerDt = new Date(year, month, day - lookBack + 1);
   for (let i = 0; i < dtArr.length; i++) {
@@ -35,10 +36,8 @@ const MultiDay = ({ newViewDt = null }) => {
     pointerDt.setDate(pointerDt.getDate() + 1);
   }
 
-  //creating array of days
   return (
     <main className='multi-day-container'>
-      {/*Some thing for the timeline on the left side*/}
       <MultiHeader dtArr={dtArr} />
       <div className='multi-day-and-time'>
         <TimeScale />

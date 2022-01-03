@@ -1,5 +1,8 @@
 import "./Yearly.css";
 
+/*--- Hook Imports ---*/
+
+/*--- Component Imports ---*/
 import Month from "../components/Month";
 
 const Yearly = () => {
