@@ -72,4 +72,5 @@ a scrollbar, once that scrollbar width has been calculated, the component rerend
 with the corrent content and offset.*/
 
 
-/*Notes on unifying source of truth for borders on multi-view*/
+/*--- Getting Creative with the Borders ---*/
+/*An interesting challenge I ran into while constructing the Multi-Day view*/

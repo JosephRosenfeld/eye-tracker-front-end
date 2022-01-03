@@ -39,7 +39,7 @@
 .time-scale-hr:not(:first-child)::after {
   position: absolute;
   top: 0;
-  right: 25%;
+  right: 15px;
   content: attr(time);
   transform: translateY(-50%);
 }

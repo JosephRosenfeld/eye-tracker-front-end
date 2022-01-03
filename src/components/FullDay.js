@@ -14,12 +14,18 @@ const FullDay = ({ year, month, day, first }) => {
       }`}
     >
       {/*the first full day shouldn't have that upper border in the header*/}
-      <div className={!first ? "multi-header-border" : "null"}></div>
+      <div
+        className={
+          !first
+            ? "multi-header-border"
+            : "multi-header-border first-day-border"
+        }
+      ></div>
       {timeArr.map((el, i) => (
         <>
           {/*the first full day should also have side borders for the times*/}
           <div
-            className={`full-day-hr ${first ? "first-full-day" : ""}`}
+            className={`full-day-hr ${first ? "first-full-day-hr" : ""}`}
             key={i}
           ></div>
         </>

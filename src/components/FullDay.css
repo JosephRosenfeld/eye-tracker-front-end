@@ -7,10 +7,11 @@
 }
 
 .full-day-hr {
-  /*height: var(--multi-hr-height);*/
   flex-grow: 1;
   border-top: 1px solid var(--header-border-color);
   border-left: 1px solid var(--header-border-color);
+
+  position: relative;
 }
 
 .full-day-hr:nth-child(2),
@@ -23,10 +24,23 @@
   border-top: none;
 }
 
+/*This class is for creating the small border lines on the multi-header component*/
 .multi-header-border {
   position: fixed;
   width: 1px;
   height: 20px;
   background: var(--header-border-color);
   transform: translateY(-100%);
+}
+
+/*This class is for creating the small border lines on the time components*/
+.first-full-day-hr::before {
+  position: absolute;
+  content: "";
+  z-index: 500;
+  right: 100%;
+  top: -1px;
+  width: 12px;
+  height: 1px;
+  background: var(--header-border-color);
 }
