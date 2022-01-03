@@ -24,15 +24,7 @@ const TimeScale = () => {
               : `${el % 12} a.m.`
           }
           key={i}
-        >
-          {el >= 12
-            ? el == 12
-              ? `12 p.m.`
-              : `${el % 12} p.m.`
-            : el == 0
-            ? `12 a.m.`
-            : `${el % 12} a.m.`}
-        </div>
+        ></div>
       ))}
     </div>
   );

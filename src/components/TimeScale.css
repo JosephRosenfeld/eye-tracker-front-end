@@ -1,20 +1,45 @@
 .time-scale {
+  display: flex;
+  flex-direction: column;
   width: var(--time-scale-width);
+  height: calc(var(--multi-hr-height) * 25);
   font-size: 11px;
 }
 
 .time-scale-hr {
-  height: var(--multi-hr-height);
-  border-bottom: 1px solid var(--header-border-color);
+  position: relative;
+  /*height: var(--multi-hr-height);*/
+  flex-grow: 1;
 }
 
 .time-scale-hr:first-child,
 .time-scale-hr:last-child {
   /*show 15mins of prev day as a sort of buffer*/
-  height: calc(var(--multi-hr-height) / 4);
+  /*height: calc(var(--multi-hr-height) / 4);*/
+  flex-grow: 0.25;
 }
 
 .time-scale-hr:first-child {
   /*show 15mins of prev day as a sort of buffer*/
   border-top: none;
+}
+/*
+
+.time-scale-hr:not(:first-child)::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  content: " ";
+  width: 20%;
+  height: 1px;
+  background: var(--header-border-color);
+  transform: translateY(0%);
+}*/
+
+.time-scale-hr:not(:first-child)::after {
+  position: absolute;
+  top: 0;
+  right: 25%;
+  content: attr(time);
+  transform: translateY(-50%);
 }

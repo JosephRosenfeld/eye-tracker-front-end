@@ -42,17 +42,16 @@ const MultiDay = ({ newViewDt = null }) => {
       <div className='multi-day-and-time'>
         <TimeScale />
         <div className='multi-days'>
-          {dtArr.map((el) => (
+          {dtArr.map((el, i) => (
             <FullDay
               year={el.year}
               month={el.month}
               day={el.day}
-              dt={`${el.day}/${el.month + 1}/${el.year}`}
-              key={el.day + el.month + el.year + ""}
+              first={i == 0}
+              key={"" + el.day + el.month + el.year}
             />
           ))}
         </div>
-        {/**/}
       </div>
     </main>
   );

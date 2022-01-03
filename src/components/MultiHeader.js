@@ -40,7 +40,7 @@ const MultiHeader = ({ dtArr }) => {
             {dtArr.map((el, i) => (
               <div
                 className='multi-header-day'
-                key={el.day + el.month + el.year + ""}
+                key={"" + el.day + el.month + el.year}
               >
                 <div className='multi-header-week-day'>{weekDayArr[i]}</div>
                 <div className='multi-header-day-date'>{el.day}</div>

@@ -70,3 +70,6 @@ necessary to base the offset element's width on the specific scroll bar in the
 Multi-Day content div. Instead a transparent div is initially rendered in the header with
 a scrollbar, once that scrollbar width has been calculated, the component rerenders
 with the corrent content and offset.*/
+
+
+/*Notes on unifying source of truth for borders on multi-view*/
