@@ -1,6 +1,47 @@
+.scrollbar-test-el {
+  overflow-y: scroll;
+  visibility: hidden;
+  position: absolute; /*take it out of the document flow*/
+}
+
 .multi-header {
-  border-bottom: 1px solid grey;
   display: flex;
+
+  cursor: default;
+}
+
+.multi-header-day {
+  flex: 1; /*Makes all the elements an equal width*/
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  position: relative; /*done for position psuedo els*/
+  padding: 10px;
+  border-bottom: 1px solid var(--header-border-color);
+
+  color: var(--text-color);
+}
+
+.multi-header-week-day {
+  font-size: 12px;
+}
+
+.multi-header-day-date {
+  font-size: 20px;
+}
+
+.multi-header-day:not(:first-child)::before {
+  content: "";
+
+  /*Position and Sizing*/
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 20%;
+  width: 1px;
+  background-color: var(--header-border-color);
 }
 
 .time-scale-offset {
@@ -8,10 +49,14 @@
 }
 
 .multi-header-days {
+  flex-grow: 1;
+
   display: flex;
-  width: 100%;
 }
 
 .multi-header-day {
   flex-grow: 1;
+}
+
+.scrollbar-offset {
 }
