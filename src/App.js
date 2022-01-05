@@ -15,6 +15,7 @@ import { changeScreenSize } from "./redux/actions/screenSizeActions";
 import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
+import MobileHeader from "./components/MobileHeader";
 
 function App() {
   //Initialize Dispatch
@@ -55,7 +56,7 @@ function App() {
   return (
     <Router>
       <div className='App'>
-        <Header />
+        {inWidth > 800 ? <Header /> : <MobileHeader />}
         <Routes>
           <Route
             path='/3day'

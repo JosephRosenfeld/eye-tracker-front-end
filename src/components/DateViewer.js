@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 //actions import
 import { changeDt } from "../redux/actions/viewDateActions";
 
-const DateViewer = () => {
+const DateViewer = ({ dateVisible }) => {
   //Retrieve and extract global state vars
   const viewDt = useSelector((state) => state.viewDt);
   let { year, month, day } = viewDt;
@@ -76,7 +76,7 @@ const DateViewer = () => {
       >
         chevron_left
       </span>
-      <div className='view-date'>{showDate}</div>
+      {dateVisible && <div className='view-date'>{showDate}</div>}
       <span
         className='right-arrow material-icons'
         onClick={() => changeViewDt(1)}

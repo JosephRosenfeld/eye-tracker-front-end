@@ -42,7 +42,7 @@ const Header = () => {
       <div className='header-left'>
         <img className='logo' src='/assets/eye-tracker-logo.png'></img>
         <div className='site-title'>Eye Tracker</div>
-        <DateViewer />
+        <DateViewer dateVisible={true} />
       </div>
 
       <div className='header-right'>

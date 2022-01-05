@@ -7,6 +7,19 @@
   --time-scale-width: 4rem;
 }
 
+@media (max-width: 800px) {
+  :root {
+    --global-header-height: 68px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --global-header-height: 57px;
+    --multi-header-height: 59.48px;
+  }
+}
+
 body {
   font-family: "Roboto", sans-serif;
   text-align: center;

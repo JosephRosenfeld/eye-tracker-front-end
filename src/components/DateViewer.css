@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  font-size: 22px;
+  user-select: none;
 }
 
 /*Add in gap for Multi-Day view so we can adjust for diff month lengths*/
@@ -19,15 +22,11 @@
   gap: 4px;
 }
 
-.view-date {
-  font-size: 22px;
-}
-
 .right-arrow,
 .left-arrow {
   position: relative;
   cursor: pointer;
-  font-size: 25px;
+  font-size: 1.14em;
   padding: 3px;
   border-radius: 3px;
 }

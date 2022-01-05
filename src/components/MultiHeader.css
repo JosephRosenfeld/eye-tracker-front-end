@@ -6,8 +6,12 @@
 
 .multi-header {
   display: flex;
-
   cursor: default;
+}
+
+.multi-header-days {
+  flex-grow: 1;
+  display: flex;
 }
 
 .multi-header-day {
@@ -46,12 +50,19 @@
   width: var(--time-scale-width);
 }
 
-.multi-header-days {
-  flex-grow: 1;
+/*Header adjustments at 600px breakpoint are largely so the Multi-Header isn't as
+large or prominent as the global header*/
+@media (max-width: 600px) {
+  .multi-header-day {
+    gap: 8px;
+    padding: 8px;
+  }
 
-  display: flex;
-}
+  .multi-header-week-day {
+    font-size: 12px;
+  }
 
-.multi-header-day {
-  flex-grow: 1;
+  .multi-header-day-date {
+    font-size: 18px;
+  }
 }

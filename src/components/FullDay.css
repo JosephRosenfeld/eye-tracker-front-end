@@ -44,3 +44,10 @@
   height: 1px;
   background: var(--header-border-color);
 }
+
+/*Increasing 'buffer' hour at the bottom to accomodate for plus button*/
+@media (max-width: 800px) {
+  .full-day-hr:last-child {
+    flex-grow: 1;
+  }
+}

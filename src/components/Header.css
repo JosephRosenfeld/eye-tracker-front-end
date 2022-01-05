@@ -13,7 +13,7 @@
   background-color: rgb(255, 255, 255, 1);
   border-bottom: 1px solid var(--header-border-color);
 
-  user-select: none;
+  user-select: auto;
 }
 
 /*HEADER LEFT SECTION*/
@@ -48,6 +48,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
+
+  user-select: none;
 }
 
 /*Only added a container so that the tooltip can position off something*/
