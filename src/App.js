@@ -58,6 +58,7 @@ function App() {
       <div className='App'>
         {inWidth > 800 ? <Header /> : <MobileHeader />}
         <Routes>
+          <Route path='/' element={<Navigate to='/year' replace />} />
           <Route
             path='/3day'
             element={
