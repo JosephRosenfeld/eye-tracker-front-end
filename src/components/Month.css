@@ -61,11 +61,6 @@
   transition: opacity 0.15s, visibility 0.15s;
 }
 
-.month-week-day-txt:hover + .month-week-day-tip {
-  visibility: visible;
-  opacity: 1;
-}
-
 .neighbor-month-day {
   color: rgba(60, 64, 67, 0.5);
 }
@@ -75,22 +70,31 @@
 }
 
 .month-day:hover {
-  /*border: 1px solid grey;*/
-  /*text-decoration: underline;
-  text-underline-offset: 1px;*/
-  /*margin: -1px;*/
+  cursor: pointer;
+}
+
+.month-day:active {
   cursor: pointer;
   background-color: rgba(180, 180, 180, 0.25);
   border-radius: 2px;
 }
 
-@media (hover: none) {
-  .month-day {
-    background-color: red;
+/*Specifying hover vs. active pseudo classes on touch screen devices or laptops/desktops
+(using screen size of 800px as a proxy)*/
+@media (min-width: 801px) {
+  .month-day:hover {
+    cursor: pointer;
+    background-color: rgba(180, 180, 180, 0.25);
+    border-radius: 2px;
+  }
+
+  .month-week-day-txt:hover + .month-week-day-tip {
+    visibility: visible;
+    opacity: 1;
   }
 }
 
-@media (max-width: 800px) and (min-width: 690px),
+@media (max-width: 800px) and (min-width: 691px),
   (max-width: 600px) and (min-width: 461px) {
   .month-container {
     gap: 14px;

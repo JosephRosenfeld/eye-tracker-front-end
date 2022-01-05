@@ -7,6 +7,7 @@ import { changeDt } from "../redux/actions/viewDateActions";
 
 const Month = ({ m }) => {
   /*--- Extracting and Destructuring Global State Vars --- */
+  const inWidth = useSelector((state) => state.screenWidth);
   const viewDt = useSelector((state) => state.viewDt);
   const year = viewDt.year;
 

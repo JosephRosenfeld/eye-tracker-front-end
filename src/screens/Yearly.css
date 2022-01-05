@@ -21,12 +21,12 @@
   }
 }
 
-/*@800px - @690px month's get a little smaller*/
+/*@800px - @691px month's get a little smaller*/
 
 @media (max-width: 800px) {
   .year-container {
     padding-top: 30px;
-    gap: 35px; /*Smaller month should have smaller padding between it*/
+    gap: 35px;
   }
 }
 
@@ -45,7 +45,7 @@
   }
 }
 
-/*@600px the month's get smaller again and the header font's get smaller*/
+/*@600px - @461px the month's get smaller again and the header font's get smaller*/
 
 @media (max-width: 600px) {
   .year-container {
@@ -67,19 +67,3 @@
     justify-self: center;
   }
 }
-
-/*
-  .year-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15%;
-  }*/
-/*
-
-*/
-/*
-@media (max-width: 550px) {
-  .year-container {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-*/
