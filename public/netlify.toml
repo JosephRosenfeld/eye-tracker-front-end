@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/"
+  to = "/year"
+  status = 200
+  force = true
