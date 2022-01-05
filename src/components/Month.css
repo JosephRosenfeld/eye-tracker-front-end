@@ -74,7 +74,6 @@
   color: var(--text-color);
 }
 
-.month-day:active,
 .month-day:hover {
   /*border: 1px solid grey;*/
   /*text-decoration: underline;
@@ -83,6 +82,12 @@
   cursor: pointer;
   background-color: rgba(180, 180, 180, 0.25);
   border-radius: 2px;
+}
+
+@media (hover: none) {
+  .month-day {
+    background-color: red;
+  }
 }
 
 @media (max-width: 800px) and (min-width: 690px),
