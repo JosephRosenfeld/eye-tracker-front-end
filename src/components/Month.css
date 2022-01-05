@@ -74,8 +74,8 @@
   color: var(--text-color);
 }
 
-.month-day:hover,
-.month-day:active {
+.month-day:active,
+.month-day:hover {
   /*border: 1px solid grey;*/
   /*text-decoration: underline;
   text-underline-offset: 1px;*/
