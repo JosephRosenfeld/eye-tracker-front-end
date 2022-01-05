@@ -72,7 +72,6 @@ const DateViewer = ({ dateVisible }) => {
     >
       <span
         className='left-arrow material-icons'
-        tabIndex={1}
         onClick={() => changeViewDt(-1)}
       >
         chevron_left
@@ -80,7 +79,6 @@ const DateViewer = ({ dateVisible }) => {
       {dateVisible && <div className='view-date'>{showDate}</div>}
       <span
         className='right-arrow material-icons'
-        tabIndex={2}
         onClick={() => changeViewDt(1)}
       >
         chevron_right
