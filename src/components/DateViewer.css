@@ -47,10 +47,10 @@
   transition: opacity 0.2s;
 }
 
-.right-arrow:active::after,
-.left-arrow:active::after
-/*.right-arrow:hover::after,
-.left-arrow:hover::after*/ {
-  visibility: visible;
-  opacity: 1;
+@media (min-width: 801px) {
+  .right-arrow:hover::after,
+  .left-arrow:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
 }
