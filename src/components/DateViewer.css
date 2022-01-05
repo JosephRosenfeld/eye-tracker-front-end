@@ -48,7 +48,9 @@
 }
 
 .right-arrow:hover::after,
-.left-arrow:hover::after {
+.left-arrow:hover::after,
+.right-arrow:active::after,
+.left-arrow:active::after {
   visibility: visible;
   opacity: 1;
 }

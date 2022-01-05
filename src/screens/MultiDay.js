@@ -11,6 +11,7 @@ import FullDay from "../components/FullDay";
 const MultiDay = ({ newViewDt = null }) => {
   //Retrieve and Extract Global State Vars
   const page = useSelector((state) => state.page);
+  console.log(page);
   let { year, month, day } = useSelector((state) => state.viewDt);
 
   //if newViewDt isn't null overwrite our local view date

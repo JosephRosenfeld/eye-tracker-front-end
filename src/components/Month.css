@@ -74,7 +74,8 @@
   color: var(--text-color);
 }
 
-.month-day:hover {
+.month-day:hover,
+.month-day:active {
   /*border: 1px solid grey;*/
   /*text-decoration: underline;
   text-underline-offset: 1px;*/
@@ -82,4 +83,69 @@
   cursor: pointer;
   background-color: rgba(180, 180, 180, 0.25);
   border-radius: 2px;
+}
+
+@media (max-width: 800px) and (min-width: 690px),
+  (max-width: 600px) and (min-width: 461px) {
+  .month-container {
+    gap: 14px;
+  }
+
+  .month-name {
+    font-size: 15px;
+  }
+
+  .month-days {
+    font-size: 12px;
+  }
+
+  .month-day,
+  .month-week-day {
+    padding: 5px 6.5px;
+  }
+
+  .month-week-day {
+    font-size: 14px;
+    border-bottom: 1px solid rgba(60, 64, 67, 0.5);
+    padding-bottom: 0px;
+    margin-bottom: 4px;
+  }
+
+  .month-week-day-tip {
+    padding: 5px;
+    border-radius: 2px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 460px) {
+  .month-container {
+    gap: 16px;
+  }
+
+  .month-name {
+    font-size: 17px;
+  }
+
+  .month-days {
+    font-size: 14px;
+  }
+
+  .month-day,
+  .month-week-day {
+    padding: 8px 9.5px;
+  }
+
+  .month-week-day {
+    font-size: 16px;
+    border-bottom: 1px solid rgba(60, 64, 67, 0.5);
+    padding-bottom: 1px;
+    margin-bottom: 6px;
+  }
+
+  .month-week-day-tip {
+    padding: 5px;
+    border-radius: 2px;
+    font-size: 14px;
+  }
 }

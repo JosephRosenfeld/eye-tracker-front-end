@@ -15,8 +15,8 @@ const Header = () => {
     <header className='mobile-header'>
       <div className='mobile-header-left'>
         <img className='logo' src='/assets/eye-tracker-logo.png'></img>
-        <div className='site-title'>Eye Tracker</div>
-        <DateViewer dateVisible={inWidth > 450} />
+        {inWidth > 450 && <div className='site-title'>Eye Tracker</div>}
+        <DateViewer dateVisible={true} />
       </div>
       <div className='menu-icon-container'>
         <span className='material-icons menu-icon'>menu</span>

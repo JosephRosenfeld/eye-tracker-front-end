@@ -1,7 +1,7 @@
 .year-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: 40px 50px 60px;
+  padding: 40px 3% 60px;
   justify-items: center;
   align-items: center;
   row-gap: 60px;
@@ -15,20 +15,71 @@
   overflow-y: auto; /*Scrollbar dissapears with auto if its not needed*/
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1075px) {
   .year-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 850px) {
+/*@800px - @690px month's get a little smaller*/
+
+@media (max-width: 800px) {
   .year-container {
-    grid-template-columns: repeat(2, 1fr);
+    padding-top: 30px;
+    gap: 35px; /*Smaller month should have smaller padding between it*/
   }
 }
 
+@media (max-width: 690px) {
+  .year-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12%;
+  }
+
+  .year-container .month-container:nth-child(2n - 1) {
+    justify-self: end;
+  }
+
+  .year-container .month-container:nth-child(2n) {
+    justify-self: start;
+  }
+}
+
+/*@600px the month's get smaller again and the header font's get smaller*/
+
+@media (max-width: 600px) {
+  .year-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9%;
+  }
+}
+
+@media (max-width: 460px) {
+  .year-container {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 70px;
+  }
+  .year-container .month-container:nth-child(2n - 1) {
+    justify-self: center;
+  }
+
+  .year-container .month-container:nth-child(2n) {
+    justify-self: center;
+  }
+}
+
+/*
+  .year-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15%;
+  }*/
+/*
+
+*/
+/*
 @media (max-width: 550px) {
   .year-container {
     grid-template-columns: repeat(1, 1fr);
   }
 }
+*/
