@@ -9,11 +9,13 @@
   right: 0;
   z-index: 105;
   height: 100vh;
-  width: max-content;
+  width: fit-content;
   border: 1px;
   background-color: white;
   box-shadow: 2px 0px 16px rgba(0, 0, 0, 0.5);
   font-size: 18px;
+
+  user-select: none;
 }
 
 .mobile-sp-item {
@@ -31,6 +33,8 @@
 .mobile-sp-title {
   align-items: flex-end;
   gap: 15px;
+
+  width: max-content;
   border-bottom: 1px solid var(--header-border-color);
 }
 
@@ -48,7 +52,6 @@
 }
 
 .sp-active,
-.mobile-sp-item:not(.mobile-sp-title):hover,
 .mobile-sp-item:not(.mobile-sp-title):active {
   color: white;
   background-color: var(--text-color);
