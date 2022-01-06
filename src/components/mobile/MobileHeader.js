@@ -6,11 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 /*--- Component Imports ---*/
-import DateViewer from "./DateViewer";
+import DateViewer from "../DateViewer";
 import MobileSidePanel from "./MobileSidePanel";
 
 /*--- Action Imports ---*/
-import { changePage } from "../redux/actions/pageActions";
+import { changePage } from "../../redux/actions/pageActions";
+import { AnimatePresence } from "framer-motion";
 
 const MobileHeader = () => {
   const dispatch = useDispatch();
@@ -65,9 +66,11 @@ const MobileHeader = () => {
       >
         <span className='material-icons menu-icon'>menu</span>
       </div>
-      {isSpOpen && (
-        <MobileSidePanel ref={sidePanelRef} setIsSpOpen={setIsSpOpen} />
-      )}
+      <AnimatePresence>
+        {isSpOpen && (
+          <MobileSidePanel ref={sidePanelRef} setIsSpOpen={setIsSpOpen} />
+        )}
+      </AnimatePresence>
     </header>
   );
 };

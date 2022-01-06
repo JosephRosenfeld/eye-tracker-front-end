@@ -102,3 +102,7 @@ This is essentially what I did in order to have all the divisional borders on th
 Header line up with all the borders in the Multi Day grid. I also relied on this to line
 up the cosmetic lines on the timescale component with the borders in the Multi Day grid.
 All in all a fun little trick I discovered that could certainly be handy in the future!*/
+
+
+/*--- General ---*/
+//Framer Motion was the easiest React animations library that I found.

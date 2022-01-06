@@ -15,7 +15,7 @@ import { changeScreenSize } from "./redux/actions/screenSizeActions";
 import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
-import MobileHeader from "./components/MobileHeader";
+import MobileHeader from "./components/mobile/MobileHeader";
 
 function App() {
   //Initialize Dispatch

@@ -22,7 +22,12 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen }, ref) => {
         translateX: "0%",
       }}
       transition={{
-        type: "inertia",
+        type: "spring",
+        duration: ".5",
+        bounce: 0,
+      }}
+      exit={{
+        translateX: "100%",
       }}
       ref={ref}
       className='mobile-side-panel'
