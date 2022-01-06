@@ -7,19 +7,21 @@ import { useLocation } from "react-router-dom";
 
 /*--- Component Imports ---*/
 import DateViewer from "./DateViewer";
+import MobileSidePanel from "./MobileSidePanel";
 
 /*--- Action Imports ---*/
 import { changePage } from "../redux/actions/pageActions";
 
 const MobileHeader = () => {
+  /*--- Correcting Page Var if Redirected Here ---*/
   const dispatch = useDispatch();
   const loc = useLocation();
   let page = useSelector((state) => state.page);
   if (page != loc.pathname) {
     dispatch(changePage(loc.pathname));
     page = loc.pathname;
-    console.log("page changed");
   }
+
   const inWidth = useSelector((state) => state.screenSize);
 
   return (
@@ -32,6 +34,7 @@ const MobileHeader = () => {
       <div className='menu-icon-container'>
         <span className='material-icons menu-icon'>menu</span>
       </div>
+      <MobileSidePanel />
     </header>
   );
 };
