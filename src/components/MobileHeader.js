@@ -13,8 +13,10 @@ import MobileSidePanel from "./MobileSidePanel";
 import { changePage } from "../redux/actions/pageActions";
 
 const MobileHeader = () => {
-  /*--- Correcting Page Var if Redirected Here ---*/
   const dispatch = useDispatch();
+  const inWidth = useSelector((state) => state.screenSize);
+
+  /*--- Correcting Page Var if Redirected Here ---*/
   const loc = useLocation();
   let page = useSelector((state) => state.page);
   if (page != loc.pathname) {
@@ -22,7 +24,6 @@ const MobileHeader = () => {
     page = loc.pathname;
   }
 
-  const inWidth = useSelector((state) => state.screenSize);
   /*--- Period Drop Down Config ---*/
   //initializing side panel toggle state to false
   const [isSpOpen, setIsSpOpen] = useState(false);
@@ -45,6 +46,10 @@ const MobileHeader = () => {
     document.addEventListener("click", handler);
     return () => window.removeEventListener("mousedown", handler);
   }, []);
+
+  /*--- Framer Motion Setup for Transitions ---*/
+
+  //Defining animated react component
 
   return (
     <header className='mobile-header'>
