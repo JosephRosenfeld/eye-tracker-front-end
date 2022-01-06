@@ -32,20 +32,19 @@ const Header = () => {
     };
     document.addEventListener("mousedown", handler);
     return () => window.removeEventListener("mousedown", handler);
-  });
+  }, []);
   //defining jsx click handler
   const toggleMenuDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   /*--- Pulling Page from Global Store ---*/
-  //In the store it starts with a '/'
+  //And updating it if sent here via redirect
   let page = useSelector((state) => state.page);
   const loc = useLocation();
   if (page != loc.pathname) {
     dispatch(changePage(loc.pathname));
     page = loc.pathname;
-    console.log("page changed");
   }
   return (
     <header className='header'>

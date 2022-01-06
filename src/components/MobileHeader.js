@@ -23,6 +23,28 @@ const MobileHeader = () => {
   }
 
   const inWidth = useSelector((state) => state.screenSize);
+  /*--- Period Drop Down Config ---*/
+  //initializing side panel toggle state to false
+  const [isSpOpen, setIsSpOpen] = useState(false);
+  //declaring ref to be used in outside click function
+  const sidePanelRef = useRef();
+  const menuRef = useRef();
+
+  //Adding event listener for outside clicks on document
+  useEffect(() => {
+    let handler = (event) => {
+      if (
+        sidePanelRef.current &&
+        !sidePanelRef.current.contains(event.target) &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        setIsSpOpen(false);
+      }
+    };
+    document.addEventListener("click", handler);
+    return () => window.removeEventListener("mousedown", handler);
+  }, []);
 
   return (
     <header className='mobile-header'>
@@ -31,10 +53,16 @@ const MobileHeader = () => {
         {inWidth > 450 && <div className='site-title'>Eye Tracker</div>}
         <DateViewer dateVisible={true} page={page} />
       </div>
-      <div className='menu-icon-container'>
+      <div
+        ref={menuRef}
+        className='menu-icon-container'
+        onClick={() => setIsSpOpen(true)}
+      >
         <span className='material-icons menu-icon'>menu</span>
       </div>
-      <MobileSidePanel />
+      {isSpOpen && (
+        <MobileSidePanel ref={sidePanelRef} setIsSpOpen={setIsSpOpen} />
+      )}
     </header>
   );
 };

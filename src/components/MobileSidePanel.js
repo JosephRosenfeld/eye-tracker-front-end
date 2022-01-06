@@ -1,24 +1,27 @@
 import "./MobileSidePanel.css";
 
+/*--- Utilities Imports ---*/
+import { forwardRef } from "react";
+
 /*--- Component Imports ---*/
 import { Link } from "react-router-dom";
 
-const MobileSidePanel = () => {
+const MobileSidePanel = forwardRef((props, ref) => {
   //Define onclick function
 
   return (
-    <div className='mobile-side-panel'>
+    <div ref={ref} className='mobile-side-panel'>
       <Link to='/year' className='mobile-sp-item mobile-sp-title'>
         <img className='logo' src='/assets/eye-tracker-logo.png'></img>
         <div className='site-title'>Eye Tracker</div>
       </Link>
       <Link to='/3day' className='mobile-sp-item mobile-sp-view'>
         3 Day
-        <span class='material-icons-outlined'>view_week</span>
+        <span className='material-icons-outlined'>view_week</span>
       </Link>
       <Link to='/year' className='mobile-sp-item mobile-sp-view'>
         Year
-        <span class='material-icons-outlined'>calendar_view_month</span>
+        <span className='material-icons-outlined'>calendar_view_month</span>
       </Link>
       <div className='mobile-sp-item mobile-sp-utility'>
         Add
@@ -38,6 +41,6 @@ const MobileSidePanel = () => {
       </div>
     </div>
   );
-};
+});
 
 export default MobileSidePanel;
