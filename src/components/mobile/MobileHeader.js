@@ -11,7 +11,7 @@ import MobileSidePanel from "./MobileSidePanel";
 
 /*--- Action Imports ---*/
 import { changePage } from "../../redux/actions/pageActions";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const MobileHeader = () => {
   const dispatch = useDispatch();
@@ -68,7 +68,29 @@ const MobileHeader = () => {
       </div>
       <AnimatePresence>
         {isSpOpen && (
-          <MobileSidePanel ref={sidePanelRef} setIsSpOpen={setIsSpOpen} />
+          <>
+            <MobileSidePanel
+              ref={sidePanelRef}
+              setIsSpOpen={setIsSpOpen}
+              page={page}
+            />
+            <motion.div
+              className='overlay'
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 0.4,
+              }}
+              transition={{
+                type: "tween",
+                duration: 0.5,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+            ></motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

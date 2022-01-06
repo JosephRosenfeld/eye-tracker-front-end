@@ -50,10 +50,19 @@
   font-size: 35px;
 }
 
-/*.menu-icon-container:hover,*/
 .menu-icon-container:active {
   border-radius: 3px;
   background-color: rgba(180, 180, 180, 0.25);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 104; /*one less than side panel*/
+  background-color: black;
 }
 
 @media (max-width: 600px) {

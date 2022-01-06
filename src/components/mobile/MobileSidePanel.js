@@ -4,13 +4,19 @@ import "./MobileSidePanel.css";
 import { forwardRef } from "react";
 import { motion } from "framer-motion";
 
+/*--- Hooks Imports ---*/
+import { useSelector } from "react-redux";
+
 /*--- Component Imports ---*/
 import { Link } from "react-router-dom";
 
-const MobileSidePanel = forwardRef(({ setIsSpOpen }, ref) => {
+const MobileSidePanel = forwardRef(({ setIsSpOpen, page }, ref) => {
   //Define onclick function
   const spOnClick = (page = null) => {
+    //set isSpOpen to false
     setIsSpOpen(false);
+
+    //If its a header page, activate that
   };
 
   return (
@@ -37,12 +43,16 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen }, ref) => {
         className='mobile-sp-item mobile-sp-title'
         onClick={spOnClick}
       >
-        <img className='logo' src='/assets/eye-tracker-logo.png'></img>
+        <img className='logo' src='/assets/text_color_logo.png'></img>
         <div className='site-title'>Eye Tracker</div>
       </Link>
       <Link
         to='/3day'
-        className='mobile-sp-item mobile-sp-view'
+        className={
+          page == "/3day"
+            ? "mobile-sp-item mobile-sp-view sp-active"
+            : "mobile-sp-item mobile-sp-view"
+        }
         onClick={spOnClick}
       >
         3 Day
@@ -50,7 +60,11 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen }, ref) => {
       </Link>
       <Link
         to='/year'
-        className='mobile-sp-item mobile-sp-view'
+        className={
+          page == "/year"
+            ? "mobile-sp-item mobile-sp-view sp-active"
+            : "mobile-sp-item mobile-sp-view"
+        }
         onClick={spOnClick}
       >
         Year

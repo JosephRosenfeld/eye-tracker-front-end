@@ -10,8 +10,9 @@
   z-index: 105;
   height: 100vh;
   width: max-content;
-  background-color: rgb(163, 163, 163);
   border: 1px;
+  background-color: white;
+  box-shadow: 2px 0px 16px rgba(0, 0, 0, 0.5);
   font-size: 18px;
 }
 
@@ -21,18 +22,34 @@
   justify-content: flex-end;
   gap: 10px;
   padding: 20px;
-  color: white;
-  border-bottom: 1px solid black;
+  color: var(--text-color);
   text-decoration: none;
 
   cursor: pointer;
 }
 
+.mobile-sp-title {
+  align-items: flex-end;
+  gap: 15px;
+  border-bottom: 1px solid var(--header-border-color);
+}
+
 .mobile-side-panel .logo {
-  height: 41px;
+  height: 35px;
 }
 
 .mobile-side-panel .site-title {
   font-size: 30px;
   font-weight: bold;
+}
+
+.mobile-sp-view:last-of-type {
+  border-bottom: 1px solid var(--header-border-color);
+}
+
+.sp-active,
+.mobile-sp-item:not(.mobile-sp-title):hover,
+.mobile-sp-item:not(.mobile-sp-title):active {
+  color: white;
+  background-color: var(--text-color);
 }
