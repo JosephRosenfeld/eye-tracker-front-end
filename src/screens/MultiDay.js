@@ -1,6 +1,6 @@
 import "./MultiDay.css";
 
-import { useEffect } from "react";
+/*--- Hook Imports ---*/
 import { useSelector } from "react-redux";
 
 /*--- Component Imports ---*/
@@ -8,10 +8,11 @@ import MultiHeader from "../components/MultiHeader";
 import TimeScale from "../components/TimeScale";
 import FullDay from "../components/FullDay";
 
+/*--- Action Imports ---*/
+
 const MultiDay = ({ newViewDt = null }) => {
   //Retrieve and Extract Global State Vars
-  const page = useSelector((state) => state.page);
-  console.log(page);
+  let page = useSelector((state) => state.page);
   let { year, month, day } = useSelector((state) => state.viewDt);
 
   //if newViewDt isn't null overwrite our local view date

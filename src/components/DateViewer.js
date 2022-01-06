@@ -5,17 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 //actions import
 import { changeDt } from "../redux/actions/viewDateActions";
 
-const DateViewer = ({ dateVisible }) => {
+const DateViewer = ({ dateVisible, page }) => {
   //Retrieve and extract global state vars
   const viewDt = useSelector((state) => state.viewDt);
   let { year, month, day } = viewDt;
-  const page = useSelector((state) => state.page);
+  console.log(page);
 
   /*--- Calculate showDate ---*/
   /*If we're on yearly display ex: < 2021 >
-    If we're on multi-day display ex: December 2021
-    If we're on multi-day and view overlaps two months ex: Nov - Dec 2021
-    If we're on multi-day and view overlaps two years ex: Dec 2021 - Jan 2022*/
+    If we're on multi-day display ex: Dec 2021*/
   let showDate;
   if (page == "/year") {
     showDate = year;

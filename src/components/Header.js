@@ -1,12 +1,17 @@
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 
 //component imports
 import DateViewer from "./DateViewer";
 
+/*--- Actions Imports ---*/
+import { changePage } from "../redux/actions/pageActions";
+
 const Header = () => {
+  const dispatch = useDispatch();
+
   /*--- Period Drop Down Config ---*/
   //initializing menu toggle state to false
   const [isOpen, setIsOpen] = useState(false);
@@ -35,14 +40,19 @@ const Header = () => {
 
   /*--- Pulling Page from Global Store ---*/
   //In the store it starts with a '/'
-  const page = useSelector((state) => state.page.substring(1));
-
+  let page = useSelector((state) => state.page);
+  const loc = useLocation();
+  if (page != loc.pathname) {
+    dispatch(changePage(loc.pathname));
+    page = loc.pathname;
+    console.log("page changed");
+  }
   return (
     <header className='header'>
       <div className='header-left'>
         <img className='logo' src='/assets/eye-tracker-logo.png'></img>
         <div className='site-title'>Eye Tracker</div>
-        <DateViewer dateVisible={true} />
+        <DateViewer dateVisible={true} page={page} />
       </div>
 
       <div className='header-right'>
@@ -68,7 +78,8 @@ const Header = () => {
             className='period-dropdown'
             onClick={toggleMenuDropdown}
           >
-            {page.charAt(0).toUpperCase() + page.slice(1)}
+            {page.substring(1).charAt(0).toUpperCase() +
+              page.substring(1).slice(1)}
           </div>
 
           {isOpen && (
