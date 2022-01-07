@@ -44,7 +44,7 @@ const MultiHeader = ({ dtArr }) => {
             </div>
           ))}
         </div>
-        <div className='scrollbar-offset' style={{ width: "17px" }}></div>
+        <div className='scrollbar-offset' style={{ width: sbOffset }}></div>
       </div>
     </>
   );

@@ -2,6 +2,42 @@
 /*Favicon color: rgb(52, 175, 78);*/
 
 
+/*Example of attaching a custom event listener 'locationchange'*/
+/*In App.js:
+  const setPageEventListener = () => {
+    dispatch(changePage(window.location.pathname));
+  };
+  useEffect(() => {
+    window.addEventListener("locationchange", setPageEventListener);
+    return () =>
+      window.removeEventListener("locationchange", setPageEventListener);
+  }, []);
+*/
+/*In index.js:
+/*Overwriting history.pushstate, history.replaceState and history.popstate in order
+to create a custom 'locationchange' event*/
+/*Link: https://stackoverflow.com/questions/6390341/how-to-detect-if-url-has-changed-after-hash-in-javascript*/
+window.history.pushState = ((f) =>
+  function pushState() {
+    var ret = f.apply(this, arguments);
+    window.dispatchEvent(new Event("pushstate"));
+    window.dispatchEvent(new Event("locationchange"));
+    return ret;
+  })(window.history.pushState);
+
+window.history.replaceState = ((f) =>
+  function replaceState() {
+    var ret = f.apply(this, arguments);
+    window.dispatchEvent(new Event("replacestate"));
+    window.dispatchEvent(new Event("locationchange"));
+    return ret;
+  })(window.history.replaceState);
+
+window.addEventListener("popstate", () => {
+  window.dispatchEvent(new Event("locationchange"));
+});
+
+
 /*--- locationchange Event Listener Explanation ---*/
 /*You can arrive at a page either externally or internally. If we're arriving externally we
 don't have control of where to direct them, and if they try to access the wrong page 
@@ -9,7 +45,7 @@ for their screen size, we need to have some logic to take that request and route
 elsewhere. We accomplish this using React Router DOM's navigate object.*/
 
 /*This works well but we still need logic to determine where we should direct someone
-internally, to one page or another, based on some factors (for our purposes that factor is
+internally, to one page or another, based on specific factors (for our purposes that factor is
 screen size but it could be other factors). Well we could rely on React Router Dom's
 logic for this and just always link to one page. Assuming our redirect logic is standard for 
 this component as it is in the App level routes then it should redirect just fine.
@@ -22,25 +58,6 @@ This is the reason why we store our screen size in our Global State, so
 we can access it from any component that might need to make a conditional redirect based
 on that information.*/
 
-/*Well if redirects happen with screen size logic, and that screen size is in our
-global state so if it changes it will force a rerender on all relevant components, then
-why should we also have a global state for the location info? I mean afterall, if we
-want to know what page we're on we can just look at the screen size and deduce it from
-there right? Well not quite
-  - We want this app to be as extensible and scalable as possible. Right now we're only
-  doing redirects and conditional routing based on screen size, but what if that changes
-  in the future.
-  - There's also a greater chance for disconnect or bugs as we're assuming all
-  other components have correctly routed you to this page based on the correct logic.
-  - Essentially we want an answer thats closer to the truth, which for us would be our
-  page global state which is set with the custom event 'locationchange'. This allows
-  us to:
-    1. Rerender relevant components based on locationchange (therefore forces the 
-    component to have the most up to date info on its page) (were we rerendering based
-    on screen size alone we may have missed any locationchanges due to other logic)
-    2. Have the most accurate source of our page information in relevant components 
-    (rather than relying on screen size as a proxy to calculate our page info)*/
-    
 /*All in all, I'm still not 100% sure if url redirects based on screen size is best
 practice and what other implications this could have (SEO, crawling, UI/UX, etc.). However,
 it's a clever solution for now and I will continue to research this going forward.*/

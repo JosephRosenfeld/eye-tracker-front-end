@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 /*--- Actions Imports ---*/
-import { changePage } from "./redux/actions/pageActions";
 import { changeScreenSize } from "./redux/actions/screenSizeActions";
 
 /*--- Component Imports ---*/
@@ -22,8 +21,8 @@ function App() {
   const location = useLocation();
 
   /*--- Window Width into Global State (Redux) ---*/
-  /*We do this so we can conditionally route to pages based on screen sizes in other
-  components*/
+  /*We do this so we can conditionally route to different pages based on screen 
+  sizes in other components*/
   const resizeEvListener = () => {
     dispatch(changeScreenSize(window.innerWidth));
   };
@@ -36,20 +35,6 @@ function App() {
   component, the entire App will be rerendered when screen width changes. And 
   because the routing is done in the App component, the route can change per 
   rerender, making it possible for redirects to happen whenever the screen size changes*/
-
-  /*--- Location into Global State (Redux) ---*/
-  /*The reason we are storing the location in state in the first place is because we need
-  to trigger a rerender when the path changes. The easiest way to do that is store the path
-  in state. State changes and voilà our component rerenders.*/
-  /*For more info read 'locationchange Event Listener Explained in the notes section*/
-  const setPageEventListener = () => {
-    dispatch(changePage(window.location.pathname));
-  };
-  useEffect(() => {
-    window.addEventListener("locationchange", setPageEventListener);
-    return () =>
-      window.removeEventListener("locationchange", setPageEventListener);
-  }, []);
 
   return (
     <div className='App'>

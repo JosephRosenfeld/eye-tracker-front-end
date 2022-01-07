@@ -1,20 +1,16 @@
 import "./SettingsPage.css";
 
 /*--- Utilities Imports ---*/
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 /*--- Hooks Imports ---*/
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
-/*--- Components Imports ---*/
-import PopupOverlay from "./PopupOverlay.js";
-
 const SettingsPage = () => {
   const loc = useLocation();
 
   const inWidth = useSelector((state) => state.screenSize);
-  const page = useSelector((state) => state.page);
   const view = loc.pathname.match(/^\/[^\/]*/)[0];
 
   const navigate = useNavigate();

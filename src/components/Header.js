@@ -1,17 +1,13 @@
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 //component imports
 import DateViewer from "./DateViewer";
 
 /*--- Actions Imports ---*/
-import { changePage } from "../redux/actions/pageActions";
 
 const Header = () => {
-  const dispatch = useDispatch();
-
   /*--- Period Drop Down Config ---*/
   //initializing menu toggle state to false
   const [isOpen, setIsOpen] = useState(false);
@@ -38,15 +34,8 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
-  /*--- Pulling Page from Global Store ---*/
-  //And updating it if sent here via redirect
-  let page = useSelector((state) => state.page);
+  /*--- Getting Current View ---*/
   const loc = useLocation();
-  if (page != loc.pathname) {
-    dispatch(changePage(loc.pathname));
-    page = loc.pathname;
-  }
-  //Seperate just the view
   const view = loc.pathname.match(/^\/[^\/]*/)[0];
 
   return (
@@ -86,7 +75,7 @@ const Header = () => {
 
           {isOpen && (
             <div ref={dropOptionsRef} className='period-options'>
-              <Link to='/year'>
+              <Link to='year'>
                 <div className='period-option' onClick={toggleMenuDropdown}>
                   Year
                 </div>

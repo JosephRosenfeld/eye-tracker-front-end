@@ -1,6 +1,7 @@
 import "./MultiDay.css";
 
 /*--- Hook Imports ---*/
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
@@ -13,11 +14,17 @@ import { Outlet } from "react-router-dom";
 /*--- Action Imports ---*/
 
 const MultiDay = ({ newViewDt = null }) => {
+  console.log("multi day rerender");
+  /*We use a ref here so that if view changes to some non multi-day val (like if we
+    switch to a year view) then it doesn't rerender the wrong amount of days right
+    before switching to the new view */
   const loc = useLocation();
-  const view = loc.pathname.match(/^\/[^\/]*/)[0];
-
+  const viewRef = useRef(loc.pathname.match(/^\/[^\/]*/)[0]);
+  let view = loc.pathname.match(/^\/[^\/]*/)[0];
+  if (view != "/3day" && view != "/week") {
+    view = viewRef.current;
+  }
   //Retrieve and Extract Global State Vars
-  /*const page = useSelector((state) => state.page);*/
   let { year, month, day } = useSelector((state) => state.viewDt);
 
   //if newViewDt isn't null overwrite our local view date
@@ -42,7 +49,6 @@ const MultiDay = ({ newViewDt = null }) => {
     };
     pointerDt.setDate(pointerDt.getDate() + 1);
   }
-
   return (
     <main className='multi-day-container'>
       <MultiHeader dtArr={dtArr} />

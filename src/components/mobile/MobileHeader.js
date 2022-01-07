@@ -10,21 +10,13 @@ import DateViewer from "../DateViewer";
 import MobileSidePanel from "./MobileSidePanel";
 
 /*--- Action Imports ---*/
-import { changePage } from "../../redux/actions/pageActions";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 const MobileHeader = () => {
-  const dispatch = useDispatch();
   const inWidth = useSelector((state) => state.screenSize);
 
-  /*--- Correcting Page Var if Redirected Here ---*/
+  /*--- Setting view Var ---*/
   const loc = useLocation();
-  let page = useSelector((state) => state.page);
-  if (page != loc.pathname) {
-    dispatch(changePage(loc.pathname));
-    page = loc.pathname;
-  }
-  //Seperate just the view
   const view = loc.pathname.match(/^\/[^\/]*/)[0];
 
   /*--- Period Drop Down Config ---*/
@@ -49,10 +41,6 @@ const MobileHeader = () => {
     document.addEventListener("click", handler);
     return () => window.removeEventListener("mousedown", handler);
   }, []);
-
-  /*--- Framer Motion Setup for Transitions ---*/
-
-  //Defining animated react component
 
   return (
     <header className='mobile-header'>

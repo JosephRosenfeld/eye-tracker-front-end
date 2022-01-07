@@ -7,7 +7,7 @@ import { changeDt } from "../redux/actions/viewDateActions";
 
 const Month = ({ m }) => {
   /*--- Extracting and Destructuring Global State Vars --- */
-  const inWidth = useSelector((state) => state.screenWidth);
+  const inWidth = useSelector((state) => state.screenSize);
   const viewDt = useSelector((state) => state.viewDt);
   const year = viewDt.year;
 
@@ -23,6 +23,7 @@ const Month = ({ m }) => {
         day: parseInt(newViewDt.day),
       })
     );
+
     navigate(inWidth > 800 ? "../week" : "../3day", { newViewDt });
   };
 
