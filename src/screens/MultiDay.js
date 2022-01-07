@@ -13,7 +13,7 @@ import { Outlet } from "react-router-dom";
 
 const MultiDay = ({ newViewDt = null }) => {
   //Retrieve and Extract Global State Vars
-  const page = useSelector((state) => state.page);
+  const page = useSelector((state) => state.loc.view);
   const view = page.match(/^\/[^\/]*/)[0];
   let { year, month, day } = useSelector((state) => state.viewDt);
   console.log("Multi day rerendered");
