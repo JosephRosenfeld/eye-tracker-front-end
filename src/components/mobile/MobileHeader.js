@@ -74,22 +74,6 @@ const MobileHeader = () => {
               setIsSpOpen={setIsSpOpen}
               page={page}
             />
-            <motion.div
-              className='overlay'
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 0.4,
-              }}
-              transition={{
-                type: "tween",
-                duration: 0.5,
-              }}
-              exit={{
-                opacity: 0,
-              }}
-            ></motion.div>
           </>
         )}
       </AnimatePresence>
