@@ -1,0 +1,9 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 104; /*one less than side panel*/
+  background-color: rgba(0, 0, 0, 0.4);
+}

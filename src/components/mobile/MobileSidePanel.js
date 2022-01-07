@@ -10,9 +10,9 @@ import { useSelector } from "react-redux";
 /*--- Component Imports ---*/
 import { Link } from "react-router-dom";
 
-const MobileSidePanel = forwardRef(({ setIsSpOpen, page }, ref) => {
+const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
   //Define onclick function
-  const spOnClick = (page = null) => {
+  const spOnClick = (view = null) => {
     //set isSpOpen to false
     setIsSpOpen(false);
 
@@ -30,7 +30,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, page }, ref) => {
         }}
         transition={{
           type: "spring",
-          duration: ".5",
+          duration: ".4",
           bounce: 0,
         }}
         exit={{
@@ -50,7 +50,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, page }, ref) => {
         <Link
           to='/3day'
           className={
-            page == "/3day"
+            view == "/3day"
               ? "mobile-sp-item mobile-sp-view sp-active"
               : "mobile-sp-item mobile-sp-view"
           }
@@ -62,7 +62,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, page }, ref) => {
         <Link
           to='/year'
           className={
-            page == "/year"
+            view == "/year"
               ? "mobile-sp-item mobile-sp-view sp-active"
               : "mobile-sp-item mobile-sp-view"
           }
@@ -83,18 +83,18 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, page }, ref) => {
           Help
           <span className='material-icons'>help</span>
         </div>
-        <div className='mobile-sp-item mobile-sp-utility'>
+        <Link to='' className='mobile-sp-item mobile-sp-utility'>
           Settings
           <span className='material-icons'>settings</span>
-        </div>
+        </Link>
       </motion.div>
       <motion.div
-        className='overlay'
+        className='sp-overlay'
         initial={{
           opacity: 0,
         }}
         animate={{
-          opacity: 0.4,
+          opacity: 1,
         }}
         transition={{
           type: "tween",

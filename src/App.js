@@ -16,6 +16,7 @@ import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
 import MobileHeader from "./components/mobile/MobileHeader";
+import SettingsPage from "./components/header_pages/SettingsPage";
 
 function App() {
   //Initialize Dispatch
@@ -66,14 +67,20 @@ function App() {
             element={
               inWidth > 800 ? <Navigate to='/week' replace /> : <MultiDay />
             }
-          />
+          >
+            <Route path='settings' element={<SettingsPage />} />
+          </Route>
           <Route
             path='/week'
             element={
               inWidth <= 800 ? <Navigate to='/3day' replace /> : <MultiDay />
             }
-          />
-          <Route path='/year' element={<Yearly />} />
+          >
+            <Route path='settings' element={<SettingsPage />} />
+          </Route>
+          <Route path='/year' element={<Yearly />}>
+            <Route path='settings' element={<SettingsPage />} />
+          </Route>
         </Routes>
       </div>
     </Router>

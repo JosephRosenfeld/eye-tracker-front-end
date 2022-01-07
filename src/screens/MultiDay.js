@@ -7,12 +7,14 @@ import { useSelector } from "react-redux";
 import MultiHeader from "../components/MultiHeader";
 import TimeScale from "../components/TimeScale";
 import FullDay from "../components/FullDay";
+import { Outlet } from "react-router-dom";
 
 /*--- Action Imports ---*/
 
 const MultiDay = ({ newViewDt = null }) => {
   //Retrieve and Extract Global State Vars
-  let page = useSelector((state) => state.page);
+  const page = useSelector((state) => state.page);
+  const view = page.match(/^\/[^\/]*/)[0];
   let { year, month, day } = useSelector((state) => state.viewDt);
 
   //if newViewDt isn't null overwrite our local view date
@@ -24,7 +26,7 @@ const MultiDay = ({ newViewDt = null }) => {
   }
 
   //Calculate lookback
-  const lookBack = page == "/week" ? 7 : page == "/3day" ? 3 : 3;
+  const lookBack = view == "/week" ? 7 : view == "/3day" ? 3 : 3;
 
   //Creating dtArr
   const dtArr = new Array(lookBack);
@@ -55,6 +57,7 @@ const MultiDay = ({ newViewDt = null }) => {
           ))}
         </div>
       </div>
+      <Outlet />
     </main>
   );
 };

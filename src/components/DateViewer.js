@@ -5,24 +5,24 @@ import { useSelector, useDispatch } from "react-redux";
 //actions import
 import { changeDt } from "../redux/actions/viewDateActions";
 
-const DateViewer = ({ dateVisible, page }) => {
+const DateViewer = ({ dateVisible, view }) => {
   //Retrieve and extract global state vars
   const viewDt = useSelector((state) => state.viewDt);
   let { year, month, day } = viewDt;
-  console.log(page);
+  console.log(view);
 
   /*--- Calculate showDate ---*/
   /*If we're on yearly display ex: < 2021 >
     If we're on multi-day display ex: Dec 2021*/
   let showDate;
-  if (page == "/year") {
+  if (view == "/year") {
     showDate = year;
-  } else if (page == "/week" || page == "/3day") {
+  } else if (view == "/week" || view == "/3day") {
     const curDt = new Date(year, month, day); //define dt obj to get its month
     showDate = `${curDt.toLocaleString("en-us", { month: "short" })} ${year}`;
 
     /*Google Calendar Date View Replication*/
-    /*const lookBack = page == "/week" ? 7 : 3;
+    /*const lookBack = view == "/week" ? 7 : 3;
     const prevDt = new Date(year, month, day - lookBack);
     if (prevDt.getFullYear() != year) {
       showDate = `${prevDt.toLocaleString("en-us", {
@@ -44,11 +44,11 @@ const DateViewer = ({ dateVisible, page }) => {
 
   //date viewer on click handler
   const changeViewDt = (change) => {
-    if (page == "/year") {
+    if (view == "/year") {
       year += 1 * change;
-    } else if (page == "/week") {
+    } else if (view == "/week") {
       day += 7 * change;
-    } else if (page == "/3day") {
+    } else if (view == "/3day") {
       day += 3 * change;
     }
 
@@ -65,7 +65,7 @@ const DateViewer = ({ dateVisible, page }) => {
   return (
     <div
       className='date-viewer'
-      data-period={page.substring(1)}
+      data-period={view.substring(1)}
       data-month={month}
     >
       <span

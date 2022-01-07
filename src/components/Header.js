@@ -46,12 +46,15 @@ const Header = () => {
     dispatch(changePage(loc.pathname));
     page = loc.pathname;
   }
+  //Seperate just the view
+  const view = page.match(/^\/[^\/]*/)[0];
+
   return (
     <header className='header'>
       <div className='header-left'>
         <img className='logo' src='/assets/eye-tracker-logo.png'></img>
         <div className='site-title'>Eye Tracker</div>
-        <DateViewer dateVisible={true} page={page} />
+        <DateViewer dateVisible={true} view={view} />
       </div>
 
       <div className='header-right'>
@@ -67,18 +70,18 @@ const Header = () => {
           <span className='material-icons header-icon'>help</span>
           <span className='header-icon-tip'>Help</span>
         </div>
-        <div className='header-icon-container'>
+        <Link to={`${view}/settings`} className='header-icon-container'>
           <span className='material-icons header-icon'>settings</span>
           <span className='header-icon-tip'>Settings</span>
-        </div>
+        </Link>
         <div className='dropdown-container'>
           <div
             ref={dropdownRef}
             className='period-dropdown'
             onClick={toggleMenuDropdown}
           >
-            {page.substring(1).charAt(0).toUpperCase() +
-              page.substring(1).slice(1)}
+            {view.substring(1).charAt(0).toUpperCase() +
+              view.substring(1).slice(1)}
           </div>
 
           {isOpen && (

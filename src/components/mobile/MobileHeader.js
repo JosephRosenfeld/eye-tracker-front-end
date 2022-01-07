@@ -24,6 +24,8 @@ const MobileHeader = () => {
     dispatch(changePage(loc.pathname));
     page = loc.pathname;
   }
+  //Seperate just the view
+  const view = page.match(/^\/[^\/]*/)[0];
 
   /*--- Period Drop Down Config ---*/
   //initializing side panel toggle state to false
@@ -57,7 +59,7 @@ const MobileHeader = () => {
       <div className='mobile-header-left'>
         <img className='logo' src='/assets/eye-tracker-logo.png'></img>
         {inWidth > 450 && <div className='site-title'>Eye Tracker</div>}
-        <DateViewer dateVisible={true} page={page} />
+        <DateViewer dateVisible={true} view={view} />
       </div>
       <div
         ref={menuRef}
@@ -72,7 +74,7 @@ const MobileHeader = () => {
             <MobileSidePanel
               ref={sidePanelRef}
               setIsSpOpen={setIsSpOpen}
-              page={page}
+              view={view}
             />
           </>
         )}

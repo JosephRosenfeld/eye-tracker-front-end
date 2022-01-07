@@ -1,9 +1,13 @@
 import "./Yearly.css";
 
+/*--- Utilities Imports ---*/
+import { AnimatePresence } from "framer-motion";
+
 /*--- Hook Imports ---*/
 
 /*--- Component Imports ---*/
 import Month from "../components/Month";
+import { Outlet } from "react-router-dom";
 
 /*--- Actions Import ---*/
 
@@ -15,6 +19,7 @@ const Yearly = () => {
       {months.map((m, idx) => (
         <Month m={m} key={idx} />
       ))}
+      <Outlet />
     </main>
   );
 };
