@@ -44,7 +44,6 @@ function App() {
   /*For more info read 'locationchange Event Listener Explained in the notes section*/
   const setPageEventListener = () => {
     dispatch(changePage(window.location.pathname));
-    console.log("page changed");
   };
   useEffect(() => {
     window.addEventListener("locationchange", setPageEventListener);

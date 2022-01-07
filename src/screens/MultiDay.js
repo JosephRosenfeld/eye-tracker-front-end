@@ -2,6 +2,7 @@ import "./MultiDay.css";
 
 /*--- Hook Imports ---*/
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 /*--- Component Imports ---*/
 import MultiHeader from "../components/MultiHeader";
@@ -12,11 +13,12 @@ import { Outlet } from "react-router-dom";
 /*--- Action Imports ---*/
 
 const MultiDay = ({ newViewDt = null }) => {
+  const loc = useLocation();
+  const view = loc.pathname.match(/^\/[^\/]*/)[0];
+
   //Retrieve and Extract Global State Vars
-  const page = useSelector((state) => state.loc.view);
-  const view = page.match(/^\/[^\/]*/)[0];
+  /*const page = useSelector((state) => state.page);*/
   let { year, month, day } = useSelector((state) => state.viewDt);
-  console.log("Multi day rerendered");
 
   //if newViewDt isn't null overwrite our local view date
   //(Update of global viewDt happened in the double click function on the Yearly)
@@ -54,6 +56,7 @@ const MultiDay = ({ newViewDt = null }) => {
               day={el.day}
               first={i == 0}
               key={"" + el.day + el.month + el.year}
+              data-key={"" + el.day + el.month + el.year}
             />
           ))}
         </div>

@@ -13,9 +13,8 @@ internally, to one page or another, based on some factors (for our purposes that
 screen size but it could be other factors). Well we could rely on React Router Dom's
 logic for this and just always link to one page. Assuming our redirect logic is standard for 
 this component as it is in the App level routes then it should redirect just fine.
-  - The problem with the above method is that it relies on app level redirects which
-  aren't as clean, reduce SEO, and still initially renders the wrong page. This is a 
-  more complex and less clean method for achieving redirects.*/
+  - Although relying on app level redirecting would create a single source of truth for
+  our redirect logic, it ends up reducing SEO, and still initially renders the wrong page.*/
 
 /*The solution would be to conditionally redirect based on some logic or state that
 the component is privy to. In our case that piece of state would be the screen-size.

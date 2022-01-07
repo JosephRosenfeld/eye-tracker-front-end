@@ -23,7 +23,7 @@ const Month = ({ m }) => {
         day: parseInt(newViewDt.day),
       })
     );
-    navigate("../week", { newViewDt });
+    navigate(inWidth > 800 ? "../week" : "../3day", { newViewDt });
   };
 
   /*--- Creating Date Array ---*/

@@ -9,7 +9,6 @@ const DateViewer = ({ dateVisible, view }) => {
   //Retrieve and extract global state vars
   const viewDt = useSelector((state) => state.viewDt);
   let { year, month, day } = viewDt;
-  console.log(view);
 
   /*--- Calculate showDate ---*/
   /*If we're on yearly display ex: < 2021 >

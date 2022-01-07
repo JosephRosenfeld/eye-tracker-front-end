@@ -47,9 +47,7 @@ const Header = () => {
     page = loc.pathname;
   }
   //Seperate just the view
-  const view = page.match(/^\/[^\/]*/)[0];
-
-  console.log("header rerendered");
+  const view = loc.pathname.match(/^\/[^\/]*/)[0];
 
   return (
     <header className='header'>

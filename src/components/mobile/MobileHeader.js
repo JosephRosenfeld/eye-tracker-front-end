@@ -25,7 +25,7 @@ const MobileHeader = () => {
     page = loc.pathname;
   }
   //Seperate just the view
-  const view = page.match(/^\/[^\/]*/)[0];
+  const view = loc.pathname.match(/^\/[^\/]*/)[0];
 
   /*--- Period Drop Down Config ---*/
   //initializing side panel toggle state to false

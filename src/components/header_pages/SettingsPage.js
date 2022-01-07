@@ -5,16 +5,17 @@ import { AnimatePresence, motion } from "framer-motion";
 
 /*--- Hooks Imports ---*/
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 /*--- Components Imports ---*/
 import PopupOverlay from "./PopupOverlay.js";
 
 const SettingsPage = () => {
+  const loc = useLocation();
+
   const inWidth = useSelector((state) => state.screenSize);
   const page = useSelector((state) => state.page);
-  const view = page.match(/^\/[^\/]*/)[0];
-  console.log(view);
+  const view = loc.pathname.match(/^\/[^\/]*/)[0];
 
   const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ const SettingsPage = () => {
     <>
       <motion.div
         initial={{
-          y: "-50px",
+          y: "-30px",
           opacity: 0,
         }}
         animate={{
@@ -36,7 +37,7 @@ const SettingsPage = () => {
           opacity: 1,
         }}
         exit={{
-          y: "50px",
+          y: "30px",
           opacity: 0,
         }}
         transition={{
@@ -48,7 +49,7 @@ const SettingsPage = () => {
           <div className='settings-header'>
             <div className='settings-title'>Settings</div>
             <div className='popup-x' onClick={closePopup}>
-              <span class='material-icons'>close</span>
+              <span className='material-icons'>close</span>
             </div>
           </div>
           <div className='settings'></div>
