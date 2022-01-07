@@ -16,6 +16,7 @@ const MultiDay = ({ newViewDt = null }) => {
   const page = useSelector((state) => state.page);
   const view = page.match(/^\/[^\/]*/)[0];
   let { year, month, day } = useSelector((state) => state.viewDt);
+  console.log("Multi day rerendered");
 
   //if newViewDt isn't null overwrite our local view date
   //(Update of global viewDt happened in the double click function on the Yearly)

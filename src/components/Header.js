@@ -49,6 +49,8 @@ const Header = () => {
   //Seperate just the view
   const view = page.match(/^\/[^\/]*/)[0];
 
+  console.log("header rerendered");
+
   return (
     <header className='header'>
       <div className='header-left'>

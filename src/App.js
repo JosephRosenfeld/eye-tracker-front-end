@@ -1,26 +1,25 @@
+/*--- Hooks Imports ---*/
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-//Actions Imports
+/*--- Actions Imports ---*/
 import { changePage } from "./redux/actions/pageActions";
 import { changeScreenSize } from "./redux/actions/screenSizeActions";
 
-//Component Imports
+/*--- Component Imports ---*/
 import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
 import MobileHeader from "./components/mobile/MobileHeader";
 import SettingsPage from "./components/header_pages/SettingsPage";
+import PopupOverlay from "./components/header_pages/PopupOverlay";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
-  //Initialize Dispatch
   const dispatch = useDispatch();
+  const location = useLocation();
 
   /*--- Window Width into Global State (Redux) ---*/
   /*We do this so we can conditionally route to pages based on screen sizes in other
@@ -33,17 +32,15 @@ function App() {
     return () => window.removeEventListener("resize", resizeEvListener);
   }, []);
   const inWidth = useSelector((state) => state.screenSize);
+  /*Additionally, because screen width is pulled in with useSelector at the App level 
+  component, the entire App will be rerendered when screen width changes. And 
+  because the routing is done in the App component, the route can change per 
+  rerender, making it possible for redirects to happen whenever the screen size changes*/
 
-  /*--- Pathname into Global State (Redux) ---*/
-  /*The reason we are storing the pathname in state in the first place is because we need
+  /*--- Location into Global State (Redux) ---*/
+  /*The reason we are storing the location in state in the first place is because we need
   to trigger a rerender when the path changes. The easiest way to do that is store the path
   in state. State changes and voilà our component rerenders.*/
-  /*The reason global state was chosen instead of component state is because we need this
-  rerendering to occur in multiple components*/
-  /*Additionally, because screen width is stored in state at the App level component,
-  the entire App will be rerendered when screen width changes. And because the routing
-  is done in the App component, the route can change per rerender, making it possible 
-  for redirects to happen whenever the screen size changes*/
   /*For more info read 'locationchange Event Listener Explained in the notes section*/
   const setPageEventListener = () => {
     dispatch(changePage(window.location.pathname));
@@ -54,13 +51,12 @@ function App() {
     return () =>
       window.removeEventListener("locationchange", setPageEventListener);
   }, []);
-  //Set the initial page if a redirect is occurring
 
   return (
-    <Router>
-      <div className='App'>
-        {inWidth > 800 ? <Header /> : <MobileHeader />}
-        <Routes>
+    <div className='App'>
+      {inWidth > 800 ? <Header /> : <MobileHeader />}
+      <AnimatePresence exitBeforeEnter>
+        <Routes location={location} key={location.key}>
           <Route path='/' element={<Navigate to='/year' replace />} />
           <Route
             path='/3day'
@@ -76,14 +72,30 @@ function App() {
               inWidth <= 800 ? <Navigate to='/3day' replace /> : <MultiDay />
             }
           >
-            <Route path='settings' element={<SettingsPage />} />
+            <Route
+              path='settings'
+              element={
+                <>
+                  <PopupOverlay />
+                  <SettingsPage />
+                </>
+              }
+            />
           </Route>
           <Route path='/year' element={<Yearly />}>
-            <Route path='settings' element={<SettingsPage />} />
+            <Route
+              path='settings'
+              element={
+                <>
+                  <PopupOverlay />
+                  <SettingsPage />
+                </>
+              }
+            />
           </Route>
         </Routes>
-      </div>
-    </Router>
+      </AnimatePresence>
+    </div>
   );
 }
 

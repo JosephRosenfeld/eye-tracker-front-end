@@ -11,6 +11,9 @@ const PopupOverlay = () => {
       transition={{
         duration: 0.2,
       }}
+      exit={{
+        opacity: 0,
+      }}
       className='popup-overlay'
     ></motion.div>
   );
