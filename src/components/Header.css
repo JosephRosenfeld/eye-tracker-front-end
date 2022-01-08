@@ -77,16 +77,18 @@
   -for some reason had to add the font-family, might be because material ui icons have a different font
   -The top is 120% instead of the 150% it was in weekdays
   */
-  font-family: "Roboto", sans-serif;
-  z-index: 101; /*one over the header's z index*/
+
   position: absolute;
+  width: max-content;
   top: 120%; /*Based on the tooltip for weekdays. The top is 120% instead of 150%*/
   left: 50%;
   transform: translateX(-50%);
+  z-index: 101; /*one over the header's z index*/
   padding: 5px;
   border-radius: 2px;
   color: #fff;
   background-color: rgba(60, 64, 67, 0.788);
+  font-family: "Roboto", sans-serif;
   font-size: 13px;
   text-align: center;
 

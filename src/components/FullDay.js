@@ -8,7 +8,6 @@ const FullDay = ({ year, month, day, first }) => {
 
   return (
     <>
-      {" "}
       <div
         className='full-day'
         date={`${year}-${month >= 10 ? month : "0" + month}-${

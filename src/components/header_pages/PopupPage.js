@@ -1,4 +1,4 @@
-import "./SettingsPage.css";
+import "./PopupPage.css";
 
 /*--- Utilities Imports ---*/
 import { motion } from "framer-motion";
@@ -7,10 +7,8 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const SettingsPage = () => {
-  const loc = useLocation();
-
-  //Varients to vary on screen width
+const PopupPage = ({ title }) => {
+  //Varients obj to vary animation based on screen width
   const inWidth = useSelector((state) => state.screenSize);
   const variants = {
     hidden_desktop: { opacity: 0, y: "-30px" },
@@ -19,18 +17,21 @@ const SettingsPage = () => {
     exit_desktop: { opacity: 0, y: "30px" },
     exit_mobile: { opacity: 1, y: "100%" },
   };
+
+  //Getting current view
+  const loc = useLocation();
   const view = loc.pathname.match(/^\/[^\/]*/)[0];
 
+  //navigating user to new page (with some conditional logic on replace)
   const navigate = useNavigate();
-
   const closePopup = () => {
-    //Remove from history
-    //navigate elsewhere
     /*On mobile its essentially a new page so its good behavior for it to be stored
     in history (not replaced), however on desktop its basically just a popup and therefore
     should be replaced in the history stack*/
     navigate(view, { replace: inWidth > 800 ? true : false });
   };
+
+  //Setting proper child page
 
   return (
     <>
@@ -42,20 +43,19 @@ const SettingsPage = () => {
           duration: inWidth > 800 ? 0.2 : 0.4,
         }}
         variants={variants}
-        className='settings-page-container'
+        className='popup-page-container'
       >
-        <div className='settings-page'>
-          <div className='settings-header'>
-            <div className='settings-title'>Settings</div>
+        <div className='popup-page'>
+          <div className='popup-header'>
+            <div className='popup-title'>{title}</div>
             <div className='popup-x' onClick={closePopup}>
               <span className='material-icons'>close</span>
             </div>
           </div>
-          <div className='settings'></div>
         </div>
       </motion.div>
     </>
   );
 };
 
-export default SettingsPage;
+export default PopupPage;

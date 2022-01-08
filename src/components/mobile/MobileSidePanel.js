@@ -88,7 +88,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
           <span className='material-icons'>add_box</span>
         </Link>
         <Link
-          to={`${view}/Reminders`}
+          to={`${view}/reminders`}
           className='mobile-sp-item mobile-sp-utility'
           onClick={() => spOnClick(true)}
         >
@@ -96,11 +96,11 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
           <span className='material-icons'>notifications</span>
         </Link>
         <Link
-          to={`${view}/help`}
+          to={`${view}/info`}
           className='mobile-sp-item mobile-sp-utility'
           onClick={() => spOnClick(true)}
         >
-          Help
+          Info
           <span className='material-icons'>help</span>
         </Link>
         <Link

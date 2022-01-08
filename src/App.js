@@ -11,7 +11,7 @@ import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
 import MobileHeader from "./components/mobile/MobileHeader";
-import SettingsPage from "./components/header_pages/SettingsPage";
+import PopupPage from "./components/header_pages/PopupPage";
 import PopupOverlay from "./components/header_pages/PopupOverlay";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -19,6 +19,8 @@ import { AnimatePresence } from "framer-motion";
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
+
+  /*--- Add to the history stack in case we routed to a popup page on mobile ---*/
 
   /*--- Window Width into Global State (Redux) ---*/
   /*We do this so we can conditionally route to different pages based on screen 
@@ -48,7 +50,10 @@ function App() {
               inWidth > 800 ? <Navigate to='/week' replace /> : <MultiDay />
             }
           >
-            <Route path='settings' element={<SettingsPage />} />
+            <Route path='add' element={<PopupPage title='Add Item' />} />
+            <Route path='reminders' element={<PopupPage title='Reminders' />} />
+            <Route path='info' element={<PopupPage title='Information' />} />
+            <Route path='settings' element={<PopupPage title='Settings' />} />
           </Route>
           <Route
             path='/week'
@@ -57,22 +62,76 @@ function App() {
             }
           >
             <Route
+              path='add'
+              element={
+                <>
+                  <PopupOverlay />
+                  <PopupPage title='Add Item' />
+                </>
+              }
+            />
+            <Route
+              path='reminders'
+              element={
+                <>
+                  <PopupOverlay />
+                  <PopupPage title='Reminders' />
+                </>
+              }
+            />
+            <Route
+              path='info'
+              element={
+                <>
+                  <PopupOverlay />
+                  <PopupPage title='Information' />
+                </>
+              }
+            />
+            <Route
               path='settings'
               element={
                 <>
                   <PopupOverlay />
-                  <SettingsPage />
+                  <PopupPage title='Settings' />
                 </>
               }
             />
           </Route>
           <Route path='/year' element={<Yearly />}>
             <Route
+              path='add'
+              element={
+                <>
+                  {inWidth > 800 && <PopupOverlay />}
+                  <PopupPage title='Add Item' />
+                </>
+              }
+            />
+            <Route
+              path='Reminders'
+              element={
+                <>
+                  {inWidth > 800 && <PopupOverlay />}
+                  <PopupPage title='Reminders' />
+                </>
+              }
+            />
+            <Route
+              path='info'
+              element={
+                <>
+                  {inWidth > 800 && <PopupOverlay />}
+                  <PopupPage title='Information' />
+                </>
+              }
+            />
+            <Route
               path='settings'
               element={
                 <>
                   {inWidth > 800 && <PopupOverlay />}
-                  <SettingsPage />
+                  <PopupPage title='Settings' />
                 </>
               }
             />

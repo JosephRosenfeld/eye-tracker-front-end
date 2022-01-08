@@ -47,19 +47,23 @@ const Header = () => {
       </div>
 
       <div className='header-right'>
-        <div className='header-icon-container'>
+        <Link to={`${view}/add`} replace className='header-icon-container'>
           <span className='material-icons header-icon'>add_box</span>
-          <span className='header-icon-tip'>Add</span>
-        </div>
-        <div className='header-icon-container'>
+          <span className='header-icon-tip'>Add Item</span>
+        </Link>
+        <Link
+          to={`${view}/reminders`}
+          replace
+          className='header-icon-container'
+        >
           <span className='material-icons header-icon'>notifications</span>
           <span className='header-icon-tip'>Reminders</span>
-        </div>
-        <div className='header-icon-container'>
+        </Link>
+        <Link to={`${view}/info`} replace className='header-icon-container'>
           <span className='material-icons header-icon'>help</span>
-          <span className='header-icon-tip'>Help</span>
-        </div>
-        <Link to={`${view}/settings`} className='header-icon-container'>
+          <span className='header-icon-tip'>Information</span>
+        </Link>
+        <Link to={`${view}/settings`} replace className='header-icon-container'>
           <span className='material-icons header-icon'>settings</span>
           <span className='header-icon-tip'>Settings</span>
         </Link>
