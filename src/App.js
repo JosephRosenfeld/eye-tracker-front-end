@@ -71,7 +71,7 @@ function App() {
               path='settings'
               element={
                 <>
-                  <PopupOverlay />
+                  {inWidth > 800 && <PopupOverlay />}
                   <SettingsPage />
                 </>
               }

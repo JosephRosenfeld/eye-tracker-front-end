@@ -6,17 +6,25 @@ import { motion } from "framer-motion";
 
 /*--- Hooks Imports ---*/
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 /*--- Component Imports ---*/
 import { Link } from "react-router-dom";
 
 const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
-  //Define onclick function
-  const spOnClick = (view = null) => {
-    //set isSpOpen to false
-    setIsSpOpen(false);
+  console.log("side panel rerender");
+  //setTimeoutFunc
+  const setTimeFunc = () => {
+    console.log("in set timeout func");
+  };
 
-    //If its a header page, activate that
+  //Define onclick function
+  const spOnClick = (pause = false) => {
+    //Pause to let delay go
+    let delay = pause ? 600 : 0;
+    setTimeout(() => setIsSpOpen(false), delay);
+    //set isSpOpen to false
+    //setIsSpOpen(false);
   };
 
   return (
@@ -42,7 +50,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
         <Link
           to='/year'
           className='mobile-sp-item mobile-sp-title'
-          onClick={spOnClick}
+          onClick={() => spOnClick(false)}
         >
           <img className='logo' src='/assets/text_color_logo.png'></img>
           <div className='site-title'>Eye Tracker</div>
@@ -54,7 +62,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
               ? "mobile-sp-item mobile-sp-view sp-active"
               : "mobile-sp-item mobile-sp-view"
           }
-          onClick={spOnClick}
+          onClick={() => spOnClick(false)}
         >
           3 Day
           <span className='material-icons-outlined'>view_week</span>
@@ -66,24 +74,40 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
               ? "mobile-sp-item mobile-sp-view sp-active"
               : "mobile-sp-item mobile-sp-view"
           }
-          onClick={spOnClick}
+          onClick={() => spOnClick(false)}
         >
           Year
           <span className='material-icons-outlined'>calendar_view_month</span>
         </Link>
-        <div className='mobile-sp-item mobile-sp-utility'>
+        <Link
+          to={`${view}/add`}
+          className='mobile-sp-item mobile-sp-utility'
+          onClick={() => spOnClick(true)}
+        >
           Add
           <span className='material-icons'>add_box</span>
-        </div>
-        <div className='mobile-sp-item mobile-sp-utility'>
+        </Link>
+        <Link
+          to={`${view}/Reminders`}
+          className='mobile-sp-item mobile-sp-utility'
+          onClick={() => spOnClick(true)}
+        >
           Reminders
           <span className='material-icons'>notifications</span>
-        </div>
-        <div className='mobile-sp-item mobile-sp-utility'>
+        </Link>
+        <Link
+          to={`${view}/help`}
+          className='mobile-sp-item mobile-sp-utility'
+          onClick={() => spOnClick(true)}
+        >
           Help
           <span className='material-icons'>help</span>
-        </div>
-        <Link to='' className='mobile-sp-item mobile-sp-utility'>
+        </Link>
+        <Link
+          to={`${view}/settings`}
+          className='mobile-sp-item mobile-sp-utility'
+          onClick={() => spOnClick(true)}
+        >
           Settings
           <span className='material-icons'>settings</span>
         </Link>

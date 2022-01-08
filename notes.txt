@@ -123,3 +123,8 @@ All in all a fun little trick I discovered that could certainly be handy in the 
 //Framer Motion was the easiest React animations library that I found.
 //Resource for animating routes with Framer Motion:
 //  -https://www.youtube.com/watch?v=Imyi2V7WgGU&ab_channel=TheNetNinja
+
+
+/*--- Areas for Improvement ---*/
+//Should have architected out my routes more completely before beginning the project
+//Have better knowledge of when my components should or shouldn't be rerendering

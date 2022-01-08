@@ -4,6 +4,7 @@ import "./PopupOverlay.css";
 import { motion } from "framer-motion";
 
 const PopupOverlay = () => {
+  console.log("popup rendered");
   return (
     <motion.div
       initial={{ opacity: 0 }}
