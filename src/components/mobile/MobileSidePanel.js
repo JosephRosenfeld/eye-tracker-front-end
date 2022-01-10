@@ -15,10 +15,6 @@ import { Link } from "react-router-dom";
 const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {*/
 const MobileSidePanel = forwardRef(({ isSpOpen, setIsSpOpen, view }, ref) => {
   console.log("side panel rerender");
-  //setTimeoutFunc
-  const setTimeFunc = () => {
-    console.log("in set timeout func");
-  };
 
   //Define onclick function
   const spOnClick = (pause = false) => {
