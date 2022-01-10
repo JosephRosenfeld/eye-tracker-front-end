@@ -11,7 +11,9 @@ import { useState } from "react";
 /*--- Component Imports ---*/
 import { Link } from "react-router-dom";
 
-const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
+/*With Framer Motion
+const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {*/
+const MobileSidePanel = forwardRef(({ isSpOpen, setIsSpOpen, view }, ref) => {
   console.log("side panel rerender");
   //setTimeoutFunc
   const setTimeFunc = () => {
@@ -45,7 +47,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
           translateX: "100%",
         }}
         ref={ref}
-        className='mobile-side-panel'
+        className={`mobile-side-panel ${isSpOpen ? "open" : "close"}`}
       >
         <Link
           to='/year'
@@ -112,6 +114,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
           <span className='material-icons'>settings</span>
         </Link>
       </motion.div>
+      {/*
       <motion.div
         className='sp-overlay'
         initial={{
@@ -127,7 +130,7 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
         exit={{
           opacity: 0,
         }}
-      ></motion.div>
+      ></motion.div>*/}
     </>
   );
 });

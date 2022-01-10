@@ -56,6 +56,13 @@ const MobileHeader = () => {
       >
         <span className='material-icons menu-icon'>menu</span>
       </div>
+      <MobileSidePanel
+        ref={sidePanelRef}
+        isSpOpen={isSpOpen}
+        setIsSpOpen={setIsSpOpen}
+        view={view}
+      />
+      {/*Using Framer Motion
       <AnimatePresence>
         {isSpOpen && (
           <>
@@ -66,7 +73,7 @@ const MobileHeader = () => {
             />
           </>
         )}
-      </AnimatePresence>
+        </AnimatePresence>*/}
     </header>
   );
 };
