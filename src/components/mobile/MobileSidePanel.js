@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 /*With Framer Motion
 const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {*/
-const MobileSidePanel = forwardRef(({ isSpOpen, setIsSpOpen, view }, ref) => {
+const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
   console.log("side panel rerender");
 
   //Define onclick function
@@ -43,7 +43,7 @@ const MobileSidePanel = forwardRef(({ isSpOpen, setIsSpOpen, view }, ref) => {
           translateX: "100%",
         }}
         ref={ref}
-        className={`mobile-side-panel ${isSpOpen ? "open" : "close"}`}
+        className='mobile-side-panel'
       >
         <Link
           to='/year'
@@ -110,7 +110,6 @@ const MobileSidePanel = forwardRef(({ isSpOpen, setIsSpOpen, view }, ref) => {
           <span className='material-icons'>settings</span>
         </Link>
       </motion.div>
-      {/*
       <motion.div
         className='sp-overlay'
         initial={{
@@ -126,7 +125,7 @@ const MobileSidePanel = forwardRef(({ isSpOpen, setIsSpOpen, view }, ref) => {
         exit={{
           opacity: 0,
         }}
-      ></motion.div>*/}
+      ></motion.div>
     </>
   );
 });

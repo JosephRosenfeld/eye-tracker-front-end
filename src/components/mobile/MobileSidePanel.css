@@ -16,14 +16,6 @@
   font-size: 18px;
 
   user-select: none;
-  transition: transform 0.4s;
-}
-
-.close {
-  transform: translateX(100%) !important;
-}
-.open {
-  transform: translateX(0%) !important;
 }
 
 .mobile-sp-item {
