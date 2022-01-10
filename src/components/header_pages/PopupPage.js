@@ -7,7 +7,14 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
+/*--- Components Imports ---*/
+import AddSubPage from "./AddSubPage";
+import RemindersSubPage from "./RemindersSubPage";
+import InfoSubPage from "./InfoSubPage";
+import SettingsSubPage from "./SettingsSubPage";
+
 const PopupPage = ({ title }) => {
+  console.log(title);
   //Varients obj to vary animation based on screen width
   const inWidth = useSelector((state) => state.screenSize);
   const variants = {
@@ -52,6 +59,17 @@ const PopupPage = ({ title }) => {
               <span className='material-icons'>close</span>
             </div>
           </div>
+          {title == "Add Item" ? (
+            <AddSubPage />
+          ) : title == "Reminders" ? (
+            <RemindersSubPage />
+          ) : title == "Inormation" ? (
+            <InfoSubPage />
+          ) : title == "Settings" ? (
+            <SettingsSubPage />
+          ) : (
+            ""
+          )}
         </div>
       </motion.div>
     </>

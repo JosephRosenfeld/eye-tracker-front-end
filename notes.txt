@@ -124,6 +124,11 @@ All in all a fun little trick I discovered that could certainly be handy in the 
 //Resource for animating routes with Framer Motion:
 //  -https://www.youtube.com/watch?v=Imyi2V7WgGU&ab_channel=TheNetNinja
 
+/*--- Scrolling ---*/
+/*In order to scroll, the CHILD DIV (NOT THE GRANDCHILD DIV) needs to have a set 
+height that overflows its parent, and the parent div needs to have overflow: auto*/
+
+
 
 /*--- Areas for Improvement ---*/
 //Should have architected out my routes more completely before beginning the project

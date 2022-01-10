@@ -29,7 +29,8 @@
 }
 
 .logo {
-  height: 41px;
+  box-sizing: content-box;
+  height: 35px;
 }
 
 .site-title {

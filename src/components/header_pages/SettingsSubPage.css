@@ -1,0 +1,161 @@
+.settings-container {
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: var(--popup-header-height);
+  right: 0;
+
+  width: 100%;
+  padding: 30px 10px 50px;
+  overflow-y: scroll;
+}
+
+.settings-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  width: 75%;
+  height: max-content;
+  color: var(--text-color);
+}
+
+.form-group {
+  display: grid;
+  row-gap: 10px;
+  column-gap: 20px;
+  width: 100%;
+}
+
+.form-group-title {
+  grid-column: 1 / -1;
+
+  padding: 10px;
+  padding-left: 5px;
+  text-align: left;
+  font-size: 25px;
+  color: rgba(66, 66, 66, 0.7);
+}
+
+.form-group-abbreviations {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.form-group-colors {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.abrev-item,
+.color-item {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 10px 5px 3px;
+}
+
+.form-group label {
+  align-self: flex-start;
+  padding-bottom: 2px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.form-group input {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid var(--header-border-color);
+  height: 1.5em;
+  border-radius: 3px;
+  font-size: 20px;
+  outline: none;
+  background-color: rgba(180, 180, 180, 0.014);
+}
+
+.form-group input:active,
+.form-group input:focus {
+  border: 1px solid var(--logo-color);
+}
+
+.form-group input[type="text"] {
+  padding-left: 5px;
+}
+
+.form-group input[type="color"] {
+  height: 2em;
+  background-color: rgba(66, 66, 66, 0.08);
+}
+
+/*--- Styling Daily Review Section ---*/
+.daily-review-section {
+  grid-column: 1 / -1;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  margin-top: 18px;
+}
+
+.daily-review-title {
+  grid-column: 1 / -1;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.daily-review-section .color-item label {
+  font-size: 15px;
+  align-self: center;
+}
+
+.daily-review-info {
+  padding-top: 5px;
+  grid-column: 1 / -1;
+  font-size: 15px;
+  color: rgba(66, 66, 66, 0.9);
+}
+
+@media (max-width: 700px) {
+  .form-group-colors {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .settings-content {
+    width: 95%;
+  }
+}
+
+@media (max-width: 450px) {
+  .form-group {
+    column-gap: 15px;
+    row-gap: 5px;
+  }
+
+  .form-group-title {
+    font-size: 22px;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 350px) {
+  .form-group-abbreviations {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .form-group-colors {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .daily-review-info {
+    font-size: 13px;
+  }
+}

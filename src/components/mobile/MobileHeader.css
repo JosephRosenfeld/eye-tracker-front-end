@@ -26,7 +26,8 @@
 }
 
 .mobile-header .logo {
-  height: 41px;
+  box-sizing: content-box;
+  height: 35px;
 }
 
 .mobile-header .site-title {
@@ -96,10 +97,6 @@
 @media (max-width: 450px) {
   .mobile-header {
     padding: 5px 5% 5px 5%;
-  }
-
-  .mobile-header .logo {
-    height: 30px;
   }
 
   .mobile-header-left .date-viewer {
