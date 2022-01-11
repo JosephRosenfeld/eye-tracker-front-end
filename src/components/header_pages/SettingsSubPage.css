@@ -11,7 +11,7 @@
   right: 0;
 
   width: 100%;
-  padding: 30px 10px 130px;
+  padding: 40px 10px 130px;
   overflow-y: scroll;
 }
 
@@ -20,7 +20,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 80px;
 
   width: 75%;
   height: max-content;
@@ -91,7 +91,18 @@
 
 .form-group input[type="color"] {
   height: 2em;
-  background-color: rgba(66, 66, 66, 0.08);
+  background-color: rgba(180, 180, 180, 0.1);
+}
+
+.form-group input[disabled],
+.form-group input[readonly] {
+  background-color: rgba(180, 180, 180, 0.14);
+  cursor: auto;
+  border: 1px solid var(--header-border-color);
+}
+
+.form-group input[disabled][type="color"] {
+  background-color: rgba(180, 180, 180, 0.5);
 }
 
 /*--- Styling Daily Review Section ---*/
@@ -100,18 +111,20 @@
 
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-
-  margin-top: 18px;
+  row-gap: 3px;
+  margin-top: 12px;
 }
 
 .daily-review-title {
   grid-column: 1 / -1;
-  font-weight: bold;
-  font-size: 15px;
+  text-align: left;
+  font-size: 20px;
+  color: rgba(66, 66, 66, 0.7);
+  padding: 5px 5px 7px;
 }
 
 .daily-review-section .color-item label {
-  font-size: 15px;
+  font-size: 13px;
   align-self: center;
 }
 

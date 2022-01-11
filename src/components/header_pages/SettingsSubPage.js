@@ -4,9 +4,12 @@ import "./SettingsSubPage.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+/*--- Components Imports ---*/
+import PopupButtons from "./PopupButtons";
+
 const SettingsSubPage = () => {
-  /* Form state */
-  const [editable, isEditable] = useState(false);
+  const [editable, setEditable] = useState(false);
+  console.log(editable);
 
   /*Get all data from redux data store*/
   const testSettingsAbbrevObj = {
@@ -18,16 +21,16 @@ const SettingsSubPage = () => {
     daily_review: "D",
   };
   const testSettingsColorsObj = {
-    systane: "#3dff64",
-    muro: "#af99ff",
-    muro_ointment: "#2b00ff",
-    erosion: "#ff0000",
-    note: "#833a3a",
-    daily_review1: "red",
-    daily_review2: "red",
-    daily_review3: "green",
-    daily_review4: "blue",
-    daily_review5: "blue",
+    systane: "#48ea69",
+    muro: "#fda744",
+    muro_ointment: "#6991ec",
+    erosion: "#ffec1f",
+    note: "#a14545",
+    daily_review1: "#ff0f0f",
+    daily_review2: "#ea6cdf",
+    daily_review3: "#9146dd",
+    daily_review4: "#5045e8",
+    daily_review5: "#42b7ff",
   };
 
   /*Load values into local component level state*/
@@ -35,32 +38,166 @@ const SettingsSubPage = () => {
   const [abrevSettings, setAbrevSettings] = useState(testSettingsAbbrevObj);
   const [colorSettings, setColorSettings] = useState(testSettingsColorsObj);
 
-  const onChange = (e, level1, level2) => {
-    console.log(e);
+  const reset = () => {
+    setAbrevSettings(testSettingsAbbrevObj);
+    setColorSettings(testSettingsColorsObj);
   };
 
-  const cancel = () => {};
-
-  const onSubmit = () => {};
-  //e.preventDefault();
-  //
-  //update global state store / reducers
-  //(which I assume also updates the database/local storage?)
-  /*
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-
-    if (currentId) {
-      dispatch(updatePost(currentId, postData));
-    } else {
-      dispatch(createPost(postData));
-    }
-    clear();//Shoouldn't have to clear in our use case
-  };*/
+    //update global state store / reducers
+    //(which I assume also updates the database/local storage?)
+  };
 
   return (
     <div className='settings-container'>
       <form className='settings-content' onSubmit={onSubmit}>
+        <div className='form-group form-group-colors'>
+          <div className='form-group-title'>Colors</div>
+          <div className='color-item'>
+            <label>SYSTANE EYE DROP </label>
+            <input
+              type='color'
+              value={colorSettings.systane}
+              onChange={(e) =>
+                setColorSettings({
+                  ...colorSettings,
+                  systane: e.target.value,
+                })
+              }
+              disabled={editable ? "" : "disabled"}
+            ></input>
+          </div>
+          <div className='color-item'>
+            <label>MURO EYE DROP</label>
+            <input
+              type='color'
+              value={colorSettings.muro}
+              onChange={(e) =>
+                setColorSettings({
+                  ...colorSettings,
+                  muro: e.target.value,
+                })
+              }
+              disabled={editable ? "" : "disabled"}
+            ></input>
+          </div>
+          <div className='color-item'>
+            <label>MURO OINTMENT</label>
+            <input
+              type='color'
+              value={colorSettings.muro_ointment}
+              onChange={(e) =>
+                setColorSettings({
+                  ...colorSettings,
+                  muro_ointment: e.target.value,
+                })
+              }
+              disabled={editable ? "" : "disabled"}
+            ></input>
+          </div>
+          <div className='color-item'>
+            <label>EROSION</label>
+            <input
+              type='color'
+              value={colorSettings.erosion}
+              onChange={(e) =>
+                setColorSettings({
+                  ...colorSettings,
+                  erosion: e.target.value,
+                })
+              }
+              disabled={editable ? "" : "disabled"}
+            ></input>
+          </div>
+          <div className='color-item'>
+            <label>NOTE</label>
+            <input
+              type='color'
+              value={colorSettings.note}
+              onChange={(e) =>
+                setColorSettings({
+                  ...colorSettings,
+                  note: e.target.value,
+                })
+              }
+              disabled={editable ? "" : "disabled"}
+            ></input>
+          </div>
+          <div className='daily-review-section'>
+            <div className='daily-review-title'>Daily Review</div>
+            <div className='color-item'>
+              <label>ONE</label>
+              <input
+                type='color'
+                value={colorSettings.daily_review1}
+                onChange={(e) =>
+                  setColorSettings({
+                    ...colorSettings,
+                    daily_review1: e.target.value,
+                  })
+                }
+                disabled={editable ? "" : "disabled"}
+              ></input>
+            </div>
+            <div className='color-item'>
+              <label>TWO</label>
+              <input
+                type='color'
+                value={colorSettings.daily_review2}
+                onChange={(e) =>
+                  setColorSettings({
+                    ...colorSettings,
+                    daily_review2: e.target.value,
+                  })
+                }
+                disabled={editable ? "" : "disabled"}
+              ></input>
+            </div>
+            <div className='color-item'>
+              <label>THREE</label>
+              <input
+                type='color'
+                value={colorSettings.daily_review3}
+                onChange={(e) =>
+                  setColorSettings({
+                    ...colorSettings,
+                    daily_review3: e.target.value,
+                  })
+                }
+                disabled={editable ? "" : "disabled"}
+              ></input>
+            </div>
+            <div className='color-item'>
+              <label>FOUR</label>
+              <input
+                type='color'
+                value={colorSettings.daily_review4}
+                onChange={(e) =>
+                  setColorSettings({
+                    ...colorSettings,
+                    daily_review4: e.target.value,
+                  })
+                }
+                disabled={editable ? "" : "disabled"}
+              ></input>
+            </div>
+            <div className='color-item'>
+              <label>FIVE</label>
+              <input
+                type='color'
+                value={colorSettings.daily_review5}
+                onChange={(e) =>
+                  setColorSettings({
+                    ...colorSettings,
+                    daily_review5: e.target.value,
+                  })
+                }
+                disabled={editable ? "" : "disabled"}
+              ></input>
+            </div>
+          </div>
+        </div>
         <div className='form-group form-group-abbreviations'>
           <div className='form-group-title'>Abbreviations</div>
           <div className='abrev-item'>
@@ -74,6 +211,7 @@ const SettingsSubPage = () => {
                   systane: e.target.value,
                 })
               }
+              readOnly={editable ? "" : "readonly"}
             ></input>
           </div>
           <div className='abrev-item'>
@@ -87,6 +225,7 @@ const SettingsSubPage = () => {
                   muro: e.target.value,
                 })
               }
+              readOnly={editable ? "" : "readonly"}
             ></input>
           </div>
           <div className='abrev-item'>
@@ -100,6 +239,7 @@ const SettingsSubPage = () => {
                   muro_ointment: e.target.value,
                 })
               }
+              readOnly={editable ? "" : "readonly"}
             ></input>
           </div>
           <div className='abrev-item'>
@@ -113,6 +253,7 @@ const SettingsSubPage = () => {
                   erosion: e.target.value,
                 })
               }
+              readOnly={editable ? "" : "readonly"}
             ></input>
           </div>
           <div className='abrev-item'>
@@ -126,6 +267,7 @@ const SettingsSubPage = () => {
                   note: e.target.value,
                 })
               }
+              readOnly={editable ? "" : "readonly"}
             ></input>
           </div>
           <div className='abrev-item'>
@@ -139,58 +281,16 @@ const SettingsSubPage = () => {
                   daily_review: e.target.value,
                 })
               }
+              readOnly={editable ? "" : "readonly"}
             ></input>
           </div>
         </div>
-        <div className='form-group form-group-colors'>
-          <div className='form-group-title'>Colors</div>
-          <div className='color-item'>
-            <label>SYSTANE EYE DROP </label>
-            <input type='color'></input>
-          </div>
-          <div className='color-item'>
-            <label>MURO EYE DROP</label>
-            <input type='color'></input>
-          </div>
-          <div className='color-item'>
-            <label>MURO OINTMENT</label>
-            <input type='color'></input>
-          </div>
-          <div className='color-item'>
-            <label>EROSION</label>
-            <input type='color'></input>
-          </div>
-          <div className='color-item'>
-            <label>NOTE</label>
-            <input type='color'></input>
-          </div>
-          <div className='daily-review-section'>
-            <div className='daily-review-title'>DAILY REVIEW</div>
-            <div className='color-item'>
-              <label>1</label>
-              <input type='color'></input>
-            </div>
-            <div className='color-item'>
-              <label>2</label>
-              <input type='color'></input>
-            </div>
-            <div className='color-item'>
-              <label>3</label>
-              <input type='color'></input>
-            </div>
-            <div className='color-item'>
-              <label>4</label>
-              <input type='color'></input>
-            </div>
-            <div className='color-item'>
-              <label>5</label>
-              <input type='color'></input>
-            </div>
-            <div className='daily-review-info'>
-              With 1 being the worst and 5 being the best
-            </div>
-          </div>
-        </div>
+        <PopupButtons
+          editable={editable}
+          setEditable={setEditable}
+          reset={reset}
+          onSubmit={onSubmit}
+        />
       </form>
     </div>
   );
