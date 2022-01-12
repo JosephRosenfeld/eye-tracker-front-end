@@ -133,3 +133,4 @@ height that overflows its parent, and the parent div needs to have overflow: aut
 /*--- Areas for Improvement ---*/
 //Should have architected out my routes more completely before beginning the project
 //Have better knowledge of when my components should or shouldn't be rerendering
+//I should have utilized my semantic html elements instead of overrelying on divs and spans
