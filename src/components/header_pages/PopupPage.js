@@ -63,7 +63,7 @@ const PopupPage = ({ title }) => {
             <AddSubPage />
           ) : title == "Reminders" ? (
             <RemindersSubPage />
-          ) : title == "Inormation" ? (
+          ) : title == "Information" ? (
             <InfoSubPage />
           ) : title == "Settings" ? (
             <SettingsSubPage />

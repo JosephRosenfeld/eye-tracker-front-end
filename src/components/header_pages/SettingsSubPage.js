@@ -9,7 +9,8 @@ import PopupButtons from "./PopupButtons";
 
 const SettingsSubPage = () => {
   const [editable, setEditable] = useState(false);
-  console.log(editable);
+  const [formErrors, setFormErrors] = useState({});
+  const [haveSaved, setHaveSaved] = useState(false); //Always show errors after first save
 
   /*Get all data from redux data store*/
   const testSettingsAbbrevObj = {
@@ -38,15 +39,59 @@ const SettingsSubPage = () => {
   const [abrevSettings, setAbrevSettings] = useState(testSettingsAbbrevObj);
   const [colorSettings, setColorSettings] = useState(testSettingsColorsObj);
 
+  //Assumes a single layer obj for state and the setState func
+  const onChange = (e, state, setState) => {
+    const { name, value, type } = e.target;
+
+    setState({ ...state, [name]: value });
+    if (type == "text") {
+      /*If we/ve already tried to submit and the edit was on a text input then
+      update the form errors shown*/
+      if (haveSaved) {
+        setFormErrors(validate({ ...state, [name]: value }));
+      }
+    }
+  };
+
   const reset = () => {
     setAbrevSettings(testSettingsAbbrevObj);
     setColorSettings(testSettingsColorsObj);
+    setHaveSaved(false);
+    setFormErrors(validate(testSettingsAbbrevObj));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setHaveSaved(true);
+    //update error state in order to rerender form
+    const errors = validate(abrevSettings);
+    setFormErrors(errors);
+
+    /*If there aren't errors, set editable to false, set have saved to false,
+    and update redux store*/
+    if (Object.keys(errors).length === 0) {
+      setEditable(false);
+      setHaveSaved(false);
+      //update redux store
+    } else {
+    }
+
     //update global state store / reducers
     //(which I assume also updates the database/local storage?)
+  };
+
+  const validate = (abrevObj) => {
+    const errors = {};
+    const singleCharReg = /^.$/;
+    const letterReg = /^[a-zA-Z]$/;
+    for (const [key, value] of Object.entries(abrevObj)) {
+      if (!singleCharReg.test(value)) {
+        errors[key] = "Must be a single character";
+      } else if (!letterReg.test(value)) {
+        errors[key] = "Must be a letter";
+      }
+    }
+    return errors;
   };
 
   return (
@@ -58,13 +103,9 @@ const SettingsSubPage = () => {
             <label>SYSTANE EYE DROP </label>
             <input
               type='color'
+              name='systane'
               value={colorSettings.systane}
-              onChange={(e) =>
-                setColorSettings({
-                  ...colorSettings,
-                  systane: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -72,13 +113,9 @@ const SettingsSubPage = () => {
             <label>MURO EYE DROP</label>
             <input
               type='color'
+              name='muro'
               value={colorSettings.muro}
-              onChange={(e) =>
-                setColorSettings({
-                  ...colorSettings,
-                  muro: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -86,13 +123,9 @@ const SettingsSubPage = () => {
             <label>MURO OINTMENT</label>
             <input
               type='color'
+              name='muro_ointment'
               value={colorSettings.muro_ointment}
-              onChange={(e) =>
-                setColorSettings({
-                  ...colorSettings,
-                  muro_ointment: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -100,13 +133,9 @@ const SettingsSubPage = () => {
             <label>EROSION</label>
             <input
               type='color'
+              name='erosion'
               value={colorSettings.erosion}
-              onChange={(e) =>
-                setColorSettings({
-                  ...colorSettings,
-                  erosion: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -114,13 +143,9 @@ const SettingsSubPage = () => {
             <label>NOTE</label>
             <input
               type='color'
+              name='note'
               value={colorSettings.note}
-              onChange={(e) =>
-                setColorSettings({
-                  ...colorSettings,
-                  note: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -130,13 +155,9 @@ const SettingsSubPage = () => {
               <label>ONE</label>
               <input
                 type='color'
+                name='daily_review1'
                 value={colorSettings.daily_review1}
-                onChange={(e) =>
-                  setColorSettings({
-                    ...colorSettings,
-                    daily_review1: e.target.value,
-                  })
-                }
+                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -144,13 +165,9 @@ const SettingsSubPage = () => {
               <label>TWO</label>
               <input
                 type='color'
+                name='daily_review2'
                 value={colorSettings.daily_review2}
-                onChange={(e) =>
-                  setColorSettings({
-                    ...colorSettings,
-                    daily_review2: e.target.value,
-                  })
-                }
+                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -158,13 +175,9 @@ const SettingsSubPage = () => {
               <label>THREE</label>
               <input
                 type='color'
+                name='daily_review3'
                 value={colorSettings.daily_review3}
-                onChange={(e) =>
-                  setColorSettings({
-                    ...colorSettings,
-                    daily_review3: e.target.value,
-                  })
-                }
+                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -172,13 +185,9 @@ const SettingsSubPage = () => {
               <label>FOUR</label>
               <input
                 type='color'
+                name='daily_review4'
                 value={colorSettings.daily_review4}
-                onChange={(e) =>
-                  setColorSettings({
-                    ...colorSettings,
-                    daily_review4: e.target.value,
-                  })
-                }
+                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -186,13 +195,9 @@ const SettingsSubPage = () => {
               <label>FIVE</label>
               <input
                 type='color'
+                name='daily_review5'
                 value={colorSettings.daily_review5}
-                onChange={(e) =>
-                  setColorSettings({
-                    ...colorSettings,
-                    daily_review5: e.target.value,
-                  })
-                }
+                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -204,85 +209,73 @@ const SettingsSubPage = () => {
             <label>SYSTANE EYE DROP</label>
             <input
               type='text'
+              name='systane'
               value={abrevSettings.systane}
-              onChange={(e) =>
-                setAbrevSettings({
-                  ...abrevSettings,
-                  systane: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
               readOnly={editable ? "" : "readonly"}
+              data-error={formErrors.systane}
             ></input>
+            <span className='error-txt'>{formErrors.systane}</span>
           </div>
           <div className='abrev-item'>
             <label>MURO EYE DROP</label>
             <input
               type='text'
+              name='muro'
               value={abrevSettings.muro}
-              onChange={(e) =>
-                setAbrevSettings({
-                  ...abrevSettings,
-                  muro: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
               readOnly={editable ? "" : "readonly"}
+              data-error={formErrors.muro}
             ></input>
+            <span className='error-txt'>{formErrors.muro}</span>
           </div>
           <div className='abrev-item'>
             <label>MURO OINTMENT</label>
             <input
               type='text'
+              name='muro_ointment'
               value={abrevSettings.muro_ointment}
-              onChange={(e) =>
-                setAbrevSettings({
-                  ...abrevSettings,
-                  muro_ointment: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
               readOnly={editable ? "" : "readonly"}
+              data-error={formErrors.muro_ointment}
             ></input>
+            <span className='error-txt'>{formErrors.muro_ointment}</span>
           </div>
           <div className='abrev-item'>
             <label>EROSION</label>
             <input
               type='text'
+              name='erosion'
               value={abrevSettings.erosion}
-              onChange={(e) =>
-                setAbrevSettings({
-                  ...abrevSettings,
-                  erosion: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
               readOnly={editable ? "" : "readonly"}
+              data-error={formErrors.erosion}
             ></input>
+            <span className='error-txt'>{formErrors.erosion}</span>
           </div>
           <div className='abrev-item'>
             <label>NOTE</label>
             <input
               type='text'
+              name='note'
               value={abrevSettings.note}
-              onChange={(e) =>
-                setAbrevSettings({
-                  ...abrevSettings,
-                  note: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
               readOnly={editable ? "" : "readonly"}
+              data-error={formErrors.note}
             ></input>
+            <span className='error-txt'>{formErrors.note}</span>
           </div>
           <div className='abrev-item'>
             <label>DAILY REVIEW</label>
             <input
               type='text'
+              name='daily_review'
               value={abrevSettings.daily_review}
-              onChange={(e) =>
-                setAbrevSettings({
-                  ...abrevSettings,
-                  daily_review: e.target.value,
-                })
-              }
+              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
               readOnly={editable ? "" : "readonly"}
+              data-error={formErrors.daily_review}
             ></input>
+            <span className='error-txt'>{formErrors.daily_review}</span>
           </div>
         </div>
         <PopupButtons

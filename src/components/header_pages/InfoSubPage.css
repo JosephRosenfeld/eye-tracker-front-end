@@ -1,0 +1,37 @@
+.info-container {
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: var(--popup-header-height);
+  right: 0;
+
+  width: 100%;
+  padding: 40px 10px 130px;
+  overflow-y: auto;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+
+  width: 75%;
+  height: max-content;
+  color: var(--text-color);
+}
+
+.info-title {
+}
+
+.info-subtitle {
+}
+
+.info-text {
+}

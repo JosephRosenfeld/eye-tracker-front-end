@@ -57,7 +57,7 @@
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: stretch;
   padding: 10px 5px 3px;
 }
@@ -77,7 +77,6 @@
   border-radius: 3px;
   font-size: 20px;
   outline: none;
-  background-color: rgba(180, 180, 180, 0.014);
 }
 
 .form-group input:active,
@@ -87,6 +86,7 @@
 
 .form-group input[type="text"] {
   padding-left: 5px;
+  background-color: rgba(180, 180, 180, 0.014);
 }
 
 .form-group input[type="color"] {
@@ -98,11 +98,21 @@
 .form-group input[readonly] {
   background-color: rgba(180, 180, 180, 0.14);
   cursor: auto;
-  border: 1px solid var(--header-border-color);
 }
 
 .form-group input[disabled][type="color"] {
-  background-color: rgba(180, 180, 180, 0.5);
+  background-color: rgba(180, 180, 180, 01);
+}
+
+.form-group input[type="text"][data-error] {
+  border: 1px solid rgba(255, 0, 0, 0.829);
+}
+
+.abrev-item .error-txt {
+  font-size: 13px;
+  padding-top: 2px;
+  color: rgba(255, 0, 0, 0.829);
+  text-align: left;
 }
 
 /*--- Styling Daily Review Section ---*/
@@ -157,9 +167,10 @@
     font-size: 22px;
     padding: 5px;
   }
-}
 
-@media (max-width: 350px) {
+  .settings-content {
+    row-gap: 60px;
+  }
   .form-group-abbreviations {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -171,4 +182,7 @@
   .daily-review-info {
     font-size: 13px;
   }
+}
+
+@media (max-width: 350px) {
 }

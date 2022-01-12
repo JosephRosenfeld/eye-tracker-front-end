@@ -1,7 +1,8 @@
 .popup-buttons-section {
   box-sizing: border-box;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: stretch;
   align-items: center;
   gap: 10px;
 
@@ -10,21 +11,22 @@
 }
 
 .popup-buttons-section * {
+  width: 100%;
   flex: 1 1 0px;
-  margin: 20px 5px 0px;
+  margin: 10px 5px 0px;
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 1px;
   cursor: pointer;
-  border: 1px solid var(--text-color);
-  background-color: white;
-  color: var(--text-color);
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.06);
+  border: 2px solid var(--text-color);
+  background-color: rgba(180, 180, 180, 0.03);
 
+  color: rgb(66, 66, 66);
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.02);
   /*This box shadow here is to help distinguish the buttons from a normal
   text input*/
 }
 
 .popup-buttons-section *:hover {
-  border: 1px solid var(--logo-color);
-  color: #23993c;
+  border: 2px solid var(--logo-color);
+  color: #348847;
 }
