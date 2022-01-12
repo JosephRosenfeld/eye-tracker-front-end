@@ -44,6 +44,11 @@
   color: rgba(66, 66, 66, 0.7);
 }
 
+.optional-txt {
+  padding-top: 4px;
+  font-size: 15px;
+}
+
 .form-group-abbreviations {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -52,8 +57,13 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.form-group-user-info {
+  grid-template-columns: repeat(1, 1fr);
+}
+
 .abrev-item,
-.color-item {
+.color-item,
+.user-item {
   align-self: stretch;
   display: flex;
   flex-direction: column;
@@ -73,7 +83,6 @@
   box-sizing: border-box;
   width: 100%;
   border: 1px solid var(--header-border-color);
-  height: 1.5em;
   border-radius: 3px;
   font-size: 20px;
   outline: none;
@@ -84,19 +93,27 @@
   border: 1px solid var(--logo-color);
 }
 
-.form-group input[type="text"] {
-  padding-left: 5px;
-  background-color: rgba(180, 180, 180, 0.014);
-}
-
 .form-group input[type="color"] {
   height: 2em;
   background-color: rgba(180, 180, 180, 0.1);
 }
 
+.form-group input[type="text"] {
+  background-color: rgba(180, 180, 180, 0.014);
+}
+
+.abrev-item input {
+  padding: 2px 5px;
+}
+
+.user-item input {
+  padding: 4px 5px;
+}
+
 .form-group input[disabled],
 .form-group input[readonly] {
   background-color: rgba(180, 180, 180, 0.14);
+  border: 1px solid var(--header-border-color);
   cursor: auto;
 }
 
@@ -108,11 +125,16 @@
   border: 1px solid rgba(255, 0, 0, 0.829);
 }
 
-.abrev-item .error-txt {
+.abrev-item .error-txt,
+.user-item .error-txt {
   font-size: 13px;
   padding-top: 2px;
   color: rgba(255, 0, 0, 0.829);
   text-align: left;
+}
+
+.user-item input {
+  font-size: 20px;
 }
 
 /*--- Styling Daily Review Section ---*/

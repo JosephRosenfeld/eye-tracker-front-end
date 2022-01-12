@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 /*--- Components Imports ---*/
 import PopupButtons from "./PopupButtons";
+import NumberFormat from "react-number-format";
 
 const SettingsSubPage = () => {
   const [editable, setEditable] = useState(false);
@@ -13,6 +14,10 @@ const SettingsSubPage = () => {
   const [haveSaved, setHaveSaved] = useState(false); //Always show errors after first save
 
   /*Get all data from redux data store*/
+  const testUserInfoObj = {
+    email: "josephgrosenfeld@gmail.com",
+    phone: "5406865236",
+  };
   const testSettingsAbbrevObj = {
     systane: "S",
     muro: "M",
@@ -38,17 +43,20 @@ const SettingsSubPage = () => {
   //should have default vals of what was in the redux store
   const [abrevSettings, setAbrevSettings] = useState(testSettingsAbbrevObj);
   const [colorSettings, setColorSettings] = useState(testSettingsColorsObj);
+  const [userSettings, setUserSettings] = useState(testUserInfoObj);
 
   //Assumes a single layer obj for state and the setState func
   const onChange = (e, state, setState) => {
-    const { name, value, type } = e.target;
+    let { name, value, type } = e.target;
 
     setState({ ...state, [name]: value });
-    if (type == "text") {
-      /*If we/ve already tried to submit and the edit was on a text input then
+    /*If we/ve already tried to submit and the edit was on a text input then
       update the form errors shown*/
-      if (haveSaved) {
-        setFormErrors(validate({ ...state, [name]: value }));
+    if (type == "text" && haveSaved) {
+      if (name == "email" || name == "phone") {
+        setFormErrors(validate(abrevSettings, { ...state, [name]: value }));
+      } else {
+        setFormErrors(validate({ ...state, [name]: value }, userSettings));
       }
     }
   };
@@ -56,6 +64,7 @@ const SettingsSubPage = () => {
   const reset = () => {
     setAbrevSettings(testSettingsAbbrevObj);
     setColorSettings(testSettingsColorsObj);
+    setUserSettings(testUserInfoObj);
     setHaveSaved(false);
     setFormErrors(validate(testSettingsAbbrevObj));
   };
@@ -64,7 +73,7 @@ const SettingsSubPage = () => {
     e.preventDefault();
     setHaveSaved(true);
     //update error state in order to rerender form
-    const errors = validate(abrevSettings);
+    const errors = validate(abrevSettings, userSettings);
     setFormErrors(errors);
 
     /*If there aren't errors, set editable to false, set have saved to false,
@@ -80,16 +89,29 @@ const SettingsSubPage = () => {
     //(which I assume also updates the database/local storage?)
   };
 
-  const validate = (abrevObj) => {
+  const validate = (abrevObj, userObj) => {
     const errors = {};
+    //defining validation regex's
     const singleCharReg = /^.$/;
     const letterReg = /^[a-zA-Z]$/;
+    //basic email regex (not fully accurate)
+    const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const whiteSpaceReg = /^\s*$/;
+
+    //Abrev validating
     for (const [key, value] of Object.entries(abrevObj)) {
-      if (!singleCharReg.test(value)) {
+      if (value == "") {
+        errors[key] = "This field is required";
+      } else if (!singleCharReg.test(value)) {
         errors[key] = "Must be a single character";
       } else if (!letterReg.test(value)) {
         errors[key] = "Must be a letter";
       }
+    }
+
+    //userObj validating
+    if (!whiteSpaceReg.test(userObj.email) && !emailReg.test(userObj.email)) {
+      errors["email"] = "Invalid email";
     }
     return errors;
   };
@@ -100,7 +122,7 @@ const SettingsSubPage = () => {
         <div className='form-group form-group-colors'>
           <div className='form-group-title'>Colors</div>
           <div className='color-item'>
-            <label>SYSTANE EYE DROP </label>
+            <label>SYSTANE EYE DROP</label>
             <input
               type='color'
               name='systane'
@@ -276,6 +298,37 @@ const SettingsSubPage = () => {
               data-error={formErrors.daily_review}
             ></input>
             <span className='error-txt'>{formErrors.daily_review}</span>
+          </div>
+        </div>
+        <div className='form-group form-group-user-info'>
+          <div className='form-group-title'>
+            User Info{" "}
+            <span className='optional-txt'>
+              <i>(Optional)</i>
+            </span>
+          </div>
+          <div className='user-item'>
+            <label>EMAIL</label>
+            <input
+              type='text'
+              name='email'
+              value={userSettings.email}
+              onChange={(e) => onChange(e, userSettings, setUserSettings)}
+              readOnly={editable ? "" : "readonly"}
+              data-error={formErrors.email}
+            ></input>
+            <span className='error-txt'>{formErrors.email}</span>
+          </div>
+          <div className='user-item'>
+            <label>PHONE NUMBER</label>
+            <NumberFormat
+              format='+1 (###) ###-####'
+              type='text'
+              name='phone'
+              value={userSettings.phone}
+              onChange={(e) => onChange(e, userSettings, setUserSettings)}
+              readOnly={editable ? "" : "readonly"}
+            />
           </div>
         </div>
         <PopupButtons
