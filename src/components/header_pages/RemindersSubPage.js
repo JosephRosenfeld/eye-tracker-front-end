@@ -9,21 +9,19 @@ const RemindersSubPage = () => {
   const [haveSaved, setHaveSaved] = useState(false); //Always show errors after first save
 
   /*Get all data from redux data store*/
-  const remindersObj = {
-    systane: "#48ea69",
-    muro: "#fda744",
-    muro_ointment: "#6991ec",
-    erosion: "#ffec1f",
-    note: "#a14545",
-    daily_review1: "#ff0f0f",
-    daily_review2: "#ea6cdf",
-    daily_review3: "#9146dd",
-    daily_review4: "#5045e8",
-    daily_review5: "#42b7ff",
-  };
+  const remindersObj = [
+    { type: "muro", time: "9:00" },
+    { type: "systane", time: "11:00" },
+    { type: "systane", time: "12:00" },
+    { type: "muro", time: "14:00" },
+    { type: "muro", time: "19:00" },
+    { type: "note", time: "20:00" },
+    { type: "muro_ointment", time: "22:00" },
+  ];
 
   /*Load values into local component level state*/
   //should have default vals of what was in the redux store
+  const [reminders, setReminders] = useState(remindersObj);
 
   /*
   //Assumes a single layer obj for state and the setState func
@@ -50,42 +48,50 @@ const RemindersSubPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setHaveSaved(true);
-    //update error state in order to rerender form
-    const errors = validate(abrevSettings);
-    setFormErrors(errors);
-
-    /*If there aren't errors, set editable to false, set have saved to false,
-    and update redux store*/
-  /*
-    if (Object.keys(errors).length === 0) {
-      setEditable(false);
-      setHaveSaved(false);
-      //update redux store
-    } else {
-    }
 
     //update global state store / reducers
     //(which I assume also updates the database/local storage?)
   };
 
-  const validate = (abrevObj) => {
-    const errors = {};
-    const singleCharReg = /^.$/;
-    const letterReg = /^[a-zA-Z]$/;
-    for (const [key, value] of Object.entries(abrevObj)) {
-      if (!singleCharReg.test(value)) {
-        errors[key] = "Must be a single character";
-      } else if (!letterReg.test(value)) {
-        errors[key] = "Must be a letter";
-      }
-    }
-    return errors;
-  };*/
+
+\  };*/
 
   return (
     <>
-      <div></div>
+      <div className='reminders-container'>
+        <div className='reminders-content'>
+          <div className='reminders-header'>
+            <div className='reminder-cell'>Type</div>
+            <div className='reminder-cell'>Time</div>
+            <div class='reminder-offset'></div>
+          </div>
+          <div className='reminder-item'>
+            <select name='type' className='reminder-cell reminder-type'>
+              <option value='systane'>Systane Eye Drop</option>
+              <option value='muro'>Muro Eye Drop</option>
+              <option value='muro_ointment'>Muro Ointment</option>
+              <option value='note'>Note</option>
+              <option value='daily_review'>Daily Review</option>
+            </select>
+            <input
+              className='reminder-cell reminder-time'
+              type='time'
+              value='12:12 pm'
+            ></input>
+            <div class='reminder-icon'></div>
+          </div>
+          <div className='reminder-item'>
+            <div className='reminder-cell'>Systane</div>
+            <div className='reminder-cell'>18:00 p.m. </div>
+            <div class='reminder-icon'></div>
+          </div>
+          <div className='reminder-item'>
+            <div className='reminder-cell'>Muro</div>
+            <div className='reminder-cell'>12:12 p.m.</div>
+            <div class='reminder-icon'></div>
+          </div>
+        </div>
+      </div>
       {/*
     <div className='reminders-container'>
       <form className='reminders-content' onSubmit={onSubmit}>

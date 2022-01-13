@@ -12,7 +12,7 @@
 
   width: 100%;
   padding: 40px 10px 130px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .settings-content {

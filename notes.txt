@@ -134,3 +134,36 @@ height that overflows its parent, and the parent div needs to have overflow: aut
 //Should have architected out my routes more completely before beginning the project
 //Have better knowledge of when my components should or shouldn't be rerendering
 //I should have utilized my semantic html elements instead of overrelying on divs and spans
+//Set all el's to border-sizing: border-box from the beginning
+/*Big area for improvement is that a styles library or framework should have been 
+used here. Ex: 
+ -Bootstrap
+ -Material UI
+ -Tailwind CSS
+ -Styled components
+
+Because although its been fun to build all of this from scratch, the overall styling
+has been the biggest time consumer for this project and there are certain aesthetic 
+principles which I've discovered (scaling padding in proportions or the different
+proportion of grey scaled text to indicate importance) and maybe didn't seem like 
+the hardest or most complex thing to utilize however implementing it smoothly and
+correctly actually does take an extreme attention to detail. I love the CSS and
+having complete customizability over everything but I think that has led to me 
+bottle necking this project and reinventing the wheel on a lot of different 
+components.
+
+For example styling a phone number component to include a text mask would have
+taken several hours, however I just used an external package and solved the 
+problem almost immediately. I've also been creating so many components that 
+style libraries offer as one of their core components such as a header bar,
+or a drop down menu, or even a time picker input. */
+
+
+
+
+
+
+
+
+
+
