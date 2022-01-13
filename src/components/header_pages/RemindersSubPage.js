@@ -78,19 +78,11 @@ const RemindersSubPage = () => {
               <option value='note'>Note</option>
               <option value='daily_review'>Daily Review</option>
             </select>
-            <Flatpickr
-              className='reminder-time'
+            <input
+              type='time'
               value={dtTime}
-              options={{
-                noCalendar: true,
-                enableTime: true,
-                minuteIncrement: 1,
-                dateFormat: "h:i K",
-              }}
-              onChange={(e) => {
-                console.log(e);
-              }}
-            />
+              onChange={(e) => setDtTime(e.target.value)}
+            ></input>
             <div class='reminder-icon'>
               <span class='material-icons'>edit</span>
             </div>
