@@ -51,7 +51,7 @@ function App() {
             }
           >
             <Route path='add' element={<PopupPage title='Add Item' />} />
-            <Route path='reminders' element={<PopupPage title='Reminders' />} />
+            {/* <Route path='reminders' element={<PopupPage title='Reminders' />} /> */}
             <Route path='info' element={<PopupPage title='Information' />} />
             <Route path='settings' element={<PopupPage title='Settings' />} />
           </Route>
@@ -70,7 +70,7 @@ function App() {
                 </>
               }
             />
-            <Route
+            {/* <Route
               path='reminders'
               element={
                 <>
@@ -78,7 +78,7 @@ function App() {
                   <PopupPage title='Reminders' />
                 </>
               }
-            />
+            /> */}
             <Route
               path='info'
               element={
@@ -108,7 +108,7 @@ function App() {
                 </>
               }
             />
-            <Route
+            {/* <Route
               path='Reminders'
               element={
                 <>
@@ -116,7 +116,7 @@ function App() {
                   <PopupPage title='Reminders' />
                 </>
               }
-            />
+            /> */}
             <Route
               path='info'
               element={

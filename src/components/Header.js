@@ -51,14 +51,14 @@ const Header = () => {
           <span className='material-icons header-icon'>add_box</span>
           <span className='header-icon-tip'>Add Item</span>
         </Link>
-        <Link
+        {/* <Link
           to={`${view}/reminders`}
           replace
           className='header-icon-container'
         >
           <span className='material-icons header-icon'>notifications</span>
           <span className='header-icon-tip'>Reminders</span>
-        </Link>
+        </Link> */}
         <Link to={`${view}/info`} replace className='header-icon-container'>
           <span className='material-icons header-icon'>help</span>
           <span className='header-icon-tip'>Information</span>

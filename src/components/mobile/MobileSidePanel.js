@@ -85,14 +85,14 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
           Add
           <span className='material-icons'>add_box</span>
         </Link>
-        <Link
+        {/* <Link
           to={`${view}/reminders`}
           className='mobile-sp-item mobile-sp-utility'
           onClick={() => spOnClick(true)}
         >
           Reminders
           <span className='material-icons'>notifications</span>
-        </Link>
+        </Link> */}
         <Link
           to={`${view}/info`}
           className='mobile-sp-item mobile-sp-utility'
