@@ -66,7 +66,7 @@ const SettingsSubPage = () => {
     setColorSettings(testSettingsColorsObj);
     setUserSettings(testUserInfoObj);
     setHaveSaved(false);
-    setFormErrors(validate(testSettingsAbbrevObj));
+    setFormErrors(validate(testSettingsAbbrevObj, testUserInfoObj));
   };
 
   const onSubmit = (e) => {

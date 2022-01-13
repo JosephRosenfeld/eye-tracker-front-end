@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className='App'>
-      {inWidth > 800 ? <Header /> : <MobileHeader />}
+      {<Header />}
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.key}>
           <Route path='/' element={<Navigate to='/year' replace />} />

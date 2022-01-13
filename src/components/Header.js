@@ -89,6 +89,21 @@ const Header = () => {
                   Week
                 </div>
               </Link>
+              <div className='period-option' onClick={toggleMenuDropdown}>
+                Week
+              </div>
+              <div className='period-option' onClick={toggleMenuDropdown}>
+                Week
+              </div>
+              <div className='period-option' onClick={toggleMenuDropdown}>
+                Week
+              </div>
+              <div className='period-option' onClick={toggleMenuDropdown}>
+                Week
+              </div>
+              <div className='period-option' onClick={toggleMenuDropdown}>
+                Week
+              </div>
             </div>
           )}
         </div>
