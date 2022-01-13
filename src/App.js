@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 import { changeScreenSize } from "./redux/actions/screenSizeActions";
 
 /*--- Component Imports ---*/
-import Test from "./screens/Test";
 import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
@@ -41,12 +40,10 @@ function App() {
 
   return (
     <div className='App'>
-      {<Header />}
+      {inWidth > 800 ? <Header /> : <MobileHeader />}
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.key}>
           <Route path='/' element={<Navigate to='/year' replace />} />
-          <Route path='/test' element={<Test />} />
-
           <Route
             path='/3day'
             element={

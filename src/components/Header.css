@@ -150,14 +150,12 @@
   position: absolute;
   width: 150%;
   min-width: max-content;
-  max-height: 100px;
   top: 140%;
   left: -25%;
   z-index: 101; /*make it show over the header*/
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
-  overflow-y: auto;
 
   animation: fadeIn 0.15s ease-in-out;
 }

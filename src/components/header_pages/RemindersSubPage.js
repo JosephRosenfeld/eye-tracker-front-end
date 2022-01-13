@@ -8,25 +8,20 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 
 const RemindersSubPage = () => {
-  const [editable, setEditable] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
-  const [haveSaved, setHaveSaved] = useState(false); //Always show errors after first save
-
   /*Get all data from redux data store*/
   const remindersObj = [
-    { type: "muro", time: "9:00" },
-    { type: "systane", time: "11:00" },
-    { type: "systane", time: "12:00" },
-    { type: "muro", time: "14:00" },
-    { type: "muro", time: "19:00" },
-    { type: "note", time: "20:00" },
-    { type: "muro_ointment", time: "22:00" },
+    { id: 1, type: "muro", time: "9:00" },
+    { id: 2, type: "systane", time: "11:00" },
+    { id: 3, type: "systane", time: "12:00" },
+    { id: 4, type: "muro", time: "14:00" },
+    { id: 5, type: "muro", time: "19:00" },
+    { id: 6, type: "note", time: "20:00" },
+    { id: 7, type: "muro_ointment", time: "22:00" },
   ];
 
   /*Load values into local component level state*/
   //should have default vals of what was in the redux store
   const [reminders, setReminders] = useState(remindersObj);
-  const [dtTime, setDtTime] = useState(new Date());
 
   /*
   //Assumes a single layer obj for state and the setState func
@@ -65,11 +60,6 @@ const RemindersSubPage = () => {
     <>
       <div className='reminders-container'>
         <div className='reminders-content'>
-          <div className='reminders-header'>
-            <div className='reminder-cell'>Type</div>
-            <div className='reminder-cell'>Time</div>
-            <div class='reminder-offset'></div>
-          </div>
           <div className='reminder-item'>
             <select name='type' className='reminder-cell reminder-type'>
               <option value='systane'>Systane Eye Drop</option>
@@ -78,20 +68,10 @@ const RemindersSubPage = () => {
               <option value='note'>Note</option>
               <option value='daily_review'>Daily Review</option>
             </select>
-            <select name='time-hr' className='reminder-cell reminder-type'>
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
-              <option value='7'>7</option>
-              <option value='8'>8</option>
-              <option value='9'>9</option>
-              <option value='10'>10</option>
-              <option value='11'>11</option>
-              <option value='12'>12</option>
-            </select>
+            <select
+              name='time-hr'
+              className='reminder-cell reminder-type'
+            ></select>
             <div class='reminder-icon'>
               <span class='material-icons'>edit</span>
             </div>
