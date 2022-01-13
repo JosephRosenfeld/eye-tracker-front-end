@@ -79,6 +79,7 @@ const RemindersSubPage = () => {
               <option value='daily_review'>Daily Review</option>
             </select>
             <Flatpickr
+              className='reminder-time'
               value={dtTime}
               options={{
                 noCalendar: true,
@@ -90,12 +91,16 @@ const RemindersSubPage = () => {
                 console.log(e);
               }}
             />
-            <div class='reminder-icon'></div>
+            <div class='reminder-icon'>
+              <span class='material-icons'>edit</span>
+            </div>
           </div>
           <div className='reminder-item'>
             <div className='reminder-cell'>Systane</div>
             <div className='reminder-cell'>18:00 p.m. </div>
-            <div class='reminder-icon'></div>
+            <div class='reminder-icon'>
+              <span class='material-icons'>close</span>
+            </div>
           </div>
           <div className='reminder-item'>
             <div className='reminder-cell'>Muro</div>
