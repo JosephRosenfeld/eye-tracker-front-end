@@ -3,6 +3,10 @@ import "./RemindersSubPage.css";
 /*--- Hooks Imports ---*/
 import { useState } from "react";
 
+/*--- Component Imports ---*/
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_green.css";
+
 const RemindersSubPage = () => {
   const [editable, setEditable] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -22,6 +26,7 @@ const RemindersSubPage = () => {
   /*Load values into local component level state*/
   //should have default vals of what was in the redux store
   const [reminders, setReminders] = useState(remindersObj);
+  const [dtTime, setDtTime] = useState(new Date());
 
   /*
   //Assumes a single layer obj for state and the setState func
@@ -73,11 +78,18 @@ const RemindersSubPage = () => {
               <option value='note'>Note</option>
               <option value='daily_review'>Daily Review</option>
             </select>
-            <input
-              className='reminder-cell reminder-time'
-              type='time'
-              value='12:12 pm'
-            ></input>
+            <Flatpickr
+              value={dtTime}
+              options={{
+                noCalendar: true,
+                enableTime: true,
+                minuteIncrement: 1,
+                dateFormat: "h:i K",
+              }}
+              onChange={(e) => {
+                console.log(e);
+              }}
+            />
             <div class='reminder-icon'></div>
           </div>
           <div className='reminder-item'>

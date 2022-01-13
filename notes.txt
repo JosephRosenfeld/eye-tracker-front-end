@@ -156,7 +156,11 @@ For example styling a phone number component to include a text mask would have
 taken several hours, however I just used an external package and solved the 
 problem almost immediately. I've also been creating so many components that 
 style libraries offer as one of their core components such as a header bar,
-or a drop down menu, or even a time picker input. */
+or a drop down menu, or even a time picker input. 
+
+Things like a drop down menu are easy enough for me to do, but when on the 
+same form I'm using an extermal library for the time picker (Flatpickr.js)
+the styling can look a bit inconsistent*/
 
 
 
