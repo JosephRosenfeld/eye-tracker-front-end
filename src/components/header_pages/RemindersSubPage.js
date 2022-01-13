@@ -80,6 +80,7 @@ const RemindersSubPage = () => {
             </select>
             <input
               type='time'
+              className='reminder-cell reminder-time'
               value={dtTime}
               onChange={(e) => setDtTime(e.target.value)}
             ></input>
