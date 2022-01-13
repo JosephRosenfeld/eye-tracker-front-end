@@ -160,13 +160,6 @@
   align-self: center;
 }
 
-.daily-review-info {
-  padding-top: 5px;
-  grid-column: 1 / -1;
-  font-size: 15px;
-  color: rgba(66, 66, 66, 0.9);
-}
-
 @media (max-width: 700px) {
   .form-group-colors {
     grid-template-columns: repeat(2, 1fr);
@@ -200,11 +193,4 @@
   .form-group-colors {
     grid-template-columns: repeat(1, 1fr);
   }
-
-  .daily-review-info {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 350px) {
 }
