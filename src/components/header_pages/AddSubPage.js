@@ -75,10 +75,10 @@ const AddSubPage = () => {
             />
           </LocalizationProvider>
           <TextField
+            size='small'
             multiline
             minRows={5}
             placeholder='Add a more detailed description of the item you wish to log'
-            inputProps={{ style: { margin: "-5px" } }}
           />
         </ThemeProvider>
         <button className='add-item-button' type='submit'>
