@@ -36,6 +36,12 @@
   text-align: left;
 }
 
+.select-placeholder {
+  color: #29292954;
+  text-align: left;
+  font-weight: 400;
+}
+
 .add-form-item {
   align-self: stretch;
   display: flex;
