@@ -25,9 +25,8 @@ const theme = createTheme({
 });
 
 const AddSubPage = () => {
-  const [time, setTime] = useState(null);
-  const [dt, setDt] = useState(null);
-  const [dtTime, setDtTime] = useState(new Date());
+  const [time, setTime] = useState(new Date());
+  const [dt, setDt] = useState(new Date());
   const [type, setType] = useState("placeholder");
 
   return (
@@ -37,6 +36,7 @@ const AddSubPage = () => {
         <ThemeProvider theme={theme}>
           <FormControl>
             <Select
+              size='small'
               value={type}
               onChange={(e) => setType(e.target.value)}
               renderValue={
@@ -62,20 +62,28 @@ const AddSubPage = () => {
               onChange={(newVal) => {
                 setDt(newVal);
               }}
-              renderInput={(params) => <TextField {...params} />}
+              showTodayButton={true}
+              renderInput={(params) => <TextField size='small' {...params} />}
+              PopperProps={{ disablePortal: true }}
             />
             <TimePicker
               value={time}
               onChange={(newVal) => setTime(newVal)}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField size='small' {...params} />}
+              showTodayButton={true}
+              PopperProps={{ disablePortal: true }}
             />
           </LocalizationProvider>
           <TextField
             multiline
-            minRows={3}
+            minRows={5}
             placeholder='Add a more detailed description of the item you wish to log'
+            inputProps={{ style: { margin: "-5px" } }}
           />
         </ThemeProvider>
+        <button className='add-item-button' type='submit'>
+          Add Item
+        </button>
       </form>
     </div>
   );

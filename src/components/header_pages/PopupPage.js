@@ -14,7 +14,6 @@ import InfoSubPage from "./InfoSubPage";
 import SettingsSubPage from "./SettingsSubPage";
 
 const PopupPage = ({ title }) => {
-  console.log(title);
   //Varients obj to vary animation based on screen width
   const inWidth = useSelector((state) => state.screenSize);
   const variants = {
@@ -37,8 +36,6 @@ const PopupPage = ({ title }) => {
     should be replaced in the history stack*/
     navigate(view, { replace: inWidth > 800 ? true : false });
   };
-
-  //Setting proper child page
 
   return (
     <>

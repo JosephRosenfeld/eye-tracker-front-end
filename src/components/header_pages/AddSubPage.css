@@ -29,10 +29,15 @@
 
 .add-item-title {
   padding: 10px;
+  padding-bottom: 15px;
   padding-left: 5px;
   text-align: left;
   font-size: 25px;
-  color: rgba(66, 66, 66, 0.7);
+  color: rgb(151, 151, 151);
+  text-align: left;
+}
+
+.MuiSelect-select {
   text-align: left;
 }
 
@@ -42,37 +47,23 @@
   font-weight: 400;
 }
 
-.add-form-item {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  padding: 10px 5px 3px;
-}
-
-.add-form-item label {
+.add-item-label {
   align-self: flex-start;
   padding-bottom: 2px;
   font-size: 13px;
   font-weight: bold;
 }
 
-.add-form-item .form-input,
-.add-form-item textarea {
-  box-sizing: border-box;
-  width: 100%;
-  border: 1px solid var(--header-border-color);
-  border-radius: 3px;
-  font-size: 20px;
-  outline: none;
+.add-item-button {
+  width: max-content;
+  margin-top: 10px;
+  padding: 10px 30px 10px;
+  color: white;
+  background-color: var(--logo-color);
+  border: none;
+  border-radius: 4px;
+  align-self: flex-end;
 }
-
-textarea {
-  height: 5em;
-  resize: none;
-}
-
 @media (max-width: 600px) {
   .add-item-content {
     width: 95%;
