@@ -40,7 +40,6 @@ const AddSubPage = () => {
         <ThemeProvider theme={theme}>
           <FormControl>
             <Select
-              size='small'
               value={type}
               onChange={(e) => setType(e.target.value)}
               renderValue={
@@ -57,6 +56,7 @@ const AddSubPage = () => {
               <MenuItem value='Muro Eye Drop'>Muro Eye Drop</MenuItem>
               <MenuItem value='Muro Ointment'>Muro Ointment</MenuItem>
               <MenuItem value='Erosion'>Erosion</MenuItem>
+              <MenuItem value='Note'>Note</MenuItem>
               <MenuItem value='Daily Review'>Daily Review</MenuItem>
             </Select>
           </FormControl>
@@ -68,23 +68,25 @@ const AddSubPage = () => {
                 setDt(newVal);
               }}
               showTodayButton={true}
-              renderInput={(params) => <TextField size='small' {...params} />}
+              renderInput={(params) => <TextField {...params} />}
               PopperProps={{ disablePortal: true }}
             />
             <TimePicker
               value={time}
               onChange={(newVal) => setTime(newVal)}
-              renderInput={(params) => <TextField size='small' {...params} />}
+              renderInput={(params) => <TextField {...params} />}
               showTodayButton={true}
               PopperProps={{ disablePortal: true }}
             />
           </LocalizationProvider>
-          <TextField
-            size='small'
-            multiline
-            minRows={5}
-            placeholder='Add a detailed description of the log item'
-          />
+          {(type == "Erosion" || type == "Note" || type == "Daily Review") && (
+            <TextField
+              size='small'
+              multiline
+              minRows={5}
+              placeholder='Add a detailed description of the log item'
+            />
+          )}
         </ThemeProvider>
         <button className='add-item-button' type='submit'>
           Add Item
