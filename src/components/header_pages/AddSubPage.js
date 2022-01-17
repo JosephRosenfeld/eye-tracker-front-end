@@ -29,9 +29,13 @@ const AddSubPage = () => {
   const [dt, setDt] = useState(new Date());
   const [type, setType] = useState("placeholder");
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className='add-item-container'>
-      <form className='add-item-content'>
+      <form className='add-item-content' onSubmit={onSubmit}>
         <div className='add-item-title'>Item Info</div>
         <ThemeProvider theme={theme}>
           <FormControl>
@@ -44,7 +48,7 @@ const AddSubPage = () => {
                   ? undefined
                   : () => (
                       <div className='select-placeholder'>
-                        The type of log item
+                        Select the type of log item
                       </div>
                     )
               }
@@ -56,6 +60,7 @@ const AddSubPage = () => {
               <MenuItem value='Daily Review'>Daily Review</MenuItem>
             </Select>
           </FormControl>
+
           <LocalizationProvider dateAdapter={DateAdapter}>
             <DatePicker
               value={dt}
@@ -78,7 +83,7 @@ const AddSubPage = () => {
             size='small'
             multiline
             minRows={5}
-            placeholder='Add a more detailed description of the item you wish to log'
+            placeholder='Add a detailed description of the log item'
           />
         </ThemeProvider>
         <button className='add-item-button' type='submit'>

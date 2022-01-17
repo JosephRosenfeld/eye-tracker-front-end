@@ -70,6 +70,7 @@ const SettingsSubPage = () => {
   };
 
   const onSubmit = (e) => {
+    console.log("submit");
     e.preventDefault();
     setHaveSaved(true);
     //update error state in order to rerender form
@@ -300,7 +301,37 @@ const SettingsSubPage = () => {
             <span className='error-txt'>{formErrors.daily_review}</span>
           </div>
         </div>
-        <div className='form-group form-group-user-info'>
+        <div className='settings-button-group'>
+          {!editable && (
+            <button
+              className='edit-button settings-button'
+              type='button'
+              onClick={(e) => {
+                setEditable(true);
+              }}
+            >
+              Edit
+            </button>
+          )}
+          {editable && (
+            <>
+              <button type='submit' className='save-button settings-button'>
+                Save
+              </button>
+              <button
+                type='button'
+                className='cancel-button settings-button'
+                onClick={(e) => {
+                  setEditable(false);
+                  reset();
+                }}
+              >
+                Cancel
+              </button>
+            </>
+          )}
+        </div>
+        {/* <div className='form-group form-group-user-info'>
           <div className='form-group-title'>
             User Info{" "}
             <span className='optional-txt'>
@@ -329,14 +360,14 @@ const SettingsSubPage = () => {
               onChange={(e) => onChange(e, userSettings, setUserSettings)}
               readOnly={editable ? "" : "readonly"}
             />
-          </div>
-        </div>
-        <PopupButtons
+          </div> 
+        </div>*/}
+        {/* <PopupButtons
           editable={editable}
           setEditable={setEditable}
           reset={reset}
           onSubmit={onSubmit}
-        />
+        /> */}
       </form>
     </div>
   );
