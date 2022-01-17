@@ -310,7 +310,7 @@ const SettingsSubPage = () => {
                 setEditable(true);
               }}
             >
-              Edit
+              Edit Settings
             </button>
           )}
           {editable && (
