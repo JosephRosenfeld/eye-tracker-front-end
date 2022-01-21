@@ -11,8 +11,9 @@ import MultiDay from "./screens/MultiDay";
 import Yearly from "./screens/Yearly";
 import Header from "./components/Header";
 import MobileHeader from "./components/mobile/MobileHeader";
-import PopupPage from "./components/header_pages/PopupPage";
-import PopupOverlay from "./components/header_pages/PopupOverlay";
+import PopupPage from "./components/popup_pages/PopupPage";
+import PopupOverlay from "./components/popup_pages/PopupOverlay";
+import LoginPopup from "./components/popup_pages/LoginPopup";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -54,6 +55,15 @@ function App() {
             {/* <Route path='reminders' element={<PopupPage title='Reminders' />} /> */}
             <Route path='info' element={<PopupPage title='Information' />} />
             <Route path='settings' element={<PopupPage title='Settings' />} />
+            <Route
+              path='login'
+              element={
+                <>
+                  {<PopupOverlay />}
+                  <LoginPopup redirect={false} />
+                </>
+              }
+            />
           </Route>
           <Route
             path='/week'
@@ -97,6 +107,15 @@ function App() {
                 </>
               }
             />
+            <Route
+              path='login'
+              element={
+                <>
+                  {<PopupOverlay />}
+                  <LoginPopup redirect={false} />
+                </>
+              }
+            />
           </Route>
           <Route path='/year' element={<Yearly />}>
             <Route
@@ -132,6 +151,15 @@ function App() {
                 <>
                   {inWidth > 800 && <PopupOverlay />}
                   <PopupPage title='Settings' />
+                </>
+              }
+            />
+            <Route
+              path='login'
+              element={
+                <>
+                  {<PopupOverlay />}
+                  <LoginPopup redirect={false} />
                 </>
               }
             />

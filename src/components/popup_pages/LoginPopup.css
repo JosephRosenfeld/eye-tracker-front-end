@@ -1,0 +1,153 @@
+.login-page-container {
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 110; /*position over header but leave space for overlay*/
+}
+
+.login-page {
+  position: fixed;
+  width: min(400px, 90%);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+.login-header {
+  flex-shrink: 1;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 5%;
+  border-bottom: 1px solid var(--header-border-color);
+  font-size: 35px;
+}
+
+.login-x {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.login-x div {
+  font-size: 35px;
+}
+
+.login-x:hover,
+.login-x:active {
+  background-color: rgba(180, 180, 180, 0.25);
+}
+
+.login-header.no-x {
+  justify-content: center;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.cheeky-section {
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.cheeky-q {
+  padding: 10px 0px 15px;
+  font-size: 1.22em;
+  font-weight: bold;
+}
+
+.conditional-br {
+  display: none;
+}
+
+.admin-section,
+.guest-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-section {
+  margin-bottom: 20px;
+}
+
+.login-section-title {
+  text-align: left;
+  padding-left: 0px;
+  font-size: 25px;
+  color: rgb(151, 151, 151);
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px 30px 10px;
+  color: white;
+  background-color: var(--logo-color);
+  border: none;
+  font-size: 18px;
+  border-radius: 4px;
+  align-self: flex-end;
+  cursor: pointer;
+
+  transition: background-color 0.15s;
+}
+
+.login-button:hover,
+.login-button:focus {
+  background-color: #28853c;
+}
+
+/*
+@media (max-width: 800px) {
+  .login-page {
+    height: 100%;
+    border-radius: 0px;
+  }
+}*/
+
+@media (max-width: 600px) {
+  .login-title {
+    font-size: 30px;
+  }
+
+  .login-section-title {
+    font-size: 23px;
+  }
+
+  .cheeky-section {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 450px) {
+  .login-title {
+    font-size: 25px;
+  }
+
+  .login-section-title {
+    font-size: 20px;
+  }
+
+  .cheeky-section {
+    font-size: 15px;
+  }
+
+  .login-button {
+    font-size: 16px;
+  }
+}

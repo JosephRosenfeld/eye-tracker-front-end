@@ -38,38 +38,36 @@ const PopupPage = ({ title }) => {
   };
 
   return (
-    <>
-      <motion.div
-        initial={inWidth > 800 ? "hidden_desktop" : "hidden_mobile"}
-        animate={"shown"}
-        exit={inWidth > 800 ? "exit_desktop" : "exit_mobile"}
-        transition={{
-          duration: inWidth > 800 ? 0.2 : 0.4,
-        }}
-        variants={variants}
-        className='popup-page-container'
-      >
-        <div className='popup-page'>
-          <div className='popup-header'>
-            <div className='popup-title'>{title}</div>
-            <div className='popup-x' onClick={closePopup}>
-              <span className='material-icons'>close</span>
-            </div>
+    <motion.div
+      initial={inWidth > 800 ? "hidden_desktop" : "hidden_mobile"}
+      animate={"shown"}
+      exit={inWidth > 800 ? "exit_desktop" : "exit_mobile"}
+      transition={{
+        duration: inWidth > 800 ? 0.2 : 0.4,
+      }}
+      variants={variants}
+      className='popup-page-container'
+    >
+      <div className='popup-page'>
+        <div className='popup-header'>
+          <div className='popup-title'>{title}</div>
+          <div className='popup-x' onClick={closePopup}>
+            <span className='material-icons'>close</span>
           </div>
-          {title == "Add Item" ? (
-            <AddSubPage />
-          ) : title == "Reminders" ? (
-            <RemindersSubPage />
-          ) : title == "Information" ? (
-            <InfoSubPage />
-          ) : title == "Settings" ? (
-            <SettingsSubPage />
-          ) : (
-            ""
-          )}
         </div>
-      </motion.div>
-    </>
+        {title == "Add Item" ? (
+          <AddSubPage />
+        ) : title == "Reminders" ? (
+          <RemindersSubPage />
+        ) : title == "Information" ? (
+          <InfoSubPage />
+        ) : title == "Settings" ? (
+          <SettingsSubPage />
+        ) : (
+          ""
+        )}
+      </div>
+    </motion.div>
   );
 };
 

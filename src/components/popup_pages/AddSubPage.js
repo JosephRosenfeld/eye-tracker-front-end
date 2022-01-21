@@ -81,7 +81,6 @@ const AddSubPage = () => {
           </LocalizationProvider>
           {(type == "Erosion" || type == "Note" || type == "Daily Review") && (
             <TextField
-              size='small'
               multiline
               minRows={5}
               placeholder='Add a detailed description of the log item'

@@ -45,7 +45,7 @@ const MobileHeader = () => {
   return (
     <header className='mobile-header'>
       <div className='mobile-header-left'>
-        <img className='logo' src='/assets/eye-tracker-logo.png'></img>
+        <img className='logo' src='/assets/eye_tracker_logo.png'></img>
         {inWidth > 450 && <div className='site-title'>Eye Tracker</div>}
         <DateViewer dateVisible={true} view={view} />
       </div>

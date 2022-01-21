@@ -1,8 +1,10 @@
 import "./Header.css";
+
+/*--- Hooks Imports ---*/
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-//component imports
+/*--- Components Imports ---*/
 import DateViewer from "./DateViewer";
 
 /*--- Actions Imports ---*/
@@ -41,11 +43,10 @@ const Header = () => {
   return (
     <header className='header'>
       <div className='header-left'>
-        <img className='logo' src='/assets/eye-tracker-logo.png'></img>
+        <img className='logo' src='/assets/eye_tracker_logo.png'></img>
         <div className='site-title'>Eye Tracker</div>
         <DateViewer dateVisible={true} view={view} />
       </div>
-
       <div className='header-right'>
         <Link to={`${view}/add`} replace className='header-icon-container'>
           <span className='material-icons header-icon'>add_box</span>
@@ -59,6 +60,7 @@ const Header = () => {
           <span className='material-icons header-icon'>notifications</span>
           <span className='header-icon-tip'>Reminders</span>
         </Link> */}
+
         <Link to={`${view}/info`} replace className='header-icon-container'>
           <span className='material-icons header-icon'>help</span>
           <span className='header-icon-tip'>Information</span>
@@ -66,6 +68,16 @@ const Header = () => {
         <Link to={`${view}/settings`} replace className='header-icon-container'>
           <span className='material-icons header-icon'>settings</span>
           <span className='header-icon-tip'>Settings</span>
+        </Link>
+        {/* Should I replace or not below */}
+        <Link
+          className='header-icon-container'
+          to={`${view}/login`}
+          replace
+          state={{ redirect: false }}
+        >
+          <span className='material-icons header-icon'>account_circle</span>
+          <span className='header-icon-tip'>Login</span>
         </Link>
         <div className='dropdown-container'>
           <div

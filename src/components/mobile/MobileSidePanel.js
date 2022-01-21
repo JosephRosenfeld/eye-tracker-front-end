@@ -109,6 +109,14 @@ const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
           Settings
           <span className='material-icons'>settings</span>
         </Link>
+        <Link
+          to={`${view}/login`}
+          className='mobile-sp-item mobile-sp-utility'
+          onClick={() => spOnClick(true)}
+        >
+          Login
+          <span className='material-icons'>account_circle</span>
+        </Link>
       </motion.div>
       <motion.div
         className='sp-overlay'

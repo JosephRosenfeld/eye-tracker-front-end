@@ -54,14 +54,6 @@
   margin: 10px 0px;
 }
 
-.add-item-label {
-  font-size: 15px;
-  font-weight: bold;
-  text-align: left;
-  max-width: 150px;
-  padding-bottom: 3px;
-}
-
 .add-item-button {
   width: max-content;
   margin-top: 10px;
