@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const url = process.env.REACT_APP_DEV_API_URI;
+export const url = "http://localhost:5000/api";
 
-export const login = (pin) => axios.post(`${url}/login`, pin);
+export const login = () => axios.get(`${url}/login`, { withCredentials: true });
 export const createPost = (newPost) => axios.post(url, newPost);
 export const updatePost = (id, updatedPost) =>
   axios.patch(`${url}/${id}`, updatedPost);

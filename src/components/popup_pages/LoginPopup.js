@@ -6,11 +6,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 /*--- Hooks Imports ---*/
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
 /*--- Components Imports ---*/
 import TextField from "@mui/material/TextField";
+
+/*--- Actions Imports ---*/
+import { login } from "../../redux/actions/authActions";
 
 const theme = createTheme({
   palette: {
@@ -21,7 +24,23 @@ const theme = createTheme({
 });
 
 const LoginPopup = ({ redirect = false }) => {
+  //setting redirect val
+  const loc = useLocation();
+  console.log(loc);
+  redirect = loc.state && loc.state.redirect ? loc.state.redirect : redirect;
+
   const [pin, setPin] = useState("");
+
+  //Handle Click
+  const dispatch = useDispatch();
+  const handleClick = (e, shouldLogin) => {
+    e.preventDefault();
+    if (shouldLogin) {
+      dispatch(login(true));
+    }
+
+    closePopup();
+  };
 
   //Varients obj to vary animation based on screen width
   const inWidth = useSelector((state) => state.screenSize);
@@ -35,8 +54,8 @@ const LoginPopup = ({ redirect = false }) => {
   };
 
   //Getting current view
-  const loc = useLocation();
   const view = loc.pathname.match(/^\/[^\/]*/)[0];
+  console.log(view);
 
   //navigating user to new page (with some conditional logic on replace)
   const navigate = useNavigate();
@@ -90,7 +109,13 @@ const LoginPopup = ({ redirect = false }) => {
                 placeholder='Admin PIN'
               />
             </ThemeProvider>
-            <button className='login-button' type='submit'>
+            <button
+              className='login-button'
+              type='button'
+              onClick={(e) => {
+                handleClick(e, true);
+              }}
+            >
               Login
             </button>
           </div>
@@ -98,7 +123,13 @@ const LoginPopup = ({ redirect = false }) => {
           {redirect && (
             <div className='guest-section'>
               <div className='login-section-title'>Guest:</div>
-              <button className='login-button' type='submit'>
+              <button
+                className='login-button'
+                type='button'
+                onClick={(e) => {
+                  handleClick(e, true);
+                }}
+              >
                 Continue as guest
               </button>
             </div>

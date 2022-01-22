@@ -1,9 +1,11 @@
 import "./Yearly.css";
 
 /*--- Utilities Imports ---*/
-import { AnimatePresence } from "framer-motion";
 
 /*--- Hook Imports ---*/
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 /*--- Component Imports ---*/
 import Month from "../components/Month";
@@ -13,7 +15,6 @@ import { Outlet } from "react-router-dom";
 
 const Yearly = () => {
   const months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  console.log("year rerender");
   return (
     <main className='year-container'>
       {months.map((m, idx) => (

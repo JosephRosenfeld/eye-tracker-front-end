@@ -1,7 +1,9 @@
 import "./MultiDay.css";
 
+/*--- Utilities Imports ---*/
+
 /*--- Hook Imports ---*/
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
@@ -9,12 +11,23 @@ import { useLocation } from "react-router-dom";
 import MultiHeader from "../components/MultiHeader";
 import TimeScale from "../components/TimeScale";
 import FullDay from "../components/FullDay";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 /*--- Action Imports ---*/
 
-const MultiDay = ({ newViewDt = null }) => {
-  console.log("multi day rerender");
+const MultiDay = ({ newViewDt = null, redirect = false }) => {
+  console.log("multi day render");
+
+  /*--- Redirect if unauthorized ---*/
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    console.log("in useEffect");
+    if (!auth && !redirect) {
+      navigate("/year/login", { replace: true, state: { redirect: true } });
+    }
+  }, []);
+
   /*We use a ref here so that if view changes to some non multi-day val (like if we
     switch to a year view) then it doesn't rerender the wrong amount of days right
     before switching to the new view */
@@ -49,6 +62,7 @@ const MultiDay = ({ newViewDt = null }) => {
     };
     pointerDt.setDate(pointerDt.getDate() + 1);
   }
+
   return (
     <main className='multi-day-container'>
       <MultiHeader dtArr={dtArr} />

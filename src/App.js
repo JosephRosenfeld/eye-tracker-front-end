@@ -1,7 +1,7 @@
 /*--- Hooks Imports ---*/
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 /*--- Actions Imports ---*/
 import { changeScreenSize } from "./redux/actions/screenSizeActions";
@@ -15,13 +15,29 @@ import PopupPage from "./components/popup_pages/PopupPage";
 import PopupOverlay from "./components/popup_pages/PopupOverlay";
 import LoginPopup from "./components/popup_pages/LoginPopup";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function App() {
   const dispatch = useDispatch();
-  const location = useLocation();
 
-  /*--- Add to the history stack in case we routed to a popup page on mobile ---*/
+  /*--- Redirect if unauthorized or wrong screen size ---*/
+  const navigate = useNavigate();
+  const loc = useLocation();
+  const auth = useSelector((state) => state.auth);
+  const inWidth = useSelector((state) => state.screenSize);
+  useEffect(() => {
+    console.log(loc.pathname.match(/^\/[^\/]*/)[0]);
+    if (!auth && loc.pathname != "/year/login") {
+      navigate("/year/login", { replace: true, state: { redirect: true } });
+    } else if (inWidth > 800 && loc.pathname.match(/^\/[^\/]*/)[0] == "/3day") {
+      navigate("/week", { replace: true });
+    } else if (
+      inWidth <= 800 &&
+      loc.pathname.match(/^\/[^\/]*/)[0] == "/week"
+    ) {
+      navigate("/3day", { replace: true });
+    }
+  });
 
   /*--- Window Width into Global State (Redux) ---*/
   /*We do this so we can conditionally route to different pages based on screen 
@@ -33,7 +49,6 @@ function App() {
     window.addEventListener("resize", resizeEvListener);
     return () => window.removeEventListener("resize", resizeEvListener);
   }, []);
-  const inWidth = useSelector((state) => state.screenSize);
   /*Additionally, because screen width is pulled in with useSelector at the App level 
   component, the entire App will be rerendered when screen width changes. And 
   because the routing is done in the App component, the route can change per 
@@ -43,14 +58,9 @@ function App() {
     <div className='App'>
       {inWidth > 800 ? <Header /> : <MobileHeader />}
       <AnimatePresence exitBeforeEnter>
-        <Routes location={location} key={location.key}>
+        <Routes location={loc} key={loc.key}>
           <Route path='/' element={<Navigate to='/year' replace />} />
-          <Route
-            path='/3day'
-            element={
-              inWidth > 800 ? <Navigate to='/week' replace /> : <MultiDay />
-            }
-          >
+          <Route path='/3day' element={<MultiDay />}>
             <Route path='add' element={<PopupPage title='Add Item' />} />
             {/* <Route path='reminders' element={<PopupPage title='Reminders' />} /> */}
             <Route path='info' element={<PopupPage title='Information' />} />
@@ -65,12 +75,7 @@ function App() {
               }
             />
           </Route>
-          <Route
-            path='/week'
-            element={
-              inWidth <= 800 ? <Navigate to='/3day' replace /> : <MultiDay />
-            }
-          >
+          <Route path='/week' element={<MultiDay />}>
             <Route
               path='add'
               element={
