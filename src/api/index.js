@@ -2,7 +2,13 @@ import axios from "axios";
 
 export const url = "http://localhost:5000/api";
 
-export const login = () => axios.get(`${url}/login`, { withCredentials: true });
+export const loginAdmin = (pin) =>
+  axios.post(`${url}/auth/loginadmin`, { pin: pin }, { withCredentials: true });
+export const loginGuest = () =>
+  axios.get(`${url}/auth/loginguest`, { withCredentials: true });
+export const loginCheck = () =>
+  axios.get(`${url}/auth/logincheck`, { withCredentials: true });
+
 export const createPost = (newPost) => axios.post(url, newPost);
 export const updatePost = (id, updatedPost) =>
   axios.patch(`${url}/${id}`, updatedPost);

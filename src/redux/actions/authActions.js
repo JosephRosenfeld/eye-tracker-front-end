@@ -1,42 +1,72 @@
 import {
-  LOGIN_LOADING,
-  LOGIN_SUCCESS,
-  LOGIN_ERROR,
+  ADMIN_LOGIN_LOADING,
+  ADMIN_LOGIN_SUCCESS,
+  ADMIN_LOGIN_ERROR,
+  GUEST_LOGIN_LOADING,
+  GUEST_LOGIN_SUCCESS,
+  GUEST_LOGIN_ERROR,
+  ADMIN_REMOVE_ERROR,
 } from "../constants/constants";
 import * as api from "../../api/index";
 
 //Action creators
-export const login = () => async (dispatch) => {
+export const loginAdmin = (pin) => async (dispatch) => {
   try {
-    //in reality when I click the login button it should validate it on the server
-    //side before giving me a cookie. The cookie will be given to me without me
-    //really having to handle it in the reducer, but it should also return some
-    //auth = true in the payload back. That way I can set the auth var as true in
-    //my redux store.
-
-    //Then in the routing we do some conditional logic based on that redux var. Then
-    //All we have to do as well is check cookie on initial render and then set
-    //that redux var so we can allow those routes.
-
-    //so all the other logic is handled server side as far as if we're updating
-    //the master user or just a session row
+    //Set loading before api call
     dispatch({
-      type: LOGIN_LOADING,
+      type: ADMIN_LOGIN_LOADING,
       payload: {},
     });
-    const { data } = await api.login();
+    //Make api call
+    const { data } = await api.loginAdmin(pin);
     //LOGIC FOR ERRORS (maybe? or does the api automatically throw an error?)
     dispatch({
-      type: LOGIN_SUCCESS,
+      type: ADMIN_LOGIN_SUCCESS,
+      payload: {},
+    });
+  } catch (error) {
+    //Catch should include invalid pins
+    dispatch({
+      type: ADMIN_LOGIN_ERROR,
+      payload: {
+        errorTxt:
+          /*Error.data ||*/ "Unable to connect to server, please try again later",
+        isLoading: false,
+      },
+    });
+  }
+};
+
+export const loginGuest = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: GUEST_LOGIN_LOADING,
+      payload: {},
+    });
+    const { data } = await api.loginGuest();
+    //LOGIC FOR ERRORS (maybe? or does the api automatically throw an error?)
+    dispatch({
+      type: GUEST_LOGIN_SUCCESS,
       payload: {},
     });
   } catch (error) {
     dispatch({
-      type: LOGIN_ERROR,
+      type: GUEST_LOGIN_ERROR,
       payload: {
-        errorMessage: "Unable to connect to server, please try again later",
+        errorTxt: "Unable to connect to server, please try again later",
         isLoading: false,
       },
     });
+  }
+};
+
+export const removeAdminError = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_REMOVE_ERROR,
+      payload: {},
+    });
+  } catch (e) {
+    console.log(e);
   }
 };

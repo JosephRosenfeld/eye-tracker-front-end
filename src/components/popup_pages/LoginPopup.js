@@ -13,7 +13,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 
 /*--- Actions Imports ---*/
-import { login } from "../../redux/actions/authActions";
+import { loginAdmin } from "../../redux/actions/authActions";
+import { loginGuest } from "../../redux/actions/authActions";
+import { removeAdminError } from "../../redux/actions/authActions";
 
 const theme = createTheme({
   palette: {
@@ -26,52 +28,82 @@ const theme = createTheme({
 const LoginPopup = ({ showExtraProp }) => {
   console.log("render login");
 
-  //setting showExtra val
+  /*--- Setting showExtra Val ---*/
   /*We store it as a state var so that its set once at initial render and doesn't
   change per each component update (like props would)*/
   const [showExtra, setShowExtra] = useState(showExtraProp);
 
-  //Handle rerender after login click
-  const [clickedLogIn, setClickedLogIn] = useState(false);
+  /*--- Setting / Configuring initial vals ---*/
+  //Essentially a 'have saved' state but for each from
+  const [adminSubmitted, setAdminSubmitted] = useState(false);
+  const [guestSubmitted, setGuestSubmitted] = useState(false);
+  //Ensures we don't get stuck in a rerender loop with constant navigation
   const [haveNavigated, setHaveNavigated] = useState(false);
   const auth = useSelector((state) => state.auth);
   const loc = useLocation();
   const view = loc.pathname.match(/^\/[^\/]*/)[0]; //get cur view
   const navigate = useNavigate();
+
+  /*--- Prevent Default on Form Submit ---*/
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  /*--- Handle Navigation after Login Click ---*/
+  /*Essentially since redux updates are asynchronous (and its better to handle
+    them as such), we decided to wait until the global state update triggers
+    a rerender, at such time this useEffect will be triggered and then based on
+    some internal logic, will decide if we need to reroute*/
   useEffect(() => {
-    if (clickedLogIn && auth.loggedIn && !haveNavigated) {
-      setHaveNavigated(true);
-      navigate(view, {
-        replace: true,
-      });
+    //Handle admin form
+    if (adminSubmitted) {
+      if (!haveNavigated && auth.adminLoggedIn) {
+        setHaveNavigated(true);
+        console.log("before navigate");
+        navigate(view, {
+          replace: true,
+        });
+      }
+
+      //Handle guest form
+    } else if (guestSubmitted) {
+      if (!haveNavigated && auth.guestLoggedIn) {
+        setHaveNavigated(true);
+        console.log("before navigate");
+        navigate(view, {
+          replace: true,
+        });
+      }
     }
-  });
+  }, [auth]);
 
   /*--- Handle Click Function ---*/
   const dispatch = useDispatch();
-  /*Setting the form error field is so we know where to display the error message,
-  this is only useful for server based validation, as the guest route won't have 
-  any client side validation (its just a button click)*/
-  const [formErrorField, setFormErrorField] = useState(null);
   const [clientSideErrors, setClientSideErrors] = useState({});
+  /*allErrors made to be a ref so that we can update it in the root LoginPopup
+  component and not have to worry about setState infinite rerender loop*/
   const allErrors = useRef({});
   const handleClick = (e) => {
-    setClickedLogIn(true);
     //Whenever we click a button, erase all pre-existing errors
     allErrors.current = {};
+    //Handle admin 'form' submission
     if (e.target.className.includes("admin-button")) {
-      setFormErrorField("admin");
-      //check for client side errors first
+      setAdminSubmitted(true);
+      setGuestSubmitted(false);
+
       const errors = validate(pin);
-      console.log(errors);
       setClientSideErrors(errors);
       if (Object.keys(errors).length !== 0) {
         return; //Escape click handler so we don't dispatch to redux
       }
+      dispatch(loginAdmin(pin));
+      //Handle guest 'form' submission
     } else if (e.target.className.includes("guest-button")) {
-      setFormErrorField("guest");
+      setAdminSubmitted(false);
+      setGuestSubmitted(true);
+
+      dispatch(loginGuest());
     }
-    dispatch(login());
   };
 
   /*--- Set PIN Form Field ---*/
@@ -79,10 +111,12 @@ const LoginPopup = ({ showExtraProp }) => {
   const onChange = (e) => {
     let { value } = e.target;
     setPin(value);
-    /*If we/ve already tried to submit and the edit was on a text input then
-      update the form errors shown*/
-    if (clickedLogIn) {
+    //Reset to 'fresh' form if input was changed right after a server response
+    if (auth.adminErrorTxt && adminSubmitted) {
+      dispatch(removeAdminError());
+      setAdminSubmitted(false);
     }
+    setClientSideErrors(validate(value));
   };
 
   /*--- Client Side PIN Validation ---*/
@@ -102,13 +136,12 @@ const LoginPopup = ({ showExtraProp }) => {
   //Set based on global auth state and local clientSideErrors state
   allErrors.current = {
     admin:
-      formErrorField == "admin" && !auth.isLoading
-        ? clientSideErrors.pin || auth.errorMessage
+      adminSubmitted && !auth.adminIsLoading
+        ? clientSideErrors.pin || auth.adminErrorTxt
         : "",
-    guest:
-      formErrorField == "guest" && !auth.isLoading ? auth.errorMessage : "",
+    guest: guestSubmitted && !auth.guestIsLoading ? auth.guestErrorTxt : "",
   };
-
+  console.log(guestSubmitted, auth);
   console.log(allErrors.current);
   //Varients obj to vary animation based on screen width
   const inWidth = useSelector((state) => state.screenSize);
@@ -147,7 +180,7 @@ const LoginPopup = ({ showExtraProp }) => {
             </div>
           )}
         </div>
-        <form className='login-content'>
+        <form className='login-content' onSubmit={onSubmit}>
           {showExtra && (
             <div className='cheeky-section'>
               {inWidth > 400 ? (
@@ -168,21 +201,21 @@ const LoginPopup = ({ showExtraProp }) => {
               <TextField
                 size={inWidth < 450 ? "small" : ""}
                 placeholder='Admin PIN  ex: 1234'
+                autoComplete='off'
                 onChange={onChange}
-                disabled={auth.isLoading}
-                data-error={clientSideErrors.pin}
+                disabled={auth.adminIsLoading || auth.guestIsLoading}
               />
             </ThemeProvider>
             <span className='error-txt'>{allErrors.current.admin}</span>
             <button
               className={`login-button admin-button ${
-                auth.isLoading && "disabled"
+                (auth.adminIsLoading || auth.guestIsLoading) && "disabled"
               }`}
               type='button'
               onClick={(e) => {
                 handleClick(e);
               }}
-              disabled={auth.isLoading}
+              disabled={auth.adminIsLoading || auth.guestIsLoading}
             >
               Login
             </button>
@@ -193,13 +226,13 @@ const LoginPopup = ({ showExtraProp }) => {
               <div className='login-section-title'>Guest:</div>
               <button
                 className={`login-button guest-button ${
-                  auth.isLoading && "disabled"
+                  (auth.adminIsLoading || auth.guestIsLoading) && "disabled"
                 }`}
                 type='button'
                 onClick={(e) => {
                   handleClick(e);
                 }}
-                disabled={auth.isLoading}
+                disabled={auth.adminIsLoading || auth.guestIsLoading}
               >
                 Continue as guest
               </button>

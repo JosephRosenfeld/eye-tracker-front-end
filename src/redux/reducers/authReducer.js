@@ -1,25 +1,63 @@
 import {
-  LOGIN_LOADING,
-  LOGIN_SUCCESS,
-  LOGIN_ERROR,
+  ADMIN_LOGIN_LOADING,
+  ADMIN_LOGIN_SUCCESS,
+  ADMIN_LOGIN_ERROR,
+  GUEST_LOGIN_LOADING,
+  GUEST_LOGIN_SUCCESS,
+  GUEST_LOGIN_ERROR,
+  ADMIN_REMOVE_ERROR,
 } from "../constants/constants";
 import Cookies from "js-cookie";
 
-const initState = Cookies.get("connect.sid")
-  ? { loggedIn: true, errorMessage: "", isLoading: false }
-  : { loggedIn: false, errorMessage: "", isLoading: false };
+const initState = {
+  adminIsLoading: false,
+  adminLoggedIn: false,
+  adminErrorTxt: "",
+  guestIsLoading: false,
+  guestLoggedIn: !!Cookies.get("connect.sid"),
+  guestErrorTxt: false,
+};
 
 export const authReducer = (state = initState, action) => {
   switch (action.type) {
-    case LOGIN_LOADING:
-      return { ...state, isLoading: true };
-    case LOGIN_SUCCESS:
-      return { loggedIn: true, errorMessage: "", isLoading: false };
-    case LOGIN_ERROR:
+    case ADMIN_LOGIN_LOADING:
+      return { ...state, adminIsLoading: true };
+    case ADMIN_LOGIN_SUCCESS:
+      return {
+        adminIsLoading: false,
+        adminLoggedIn: true,
+        adminErrorTxt: "",
+        guestLoggedIn: false,
+        guestErrorTxt: "",
+      };
+    /*We shouldn't have to reset guestIsLoading above (should be taken care of in
+        the guest actions)*/
+    case ADMIN_LOGIN_ERROR:
       return {
         ...state,
-        errorMessage: action.payload.errorMessage,
-        isLoading: action.payload.isLoading,
+        adminErrorTxt: action.payload.errorTxt,
+        adminIsLoading: false,
+      };
+    case GUEST_LOGIN_LOADING:
+      return { ...state, guestIsLoading: true };
+    case GUEST_LOGIN_SUCCESS:
+      return {
+        adminLoggedIn: false,
+        adminErrorTxt: "",
+        guestIsLoading: false,
+        guestLoggedIn: true,
+        guestErrorTxt: "",
+      };
+    case GUEST_LOGIN_ERROR:
+      return {
+        ...state,
+        guestErrorTxt: action.payload.errorTxt,
+        guestIsLoading: false,
+      };
+    case ADMIN_REMOVE_ERROR:
+      return {
+        ...state,
+        adminErrorTxt: "",
       };
     default:
       return state;
