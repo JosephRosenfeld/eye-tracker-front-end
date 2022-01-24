@@ -16,18 +16,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 /*--- Action Imports ---*/
 
 const MultiDay = ({ newViewDt = null, redirect = false }) => {
-  console.log("multi day render");
-
-  /*--- Redirect if unauthorized ---*/
-  const navigate = useNavigate();
-  const auth = useSelector((state) => state.auth);
-  useEffect(() => {
-    console.log("in useEffect");
-    if (!auth && !redirect) {
-      navigate("/year/login", { replace: true, state: { redirect: true } });
-    }
-  }, []);
-
   /*We use a ref here so that if view changes to some non multi-day val (like if we
     switch to a year view) then it doesn't rerender the wrong amount of days right
     before switching to the new view */
@@ -37,9 +25,9 @@ const MultiDay = ({ newViewDt = null, redirect = false }) => {
   if (view != "/3day" && view != "/week") {
     view = viewRef.current;
   }
+
   //Retrieve and Extract Global State Vars
   let { year, month, day } = useSelector((state) => state.viewDt);
-
   //if newViewDt isn't null overwrite our local view date
   //(Update of global viewDt happened in the double click function on the Yearly)
   if (newViewDt) {

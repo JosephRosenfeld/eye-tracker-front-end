@@ -1,3 +1,6 @@
+/*--- Utilities Imports ---*/
+import Cookies from "js-cookie";
+
 /*--- Hooks Imports ---*/
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,10 +18,11 @@ import PopupPage from "./components/popup_pages/PopupPage";
 import PopupOverlay from "./components/popup_pages/PopupOverlay";
 import LoginPopup from "./components/popup_pages/LoginPopup";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const dispatch = useDispatch();
+  console.log("app rerender");
 
   /*--- Redirect if unauthorized or wrong screen size ---*/
   const navigate = useNavigate();
@@ -26,11 +30,14 @@ function App() {
   const auth = useSelector((state) => state.auth);
   const inWidth = useSelector((state) => state.screenSize);
   useEffect(() => {
-    console.log(loc.pathname.match(/^\/[^\/]*/)[0]);
-    if (!auth && loc.pathname != "/year/login") {
-      navigate("/year/login", { replace: true, state: { redirect: true } });
+    console.log("in use effect");
+    //If we're unauthorized and not at login page, then redirect there
+    if (!auth.loggedIn && loc.pathname != "/year/login") {
+      navigate("/year/login", { replace: true });
+      //If we're on too big a screen go to a smaller one
     } else if (inWidth > 800 && loc.pathname.match(/^\/[^\/]*/)[0] == "/3day") {
       navigate("/week", { replace: true });
+      //If we're on too big a screen go to a bigger one
     } else if (
       inWidth <= 800 &&
       loc.pathname.match(/^\/[^\/]*/)[0] == "/week"
@@ -70,7 +77,7 @@ function App() {
               element={
                 <>
                   {<PopupOverlay />}
-                  <LoginPopup redirect={false} />
+                  <LoginPopup showExtraProp={!auth.loggedIn} />
                 </>
               }
             />
@@ -117,7 +124,7 @@ function App() {
               element={
                 <>
                   {<PopupOverlay />}
-                  <LoginPopup redirect={false} />
+                  <LoginPopup showExtraProp={!auth.loggedIn} />
                 </>
               }
             />
@@ -164,7 +171,7 @@ function App() {
               element={
                 <>
                   {<PopupOverlay />}
-                  <LoginPopup redirect={false} />
+                  <LoginPopup showExtraProp={!auth.loggedIn} />
                 </>
               }
             />

@@ -107,18 +107,22 @@
   transition: background-color 0.15s;
 }
 
-.login-button:hover,
-.login-button:focus {
+.login-button:not(.disabled):hover,
+.login-button:not(.disabled):focus {
   background-color: #28853c;
 }
 
-/*
-@media (max-width: 800px) {
-  .login-page {
-    height: 100%;
-    border-radius: 0px;
-  }
-}*/
+.disabled {
+  cursor: auto;
+  background-color: #a5a5a5;
+}
+
+.error-txt {
+  font-size: 15px;
+  padding-top: 2px;
+  color: rgba(255, 0, 0, 0.829);
+  text-align: center;
+}
 
 @media (max-width: 600px) {
   .login-title {
