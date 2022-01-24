@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 /*--- Actions Imports ---*/
 import { changeScreenSize } from "./redux/actions/screenSizeActions";
+import { loginCheck } from "./redux/actions/authActions";
 
 /*--- Component Imports ---*/
 import MultiDay from "./screens/MultiDay";
@@ -24,15 +25,28 @@ function App() {
   const dispatch = useDispatch();
   console.log("app rerender");
 
+  /*--- Check Cookie Status ---*/
+  /*We have a cookie, but does that cookie belong to an admin or a guest? We call
+  the login check action creator in order to find out*/
+  useEffect(() => {
+    if (auth.guestLoggedIn) {
+      dispatch(loginCheck());
+    }
+  }, []);
+
   /*--- Redirect if unauthorized or wrong screen size ---*/
   const navigate = useNavigate();
   const loc = useLocation();
   const auth = useSelector((state) => state.auth);
   const inWidth = useSelector((state) => state.screenSize);
   useEffect(() => {
-    console.log("in use effect");
     //If we're unauthorized and not at login page, then redirect there
-    if (!auth.loggedIn && loc.pathname != "/year/login") {
+    if (
+      !auth.guestLoggedIn &&
+      !auth.adminLoggedIn &&
+      loc.pathname != "/year/login"
+    ) {
+      console.log("before app navigate");
       navigate("/year/login", { replace: true });
       //If we're on too big a screen go to a smaller one
     } else if (inWidth > 800 && loc.pathname.match(/^\/[^\/]*/)[0] == "/3day") {
@@ -77,7 +91,9 @@ function App() {
               element={
                 <>
                   {<PopupOverlay />}
-                  <LoginPopup showExtraProp={!auth.loggedIn} />
+                  <LoginPopup
+                    showExtraProp={!auth.guestLoggedIn && !auth.adminLoggedIn}
+                  />
                 </>
               }
             />
@@ -124,7 +140,9 @@ function App() {
               element={
                 <>
                   {<PopupOverlay />}
-                  <LoginPopup showExtraProp={!auth.loggedIn} />
+                  <LoginPopup
+                    showExtraProp={!auth.guestLoggedIn && !auth.adminLoggedIn}
+                  />
                 </>
               }
             />
@@ -171,7 +189,9 @@ function App() {
               element={
                 <>
                   {<PopupOverlay />}
-                  <LoginPopup showExtraProp={!auth.loggedIn} />
+                  <LoginPopup
+                    showExtraProp={!auth.guestLoggedIn && !auth.adminLoggedIn}
+                  />
                 </>
               }
             />

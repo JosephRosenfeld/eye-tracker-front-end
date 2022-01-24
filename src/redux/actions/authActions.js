@@ -30,7 +30,8 @@ export const loginAdmin = (pin) => async (dispatch) => {
       type: ADMIN_LOGIN_ERROR,
       payload: {
         errorTxt:
-          /*Error.data ||*/ "Unable to connect to server, please try again later",
+          (error.response && error.response.data.errorTxt) ||
+          "Unable to connect to server, please try again later",
         isLoading: false,
       },
     });
@@ -66,6 +67,20 @@ export const removeAdminError = () => async (dispatch) => {
       type: ADMIN_REMOVE_ERROR,
       payload: {},
     });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const loginCheck = () => async (dispatch) => {
+  try {
+    const { data } = await api.loginCheck();
+    if (data.isAdmin) {
+      dispatch({
+        type: ADMIN_LOGIN_SUCCESS,
+        payload: {},
+      });
+    }
   } catch (e) {
     console.log(e);
   }

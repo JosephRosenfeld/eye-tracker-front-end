@@ -24,6 +24,7 @@ export const authReducer = (state = initState, action) => {
       return { ...state, adminIsLoading: true };
     case ADMIN_LOGIN_SUCCESS:
       return {
+        ...state,
         adminIsLoading: false,
         adminLoggedIn: true,
         adminErrorTxt: "",
@@ -42,6 +43,7 @@ export const authReducer = (state = initState, action) => {
       return { ...state, guestIsLoading: true };
     case GUEST_LOGIN_SUCCESS:
       return {
+        ...state,
         adminLoggedIn: false,
         adminErrorTxt: "",
         guestIsLoading: false,

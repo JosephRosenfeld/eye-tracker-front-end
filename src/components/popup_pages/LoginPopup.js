@@ -141,8 +141,6 @@ const LoginPopup = ({ showExtraProp }) => {
         : "",
     guest: guestSubmitted && !auth.guestIsLoading ? auth.guestErrorTxt : "",
   };
-  console.log(guestSubmitted, auth);
-  console.log(allErrors.current);
   //Varients obj to vary animation based on screen width
   const inWidth = useSelector((state) => state.screenSize);
   const variants = {
