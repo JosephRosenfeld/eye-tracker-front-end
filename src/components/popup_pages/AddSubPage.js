@@ -14,6 +14,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 import Select from "@mui/material/Select";
 
 const theme = createTheme({
@@ -25,9 +26,11 @@ const theme = createTheme({
 });
 
 const AddSubPage = () => {
+  const [type, setType] = useState("placeholder");
   const [time, setTime] = useState(new Date());
   const [dt, setDt] = useState(new Date());
-  const [type, setType] = useState("placeholder");
+  const [rating, setRating] = useState("placeholder");
+  const [desc, setDesc] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +44,11 @@ const AddSubPage = () => {
           <FormControl>
             <Select
               value={type}
-              onChange={(e) => setType(e.target.value)}
+              onChange={(e) => {
+                setType(e.target.value);
+                setRating("placeholder");
+                setDesc("");
+              }}
               renderValue={
                 type !== "placeholder"
                   ? undefined
@@ -79,10 +86,36 @@ const AddSubPage = () => {
               PopperProps={{ disablePortal: true }}
             />
           </LocalizationProvider>
+          {type == "Daily Review" && (
+            <FormControl>
+              <Select
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                renderValue={
+                  rating !== "placeholder"
+                    ? undefined
+                    : () => (
+                        <div className='select-placeholder'>
+                          Rating (with 5 being the best)
+                        </div>
+                      )
+                }
+              >
+                <MenuItem value='5'>5</MenuItem>
+                <MenuItem value='4'>4</MenuItem>
+                <MenuItem value='3'>3</MenuItem>
+                <MenuItem value='2'>2</MenuItem>
+                <MenuItem value='1'>1</MenuItem>
+              </Select>
+            </FormControl>
+          )}
           {(type == "Erosion" || type == "Note" || type == "Daily Review") && (
             <TextField
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
               multiline
               minRows={5}
+              inputProps={{ maxLength: 1000 }}
               placeholder='Add a detailed description of the log item'
             />
           )}

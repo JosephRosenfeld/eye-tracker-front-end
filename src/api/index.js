@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const url = "http://localhost:5000/api";
 
-export const loginAdmin = (pin) =>
-  axios.post(`${url}/auth/loginadmin`, { pin: pin }, { withCredentials: true });
+export const loginAdmin = (pwd) =>
+  axios.post(`${url}/auth/loginadmin`, { pwd: pwd }, { withCredentials: true });
 export const loginGuest = () =>
   axios.get(`${url}/auth/loginguest`, { withCredentials: true });
 export const loginCheck = () =>

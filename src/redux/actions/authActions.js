@@ -10,7 +10,7 @@ import {
 import * as api from "../../api/index";
 
 //Action creators
-export const loginAdmin = (pin) => async (dispatch) => {
+export const loginAdmin = (pwd) => async (dispatch) => {
   try {
     //Set loading before api call
     dispatch({
@@ -18,14 +18,14 @@ export const loginAdmin = (pin) => async (dispatch) => {
       payload: {},
     });
     //Make api call
-    const { data } = await api.loginAdmin(pin);
+    const { data } = await api.loginAdmin(pwd);
     //LOGIC FOR ERRORS (maybe? or does the api automatically throw an error?)
     dispatch({
       type: ADMIN_LOGIN_SUCCESS,
       payload: {},
     });
   } catch (error) {
-    //Catch should include invalid pins
+    //Catch should include invalid passwords
     dispatch({
       type: ADMIN_LOGIN_ERROR,
       payload: {

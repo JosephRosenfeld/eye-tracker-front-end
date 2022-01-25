@@ -42,7 +42,7 @@
 }
 
 .select-placeholder {
-  color: #29292954;
+  color: #29292967; /*mimics the mui placeholder color*/
   text-align: left;
   font-weight: 400;
 }

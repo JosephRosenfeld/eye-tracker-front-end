@@ -91,12 +91,12 @@ const LoginPopup = ({ showExtraProp }) => {
       setAdminSubmitted(true);
       setGuestSubmitted(false);
 
-      const errors = validate(pin);
+      const errors = validate(pwd);
       setClientSideErrors(errors);
       if (Object.keys(errors).length !== 0) {
         return; //Escape click handler so we don't dispatch to redux
       }
-      dispatch(loginAdmin(pin));
+      dispatch(loginAdmin(pwd));
       //Handle guest 'form' submission
     } else if (e.target.className.includes("guest-button")) {
       setAdminSubmitted(false);
@@ -106,11 +106,11 @@ const LoginPopup = ({ showExtraProp }) => {
     }
   };
 
-  /*--- Set PIN Form Field ---*/
-  const [pin, setPin] = useState("");
+  /*--- Set Password Form Field ---*/
+  const [pwd, setPwd] = useState("");
   const onChange = (e) => {
     let { value } = e.target;
-    setPin(value);
+    setPwd(value);
     //Reset to 'fresh' form if input was changed right after a server response
     if (auth.adminErrorTxt && adminSubmitted) {
       dispatch(removeAdminError());
@@ -119,15 +119,12 @@ const LoginPopup = ({ showExtraProp }) => {
     setClientSideErrors(validate(value));
   };
 
-  /*--- Client Side PIN Validation ---*/
-  const validate = (pin) => {
+  /*--- Client Side Password Validation ---*/
+  const validate = (pwd) => {
     const errors = {};
-    const fourNumsReg = /^\d\d\d\d$/;
 
-    if (pin == "") {
-      errors.pin = "This field is required for Admin login";
-    } else if (!fourNumsReg.test(pin)) {
-      errors.pin = "PIN must be exactly four digits";
+    if (pwd == "") {
+      errors.pwd = "This field is required for Admin login";
     }
     return errors;
   };
@@ -137,7 +134,7 @@ const LoginPopup = ({ showExtraProp }) => {
   allErrors.current = {
     admin:
       adminSubmitted && !auth.adminIsLoading
-        ? clientSideErrors.pin || auth.adminErrorTxt
+        ? clientSideErrors.pwd || auth.adminErrorTxt
         : "",
     guest: guestSubmitted && !auth.guestIsLoading ? auth.guestErrorTxt : "",
   };
@@ -198,7 +195,7 @@ const LoginPopup = ({ showExtraProp }) => {
             <ThemeProvider theme={theme}>
               <TextField
                 size={inWidth < 450 ? "small" : ""}
-                placeholder='Admin PIN  ex: 1234'
+                placeholder='Admin Password'
                 autoComplete='off'
                 onChange={onChange}
                 disabled={auth.adminIsLoading || auth.guestIsLoading}
@@ -218,7 +215,6 @@ const LoginPopup = ({ showExtraProp }) => {
               Login
             </button>
           </div>
-
           {showExtra && (
             <div className='guest-section'>
               <div className='login-section-title'>Guest:</div>
