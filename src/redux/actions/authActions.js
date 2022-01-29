@@ -8,6 +8,7 @@ import {
   ADMIN_REMOVE_ERROR,
 } from "../constants/constants";
 import * as api from "../../api/index";
+import Cookie from "js-cookie";
 
 //Action creators
 export const loginAdmin = (pwd) => async (dispatch) => {
@@ -19,7 +20,9 @@ export const loginAdmin = (pwd) => async (dispatch) => {
     });
     //Make api call
     const { data } = await api.loginAdmin(pwd);
-    //LOGIC FOR ERRORS (maybe? or does the api automatically throw an error?)
+    //Set cookie
+    Cookie.set("loggedIn", "true", { expires: 1 });
+
     dispatch({
       type: ADMIN_LOGIN_SUCCESS,
       payload: {},
@@ -44,8 +47,10 @@ export const loginGuest = () => async (dispatch) => {
       type: GUEST_LOGIN_LOADING,
       payload: {},
     });
+    //Api call
     const { data } = await api.loginGuest();
-    //LOGIC FOR ERRORS (maybe? or does the api automatically throw an error?)
+    //Set cookie
+    Cookie.set("loggedIn", "true", { expires: 1 });
     dispatch({
       type: GUEST_LOGIN_SUCCESS,
       payload: {},

@@ -14,8 +14,8 @@ const initialState = {
   adminLoggedIn: false,
   adminErrorTxt: "",
   guestIsLoading: false,
-  guestLoggedIn: !!Cookies.get("connect.sid"),
-  guestErrorTxt: false,
+  guestLoggedIn: !!Cookies.get("loggedIn"),
+  guestErrorTxt: "",
 };
 
 export const authReducer = (state = initialState, action) => {

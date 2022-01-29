@@ -148,6 +148,7 @@ height that overflows its parent, and the parent div needs to have overflow: aut
 
 /*--- AWS Configs ---*/
 Resource for EC2 config:
+  https://www.youtube.com/watch?v=Buh3GjHPmjo&t=0s&ab_channel=FelixYu
 
 Resource for EC2 errors:
   https://www.youtube.com/watch?v=sXZVkOH6hrA&t=444s&ab_channel=FelixYu
@@ -163,6 +164,7 @@ Remember, the ApplicationStop LifeCycle hook is pulled from the previously succe
 deployment as the appspec.yml and the scripts haven't even been downloaded yet
 
 Resource for RDS config:
+  https://www.youtube.com/watch?v=XDMgXZUfa10&t=926s&ab_channel=Saddam
 
 Resource for SSH into RDS: 
   https://medium.com/@deepspaceprog/how-to-connect-via-ssh-to-an-amazon-rds-instance-running-postgresql-5e7661cdd37e
