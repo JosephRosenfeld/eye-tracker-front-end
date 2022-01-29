@@ -44,27 +44,27 @@ don't have control of where to direct them, and if they try to access the wrong 
 for their screen size, we need to have some logic to take that request and route them
 elsewhere. We accomplish this using React Router DOM's navigate object.*/
 
-/*This works well but we still need logic to determine where we should direct someone
+This works well but we still need logic to determine where we should direct someone
 internally, to one page or another, based on specific factors (for our purposes that factor is
 screen size but it could be other factors). Well we could rely on React Router Dom's
 logic for this and just always link to one page. Assuming our redirect logic is standard for 
 this component as it is in the App level routes then it should redirect just fine.
   - Although relying on app level redirecting would create a single source of truth for
-  our redirect logic, it ends up reducing SEO, and still initially renders the wrong page.*/
+  our redirect logic, it ends up reducing SEO, and still initially renders the wrong page.
 
-/*The solution would be to conditionally redirect based on some logic or state that
+The solution would be to conditionally redirect based on some logic or state that
 the component is privy to. In our case that piece of state would be the screen-size.
 This is the reason why we store our screen size in our Global State, so 
 we can access it from any component that might need to make a conditional redirect based
-on that information.*/
+on that information.
 
-/*All in all, I'm still not 100% sure if url redirects based on screen size is best
+All in all, I'm still not 100% sure if url redirects based on screen size is best
 practice and what other implications this could have (SEO, crawling, UI/UX, etc.). However,
-it's a clever solution for now and I will continue to research this going forward.*/
+it's a clever solution for now and I will continue to research this going forward.
 
 
 /*--- Multi Day Header Scrollbar Offset ---*/
-/*Essentially, the main challenge with this one is the fact that different browsers
+Essentially, the main challenge with this one is the fact that different browsers
 have different scrollbar width's. The main content in the Multi Day page has a scrollbar,
 therefore its content is offset to the left by that scrollbar's width. The header however
 doesn't have a scrollbar, so even once we've offset the header by the timescale width 
@@ -119,24 +119,104 @@ up the cosmetic lines on the timescale component with the borders in the Multi D
 All in all a fun little trick I discovered that could certainly be handy in the future!*/
 
 
+/*--- Client Side API Call Structuring ---*/
+So a big oversimplification in this app vs. what it would look like if it were truly
+designed for scale is the lack of pagination. Although we are sending large quantities
+of data via JSON serialization from the server, it all gets compressed using a compression
+package and our expected delivery payload of about two years of data is only about 7kb
+which from what I can tell is a pretty acceptable payload size by API standards.
+
+In a production level application you would most likely query for say a given week, or 
+maybe a few weeks so that you don't have to send out an api request on every single
+view window scroll or change, but the main point is that you wouldn't be requesting for
+ALL the relevant data to a user on the initial app render.
+
+Something thats interesting to note is that I was initially going to perform pagination 
+as the JSON data was in the order of megabytes in size, however, after using the
+3rd party compression packages that size got reduced by over 99.97% which is pretty crazy
+when you think about it.*/
+
 /*--- General ---*/
-//Framer Motion was the easiest React animations library that I found.
-//Resource for animating routes with Framer Motion:
-//  -https://www.youtube.com/watch?v=Imyi2V7WgGU&ab_channel=TheNetNinja
+Framer Motion was the easiest React animations library that I found.
+
+Resource for animating routes with Framer Motion:
+  -https://www.youtube.com/watch?v=Imyi2V7WgGU&ab_channel=TheNetNinja
 
 /*--- Scrolling ---*/
-/*In order to scroll, the CHILD DIV (NOT THE GRANDCHILD DIV) needs to have a set 
-height that overflows its parent, and the parent div needs to have overflow: auto*/
+In order to scroll, the CHILD DIV (NOT THE GRANDCHILD DIV) needs to have a set 
+height that overflows its parent, and the parent div needs to have overflow: auto
 
+/*--- AWS Configs ---*/
+Resource for EC2 config:
 
+Resource for EC2 errors:
+  https://www.youtube.com/watch?v=sXZVkOH6hrA&t=444s&ab_channel=FelixYu
+  commands for erasing code deploy and reinstalling:
+    sudo yum erase codedeploy-agent 
+    cd /opt 
+    sudo rm -r codedeploy-agent
+    cd
+    sudo rm -r express-app
+    sudo ./install auto
+  
+Remember, the ApplicationStop LifeCycle hook is pulled from the previously successful
+deployment as the appspec.yml and the scripts haven't even been downloaded yet
+
+Resource for RDS config:
+
+Resource for SSH into RDS: 
+  https://medium.com/@deepspaceprog/how-to-connect-via-ssh-to-an-amazon-rds-instance-running-postgresql-5e7661cdd37e
+  commands:
+    psql -h hostname -p portNumber -U userName dbName -W
+  ^Assumes proper inbound rules and security groups
+
+Resource for using ngrok which enables a free SSL cert for my app (although on each restart
+it'll point me to a new url):
+  https://stackoverflow.com/questions/19926385/amazon-ec2-ssl
+  https://gist.github.com/leobrines/949f28e743154dac43a9a0d3c5747982
+
+Installing ngrok commands:
+  wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+  unzip ngrok-stable-linux-amd64.zip
+  rm ngrok-stable-linux-amd64.zip
+  chmod 755 ngrok
+  mv ngrok /usr/bin/
+
+Configuring ngrok command:
+  ngrok authtoken <Auth token>
+
+Running ngrok command:
+  ngrok http 5000
+
+Installing dependenceis for env vars config
+  #install jq
+  sudo yum install jq
+
+  #install aws cli
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  rm -rf awscliv2.zip
+  sudo ./aws/install
+  rm -rf aws
+
+Resource for utilizing metadata tags as env vars:
+  https://stackoverflow.com/questions/28643573/how-to-set-an-environment-variable-in-amazon-ec2
+  https://github.com/12moons/ec2-tags-env
+
+Its important for the Name tag to be persistent on your Code Deploy group and your EC2
+Instance as it
 
 /*--- Areas for Improvement ---*/
-//Should have architected out my routes more completely before beginning the project
-//Have better knowledge of when my components should or shouldn't be rerendering
-//I should have utilized my semantic html elements instead of overrelying on divs and spans
-//Set all el's to border-sizing: border-box from the beginning
-/*Big area for improvement is that a styles library or framework should have been 
-used here. Ex: 
+Should have architected out my routes more completely before beginning the project
+
+Have better knowledge of when my components should or shouldn't be rerendering
+
+I should have utilized my semantic html elements instead of overrelying on divs and spans
+
+Set all el's to border-sizing: border-box from the beginning
+
+/*Big area for improvement is that a styles library or framework should have been used here.
+Ex: 
  -Bootstrap
  -Material UI
  -Tailwind CSS
@@ -161,6 +241,12 @@ or a drop down menu, or even a time picker input.
 Things like a drop down menu are easy enough for me to do, but when on the 
 same form I'm using an extermal library for the time picker (Flatpickr.js)
 the styling can look a bit inconsistent*/
+
+Another big area of improvement would be the security in our hosting. In order to make
+things easier we basically set everything to public. Our inbound and outbound rules on the
+EC2 and RDS servers is not very safe and we allow SSH from anywhere.
+
+
 
 
 

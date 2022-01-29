@@ -197,6 +197,7 @@ const LoginPopup = ({ showExtraProp }) => {
                 size={inWidth < 450 ? "small" : ""}
                 placeholder='Admin Password'
                 autoComplete='off'
+                type='password'
                 onChange={onChange}
                 disabled={auth.adminIsLoading || auth.guestIsLoading}
               />

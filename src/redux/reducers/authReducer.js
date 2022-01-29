@@ -9,7 +9,7 @@ import {
 } from "../constants/constants";
 import Cookies from "js-cookie";
 
-const initState = {
+const initialState = {
   adminIsLoading: false,
   adminLoggedIn: false,
   adminErrorTxt: "",
@@ -18,7 +18,7 @@ const initState = {
   guestErrorTxt: false,
 };
 
-export const authReducer = (state = initState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN_LOGIN_LOADING:
       return { ...state, adminIsLoading: true };
