@@ -7,18 +7,23 @@ export const url =
 
 /*--- Auth Endpoints ---*/
 export const loginAdmin = (pwd) =>
-  axios.post(`${url}/auth/loginadmin`, { pwd: pwd }, { withCredentials: true });
+  axios.post(
+    `${url}/api/auth/loginadmin`,
+    { pwd: pwd },
+    { withCredentials: true }
+  );
 export const loginGuest = () =>
-  axios.get(`${url}/auth/loginguest`, { withCredentials: true });
+  axios.get(`${url}/api/auth/loginguest`, { withCredentials: true });
 export const loginCheck = () =>
-  axios.get(`${url}/auth/logincheck`, { withCredentials: true });
+  axios.get(`${url}/api/auth/logincheck`, { withCredentials: true });
 
 /*--- Log Endpoints ---*/
 export const getLogs = (pwd) =>
-  axios.get(`${url}/data/logs`, { withCredentials: true });
+  axios.get(`${url}/api/data/logs`, { withCredentials: true });
 
+/* Examples
 export const createPost = (newPost) => axios.post(url, newPost);
 export const updatePost = (id, updatedPost) =>
   axios.patch(`${url}/${id}`, updatedPost);
 export const deletePost = (id) => axios.delete(`${url}/${id}`);
-export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);
+export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);*/
