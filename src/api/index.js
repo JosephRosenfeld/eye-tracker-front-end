@@ -1,6 +1,9 @@
 import axios from "axios";
 
-export const url = "http://localhost:5000";
+export const url =
+  process.env.NODE_ENV == "production"
+    ? process.env.REACT_APP_PROD_API_URI
+    : process.env.REACT_APP_DEV_API_URI;
 
 /*--- Auth Endpoints ---*/
 export const loginAdmin = (pwd) =>
