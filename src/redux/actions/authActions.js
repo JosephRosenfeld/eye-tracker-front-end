@@ -7,6 +7,8 @@ import {
   GUEST_LOGIN_ERROR,
   ADMIN_REMOVE_ERROR,
 } from "../constants/constants";
+import { getLogs } from "./logsActions";
+import { getSettings } from "./settingsActions";
 import * as api from "../../api/index";
 import Cookie from "js-cookie";
 
@@ -18,15 +20,21 @@ export const loginAdmin = (pwd) => async (dispatch) => {
       type: ADMIN_LOGIN_LOADING,
       payload: {},
     });
+
     //Make api call
     const { data } = await api.loginAdmin(pwd);
     //Set cookie
-    Cookie.set("loggedIn", "true", { expires: 1 });
+    console.log();
+    Cookie.set("loggedIn", "true", { expires: new Date(data.expires) });
 
     dispatch({
       type: ADMIN_LOGIN_SUCCESS,
       payload: {},
     });
+
+    //Now that the login was a success lets get all the data we need
+    dispatch(getLogs());
+    dispatch(getSettings());
   } catch (error) {
     //Catch should include invalid passwords
     dispatch({
@@ -35,7 +43,6 @@ export const loginAdmin = (pwd) => async (dispatch) => {
         errorTxt:
           (error.response && error.response.data.errorTxt) ||
           "Unable to connect to server, please try again later",
-        isLoading: false,
       },
     });
   }
@@ -47,20 +54,28 @@ export const loginGuest = () => async (dispatch) => {
       type: GUEST_LOGIN_LOADING,
       payload: {},
     });
+
     //Api call
     const { data } = await api.loginGuest();
     //Set cookie
-    Cookie.set("loggedIn", "true", { expires: 1 });
+    Cookie.set("loggedIn", "true", { expires: new Date(data.expires) });
+
     dispatch({
       type: GUEST_LOGIN_SUCCESS,
       payload: {},
     });
+
+    console.log("before getLogs");
+
+    //Now that the login was a success lets get all the data we need
+    dispatch(getLogs());
+    console.log("after getLogs before getSettings");
+    dispatch(getSettings());
   } catch (error) {
     dispatch({
       type: GUEST_LOGIN_ERROR,
       payload: {
         errorTxt: "Unable to connect to server, please try again later",
-        isLoading: false,
       },
     });
   }

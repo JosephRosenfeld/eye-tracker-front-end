@@ -9,6 +9,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 /*--- Actions Imports ---*/
 import { changeScreenSize } from "./redux/actions/screenSizeActions";
 import { loginCheck } from "./redux/actions/authActions";
+import { getLogs } from "./redux/actions/logsActions";
+import { getSettings } from "./redux/actions/settingsActions";
 
 /*--- Component Imports ---*/
 import MultiDay from "./screens/MultiDay";
@@ -31,6 +33,15 @@ function App() {
   useEffect(() => {
     if (auth.guestLoggedIn) {
       dispatch(loginCheck());
+    }
+  }, []);
+
+  /*--- Pull in Data ---*/
+  //(if logged in)
+  useEffect(() => {
+    if (auth.guestLoggedIn || auth.adminLoggedIn) {
+      dispatch(getSettings());
+      dispatch(getLogs());
     }
   }, []);
 

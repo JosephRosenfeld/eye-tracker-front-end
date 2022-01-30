@@ -105,6 +105,11 @@ const LoginPopup = ({ showExtraProp }) => {
       dispatch(loginGuest());
     }
   };
+  /*
+  useEffect(() => {
+    window.addEventListener("resize", resizeEvListener);
+    return () => window.removeEventListener("resize", resizeEvListener);
+  }, []);*/
 
   /*--- Set Password Form Field ---*/
   const [pwd, setPwd] = useState("");
@@ -207,7 +212,7 @@ const LoginPopup = ({ showExtraProp }) => {
               className={`login-button admin-button ${
                 (auth.adminIsLoading || auth.guestIsLoading) && "disabled"
               }`}
-              type='button'
+              type='submit'
               onClick={(e) => {
                 handleClick(e);
               }}

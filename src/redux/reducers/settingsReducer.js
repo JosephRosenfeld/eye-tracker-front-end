@@ -1,6 +1,11 @@
-import { UDPATE_SETTINGS } from "../constants/constants";
+import {
+  SETTINGS_LOADING,
+  GET_SETTINGS_SUCCESS,
+  UPDATE_SETTINGS_SUCCESS,
+  SETTINGS_ERROR,
+} from "../constants/constants";
 
-const initialState = {
+const initialSettings = {
   systane_abbreviation: "S",
   muro_abbreviation: "M",
   muro_ointment_abbreviation: "O",
@@ -19,10 +24,30 @@ const initialState = {
   daily_review5_color: "#42b7ff",
 };
 
-export const viewDtReducer = (state = initialState, action) => {
+const initialState = {
+  settingsIsLoading: false,
+  settings: initialSettings,
+  settingsErrorTxt: "",
+};
+
+export const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_SETTINGS:
+    case SETTINGS_LOADING:
+      return { ...state, settingsIsLoading: true };
+    case GET_SETTINGS_SUCCESS:
+      return {
+        settingsIsLoading: false,
+        settings: action.payload,
+        settingsErrorTxt: "",
+      };
+    case UPDATE_SETTINGS_SUCCESS:
       return action.payload;
+    case SETTINGS_ERROR:
+      return {
+        ...state,
+        settingsIsLoading: false,
+        settingsErrorTxt: action.payload.errorTxt,
+      };
     default:
       return state;
   }
