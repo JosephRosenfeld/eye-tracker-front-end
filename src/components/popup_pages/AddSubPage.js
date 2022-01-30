@@ -4,7 +4,11 @@ import "./AddSubPage.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 /*--- Hooks imports ---*/
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+
+/*--- Actions Imports ---*/
+import { createLog } from "../../redux/actions/logsActions";
 
 /*--- Components Imports ---*/
 import TextField from "@mui/material/TextField";
@@ -14,8 +18,8 @@ import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
 import Select from "@mui/material/Select";
+import AnimateHeight from "react-animate-height";
 
 const theme = createTheme({
   palette: {
@@ -26,18 +30,35 @@ const theme = createTheme({
 });
 
 const AddSubPage = () => {
+  console.log("rerender");
   const [type, setType] = useState("placeholder");
-  const [time, setTime] = useState(new Date());
-  const [dt, setDt] = useState(new Date());
+  const [time, setTime] = useState(new Date().toISOString());
+  const [dt, setDt] = useState(new Date().toISOString());
   const [rating, setRating] = useState("placeholder");
   const [desc, setDesc] = useState("");
+  console.log(dt);
+  console.log(time);
 
+  const dispatch = useDispatch();
+  const containerRef = useRef();
+  console.log(containerRef);
   const onSubmit = (e) => {
     e.preventDefault();
   };
 
+  /*--- Scroll Up When Poppers Closed ---*/
+  const onClose = () => {
+    console.log("onClose");
+    if (type != "Erosion" && type != "Note" && type != "Daily Review") {
+      containerRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className='add-item-container'>
+    <div ref={containerRef} className='add-item-container'>
       <form className='add-item-content' onSubmit={onSubmit}>
         <div className='add-item-title'>Item Info</div>
         <ThemeProvider theme={theme}>
@@ -72,18 +93,22 @@ const AddSubPage = () => {
             <DatePicker
               value={dt}
               onChange={(newVal) => {
-                setDt(newVal);
+                setDt(new Date(newVal._d).toISOString());
               }}
               showTodayButton={true}
               renderInput={(params) => <TextField {...params} />}
               PopperProps={{ disablePortal: true }}
+              onClose={onClose}
             />
             <TimePicker
               value={time}
-              onChange={(newVal) => setTime(newVal)}
+              onChange={(newVal) => setTime(new Date(newVal._d).toISOString())}
               renderInput={(params) => <TextField {...params} />}
               showTodayButton={true}
-              PopperProps={{ disablePortal: true }}
+              PopperProps={{
+                disablePortal: true,
+              }}
+              onClose={onClose}
             />
           </LocalizationProvider>
           {type == "Daily Review" && (

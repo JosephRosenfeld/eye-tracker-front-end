@@ -20,6 +20,7 @@ import MobileHeader from "./components/mobile/MobileHeader";
 import PopupPage from "./components/popup_pages/PopupPage";
 import PopupOverlay from "./components/popup_pages/PopupOverlay";
 import LoginPopup from "./components/popup_pages/LoginPopup";
+import TestingComp from "./components/TestingComp";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -91,6 +92,7 @@ function App() {
       {inWidth > 800 ? <Header /> : <MobileHeader />}
       <AnimatePresence exitBeforeEnter>
         <Routes location={loc} key={loc.key}>
+          <Route path='testing' element={<TestingComp />} />
           <Route path='/' element={<Navigate to='/year' replace />} />
           <Route path='/3day' element={<MultiDay />}>
             <Route path='add' element={<PopupPage title='Add Item' />} />
