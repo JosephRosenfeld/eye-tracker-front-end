@@ -4,69 +4,38 @@ import "./SettingsSubPage.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-/*--- Components Imports ---*/
-import PopupButtons from "./PopupButtons";
-import NumberFormat from "react-number-format";
+/*--- Actions Imports ---*/
+import { updateSettings } from "../../redux/actions/settingsActions";
 
 const SettingsSubPage = () => {
   const [editable, setEditable] = useState(false);
   const [formErrors, setFormErrors] = useState({});
-  const [haveSaved, setHaveSaved] = useState(false); //Always show errors after first save
+  const [haveSaved, setHaveSaved] = useState(false);
 
-  /*Get all data from redux data store*/
-  const testUserInfoObj = {
-    email: "josephgrosenfeld@gmail.com",
-    phone: "5406865236",
-  };
-  const testSettingsAbbrevObj = {
-    systane: "S",
-    muro: "M",
-    muro_ointment: "O",
-    erosion: "E",
-    note: "N",
-    daily_review: "D",
-  };
-  const testSettingsColorsObj = {
-    systane: "#48ea69",
-    muro: "#fda744",
-    muro_ointment: "#6991ec",
-    erosion: "#ffec1f",
-    note: "#a14545",
-    daily_review1: "#ff0f0f",
-    daily_review2: "#ea6cdf",
-    daily_review3: "#9146dd",
-    daily_review4: "#5045e8",
-    daily_review5: "#42b7ff",
-  };
+  const dispatch = useDispatch();
 
-  /*Load values into local component level state*/
-  //should have default vals of what was in the redux store
-  const [abrevSettings, setAbrevSettings] = useState(testSettingsAbbrevObj);
-  const [colorSettings, setColorSettings] = useState(testSettingsColorsObj);
-  const [userSettings, setUserSettings] = useState(testUserInfoObj);
+  //Get cur settings data from redux data store
+  const savedSettings = useSelector((state) => {
+    state.settings_obj;
+  });
+
+  //Initialize form data with redux settings
+  const [formSettings, setFormSettings] = useState(savedSettings);
 
   //Assumes a single layer obj for state and the setState func
-  const onChange = (e, state, setState) => {
+  const onChange = (e) => {
     let { name, value, type } = e.target;
-
-    setState({ ...state, [name]: value });
-    /*If we/ve already tried to submit and the edit was on a text input then
-      update the form errors shown*/
-    if (type == "text" && haveSaved) {
-      if (name == "email" || name == "phone") {
-        setFormErrors(validate(abrevSettings, { ...state, [name]: value }));
-      } else {
-        setFormErrors(validate({ ...state, [name]: value }, userSettings));
-      }
+    setFormSettings({ ...formSettings, [name]: value });
+    /*If we've already hit submit, display errors as we change*/
+    if (haveSaved) {
+      setFormErrors(validate({ ...state, [name]: value }));
     }
   };
 
   const reset = () => {
-    setAbrevSettings(testSettingsAbbrevObj);
-    setColorSettings(testSettingsColorsObj);
-    setUserSettings(testUserInfoObj);
+    setFormSettings(savedSettings);
     setHaveSaved(false);
-    setFormErrors(validate(testSettingsAbbrevObj, testUserInfoObj));
+    setFormErrors(validate(savedSettings));
   };
 
   const onSubmit = (e) => {
@@ -74,7 +43,7 @@ const SettingsSubPage = () => {
     e.preventDefault();
     setHaveSaved(true);
     //update error state in order to rerender form
-    const errors = validate(abrevSettings, userSettings);
+    const errors = validate(abrevSettings);
     setFormErrors(errors);
 
     /*If there aren't errors, set editable to false, set have saved to false,
@@ -82,31 +51,33 @@ const SettingsSubPage = () => {
     if (Object.keys(errors).length === 0) {
       setEditable(false);
       setHaveSaved(false);
-      //update redux store
-    } else {
+      dispatch(updateSettings(formSettings));
     }
-
-    //update global state store / reducers
-    //(which I assume also updates the database/local storage?)
   };
 
-  const validate = (abrevObj, userObj) => {
+  const validate = (settingsObj) => {
     const errors = {};
     //defining validation regex's
     const singleCharReg = /^.$/;
     const letterReg = /^[a-zA-Z]$/;
+    //regex for abrev items
+    const abrevReg = /abbreviation$/;
     //basic email regex (not fully accurate)
-    const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const whiteSpaceReg = /^\s*$/;
+    // const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const whiteSpaceReg = /^\s*$/;
 
-    //Abrev validating
-    for (const [key, value] of Object.entries(abrevObj)) {
+    //Validate all keys
+    for (const [key, value] of Object.entries(settingsObj)) {
+      //validations for only abbreviation fields
+      if (abrevReg.test(key)) {
+        !singleCharReg.test(value)) {
+          errors[key] = "Must be a single character";
+        } else if (!letterReg.test(value)) {
+          errors[key] = "Must be a letter";
+        }
+      }
       if (value == "") {
         errors[key] = "This field is required";
-      } else if (!singleCharReg.test(value)) {
-        errors[key] = "Must be a single character";
-      } else if (!letterReg.test(value)) {
-        errors[key] = "Must be a letter";
       }
     }
 
@@ -127,8 +98,8 @@ const SettingsSubPage = () => {
             <input
               type='color'
               name='systane'
-              value={colorSettings.systane}
-              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+              value={formSettings.systane}
+              onChange={onChange}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -137,8 +108,8 @@ const SettingsSubPage = () => {
             <input
               type='color'
               name='muro'
-              value={colorSettings.muro}
-              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+              value={formSettings.muro}
+              onChange={onChange}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -147,8 +118,8 @@ const SettingsSubPage = () => {
             <input
               type='color'
               name='muro_ointment'
-              value={colorSettings.muro_ointment}
-              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+              value={formSettings.muro_ointment}
+              onChange={onChange}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -157,8 +128,8 @@ const SettingsSubPage = () => {
             <input
               type='color'
               name='erosion'
-              value={colorSettings.erosion}
-              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+              value={formSettings.erosion}
+              onChange={onChange}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -167,8 +138,8 @@ const SettingsSubPage = () => {
             <input
               type='color'
               name='note'
-              value={colorSettings.note}
-              onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+              value={formSettings.note}
+              onChange={onChange}
               disabled={editable ? "" : "disabled"}
             ></input>
           </div>
@@ -179,8 +150,8 @@ const SettingsSubPage = () => {
               <input
                 type='color'
                 name='daily_review1'
-                value={colorSettings.daily_review1}
-                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+                value={formSettings.daily_review1}
+                onChange={onChange}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -189,8 +160,8 @@ const SettingsSubPage = () => {
               <input
                 type='color'
                 name='daily_review2'
-                value={colorSettings.daily_review2}
-                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+                value={formSettings.daily_review2}
+                onChange={onChange}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -199,8 +170,8 @@ const SettingsSubPage = () => {
               <input
                 type='color'
                 name='daily_review3'
-                value={colorSettings.daily_review3}
-                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+                value={formSettings.daily_review3}
+                onChange={onChange}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -209,8 +180,8 @@ const SettingsSubPage = () => {
               <input
                 type='color'
                 name='daily_review4'
-                value={colorSettings.daily_review4}
-                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+                value={formSettings.daily_review4}
+                onChange={onChange}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -219,8 +190,8 @@ const SettingsSubPage = () => {
               <input
                 type='color'
                 name='daily_review5'
-                value={colorSettings.daily_review5}
-                onChange={(e) => onChange(e, colorSettings, setColorSettings)}
+                value={formSettings.daily_review5}
+                onChange={onChange}
                 disabled={editable ? "" : "disabled"}
               ></input>
             </div>
@@ -233,8 +204,8 @@ const SettingsSubPage = () => {
             <input
               type='text'
               name='systane'
-              value={abrevSettings.systane}
-              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
+              value={formSettings.systane}
+              onChange={onChange}
               readOnly={editable ? "" : "readonly"}
               data-error={formErrors.systane}
             ></input>
@@ -245,8 +216,8 @@ const SettingsSubPage = () => {
             <input
               type='text'
               name='muro'
-              value={abrevSettings.muro}
-              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
+              value={formSettings.muro}
+              onChange={onChange}
               readOnly={editable ? "" : "readonly"}
               data-error={formErrors.muro}
             ></input>
@@ -257,8 +228,8 @@ const SettingsSubPage = () => {
             <input
               type='text'
               name='muro_ointment'
-              value={abrevSettings.muro_ointment}
-              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
+              value={formSettings.muro_ointment_abbreviation}
+              onChange={onChange}
               readOnly={editable ? "" : "readonly"}
               data-error={formErrors.muro_ointment}
             ></input>
@@ -269,8 +240,8 @@ const SettingsSubPage = () => {
             <input
               type='text'
               name='erosion'
-              value={abrevSettings.erosion}
-              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
+              value={formSettings.erosion}
+              onChange={onChange}
               readOnly={editable ? "" : "readonly"}
               data-error={formErrors.erosion}
             ></input>
@@ -281,8 +252,8 @@ const SettingsSubPage = () => {
             <input
               type='text'
               name='note'
-              value={abrevSettings.note}
-              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
+              value={formSettings.note}
+              onChange={onChange}
               readOnly={editable ? "" : "readonly"}
               data-error={formErrors.note}
             ></input>
@@ -293,8 +264,8 @@ const SettingsSubPage = () => {
             <input
               type='text'
               name='daily_review'
-              value={abrevSettings.daily_review}
-              onChange={(e) => onChange(e, abrevSettings, setAbrevSettings)}
+              value={formSettings.daily_review}
+              onChange={onChange}
               readOnly={editable ? "" : "readonly"}
               data-error={formErrors.daily_review}
             ></input>
@@ -344,7 +315,7 @@ const SettingsSubPage = () => {
               type='text'
               name='email'
               value={userSettings.email}
-              onChange={(e) => onChange(e, userSettings, setUserSettings)}
+              onChange={onChange}
               readOnly={editable ? "" : "readonly"}
               data-error={formErrors.email}
             ></input>
@@ -357,7 +328,7 @@ const SettingsSubPage = () => {
               type='text'
               name='phone'
               value={userSettings.phone}
-              onChange={(e) => onChange(e, userSettings, setUserSettings)}
+              onChange={onChange}
               readOnly={editable ? "" : "readonly"}
             />
           </div> 

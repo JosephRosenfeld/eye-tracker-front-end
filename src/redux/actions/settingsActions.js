@@ -35,4 +35,4 @@ export const getSettings = () => async (dispatch) => {
   }
 };
 
-export const updateSettings = () => async (dispatch) => {};
+export const updateSettings = (settings_obj) => async (dispatch) => {};
