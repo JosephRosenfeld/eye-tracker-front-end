@@ -1,0 +1,13 @@
+.container {
+  background-color: cadetblue;
+}
+
+.child1,
+.child2 {
+  padding: 50px;
+}
+
+button {
+  height: 20px;
+  width: max-content;
+}

@@ -10,10 +10,9 @@
   top: var(--popup-header-height);
   right: 0;
   width: 100%;
-  padding: 40px 10px 130px;
+  padding: 40px 10px 200px;
+  /*Always set to scroll so that inputs don't snap back and forth*/
   overflow-y: scroll;
-
-  /*Transition on height*/
 }
 
 .add-item-content {
@@ -38,6 +37,22 @@
   text-align: left;
 }
 
+.add-item-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  width: 100%;
+}
+
+.add-item-input-group > div {
+  flex-grow: 1;
+}
+
+.error-txt {
+  align-self: flex-start;
+}
+
 .MuiSelect-select {
   text-align: left;
 }
@@ -46,13 +61,6 @@
   color: #29292967; /*mimics the mui placeholder color*/
   text-align: left;
   font-weight: 400;
-}
-
-.add-item-input-group {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  margin: 10px 0px;
 }
 
 .add-item-button {
@@ -72,6 +80,12 @@
 .add-item-button:hover,
 .add-item-button:focus {
   background-color: #28853c;
+}
+
+.submission-txt {
+  margin-top: 20px;
+  font-size: 20px;
+  color: var(--logo-color);
 }
 
 @media (max-width: 600px) {
