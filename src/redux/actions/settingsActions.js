@@ -17,7 +17,6 @@ export const getSettings = () => async (dispatch) => {
     console.log("in get settings");
     //Make api call
     const { data } = await api.getSettings();
-    console.log(data);
 
     dispatch({
       type: GET_SETTINGS_SUCCESS,
@@ -35,4 +34,31 @@ export const getSettings = () => async (dispatch) => {
   }
 };
 
-export const updateSettings = (settings_obj) => async (dispatch) => {};
+export const updateSettings = (settings_obj) => async (dispatch) => {
+  try {
+    //Set loading before api call
+    dispatch({
+      type: SETTINGS_LOADING,
+    });
+
+    console.log("in update settings");
+    //Make api call
+    console.log(settings_obj);
+    const { data } = await api.updateSettings(settings_obj);
+    console.log(data);
+
+    dispatch({
+      type: UPDATE_SETTINGS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SETTINGS_ERROR,
+      payload: {
+        errorTxt:
+          (error.response && error.response.data.errorTxt) ||
+          "Unable to connect to server, please try again later",
+      },
+    });
+  }
+};

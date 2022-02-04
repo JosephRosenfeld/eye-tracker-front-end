@@ -33,23 +33,15 @@ export const updateLog = (log) => {
   });
 };
 export const deleteLog = () => {
-  return axios.get(`${url}/api/data/logs/:id`, { withCredentials: true });
+  return axios.delete(`${url}/api/data/logs/:id`, { withCredentials: true });
 };
 
 /*--- Setting Endpoints ---*/
 export const getSettings = () => {
   return axios.get(`${url}/api/data/settings`, { withCredentials: true });
 };
-export const updateSettings = (updatedSettings) => {
-  return axios.patch(`${url}/api/data/settings`, updatedSettings, {
+export const updateSettings = (settings_obj) => {
+  return axios.patch(`${url}/api/data/settings`, settings_obj, {
     withCredentials: true,
   });
 };
-
-/*---Examples */
-/*
-export const createPost = (newPost) => axios.post(url, newPost);
-export const updatePost = (id, updatedPost) =>
-  axios.patch(`${url}/${id}`, updatedPost);
-export const deletePost = (id) => axios.delete(`${url}/${id}`);
-export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);*/

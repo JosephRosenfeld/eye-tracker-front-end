@@ -35,6 +35,11 @@ export const settingsReducer = (state = initialState, action) => {
     case SETTINGS_LOADING:
       return { ...state, settingsIsLoading: true };
     case GET_SETTINGS_SUCCESS:
+      return {
+        settingsIsLoading: false,
+        settings_obj: action.payload,
+        settingsErrorTxt: "",
+      };
     case UPDATE_SETTINGS_SUCCESS:
       return {
         settingsIsLoading: false,
