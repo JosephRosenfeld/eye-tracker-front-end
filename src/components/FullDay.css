@@ -1,9 +1,17 @@
+.full-day,
+.full-day *,
+.full-day *:before,
+.full-day *:after {
+  box-sizing: border-box;
+}
+
 .full-day {
+  position: relative;
   flex-grow: 1; /*Makes each day expand evenly to take up space*/
 
   display: flex;
   flex-direction: column;
-  height: calc(var(--multi-hr-height) * 25);
+  height: calc(var(--multi-hr-height) * 24.5);
 }
 
 .full-day-hr {
@@ -14,8 +22,10 @@
   position: relative;
 }
 
+/*Selects the 2nd element (because of the multi-header cosmetic border
+child) and the 26th element*/
 .full-day-hr:nth-child(2),
-.full-day-hr:last-child {
+.full-day-hr:nth-child(27) {
   /*show 15mins of prev day & next day as a sort of buffer*/
   flex-grow: 0.25;
 }
@@ -42,11 +52,4 @@
   width: 12px;
   height: 1px;
   background: var(--header-border-color);
-}
-
-/*Increasing 'buffer' hour at the bottom to accomodate for plus button*/
-@media (max-width: 800px) {
-  .full-day-hr:last-child {
-    flex-grow: 1;
-  }
 }

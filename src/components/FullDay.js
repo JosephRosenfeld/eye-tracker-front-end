@@ -3,6 +3,9 @@ import "./FullDay.css";
 /*--- Hooks Imports ---*/
 import { useSelector } from "react-redux";
 
+/*--- Components Imports ---*/
+import Log from "./Log";
+
 const FullDay = ({ year, month, day, first }) => {
   /*Pull our logs for the day*/
   const logs = useSelector((state) =>
@@ -27,6 +30,9 @@ const FullDay = ({ year, month, day, first }) => {
     return i;
   });
 
+  //# per row
+  const rowCount = 5;
+
   return (
     <div
       className='full-day'
@@ -48,6 +54,10 @@ const FullDay = ({ year, month, day, first }) => {
           data-key={i}
         ></div>
       ))}
+      {logs.map((log, i) => {
+        let pos = (i % rowCount) / rowCount;
+        return <Log log={log} pos={pos} key={log.log_id} z={i} />;
+      })}
     </div>
   );
 };
