@@ -64,8 +64,8 @@ const AddSubPage = () => {
       dispatch(
         createLog({
           type: newLog.type == "placeholder" ? null : newLog.type,
-          time: newLog.time.toISOString(),
-          dt: newLog.dt.toISOString(),
+          time: newLog.time.format(),
+          dt: newLog.dt.format(),
           rating: newLog.rating == "placeholder" ? null : newLog.rating,
           desc: newLog.desc,
         })

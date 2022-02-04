@@ -1,15 +1,68 @@
 import "./Month.css";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 /*--- Importing Actions ---*/
 import { changeDt } from "../redux/actions/viewDateActions";
+import { drawerClasses } from "@mui/material";
 
 const Month = ({ m }) => {
+  console.log("month render");
   /*--- Extracting and Destructuring Global State Vars --- */
   const inWidth = useSelector((state) => state.screenSize);
   const viewDt = useSelector((state) => state.viewDt);
   const year = viewDt.year;
+  const erosionColor = useSelector(
+    (state) => state.settings.settings_obj.erosion_color
+  );
+  const dailyRColor = useSelector((state) => {
+    return {
+      r1: state.settings.settings_obj.daily_review1_color,
+      r2: state.settings.settings_obj.daily_review2_color,
+      r3: state.settings.settings_obj.daily_review3_color,
+      r4: state.settings.settings_obj.daily_review4_color,
+      r5: state.settings.settings_obj.daily_review5_color,
+    };
+  });
+
+  //Get logs for erosions and filters for this month
+  const logsArr = useSelector((state) =>
+    state.logs.logs.filter((log) => {
+      let logDt = new Date(log.log_datetime);
+      return (
+        (log.log_type_name == "Erosion" ||
+          log.log_type_name == "Daily Review") &&
+        logDt.getFullYear() == year &&
+        logDt.getMonth() == m
+      );
+    })
+  );
+  //Sort in increasing datetime order (used to get the latest daily review later on)
+  logsArr.sort((logA, logB) => {
+    let logATime = new Date(logA.log_datetime).getTime();
+    let logBTime = new Date(logB.log_datetime).getTime();
+    return logATime - logBTime;
+  });
+  /*Create a map with keys for O(1) lookup time later on when assigning custom
+  data attributes*/
+  const logsMap = {};
+  for (let i = 0; i < logsArr.length; i++) {
+    let log = logsArr[i];
+    //Create local time date string for key
+    let dtKey = new Date(log.log_datetime).toLocaleDateString();
+    //If logDt key doesn't exist, set it
+    if (!logsMap[dtKey]) {
+      logsMap[dtKey] = {};
+    }
+    //Set erosion to true if we have one or else, previous erosion value
+    logsMap[dtKey].erosion =
+      log.log_type_name == "Erosion" ? true : logsMap[dtKey].erosion;
+    /*Set rating (since it's an ordered array by log date, we can be certain that the 
+    latest daily review log item will be used)*/
+    logsMap[dtKey].rating =
+      log.log_type_name == "Daily Review" ? log.rating : logsMap[dtKey].rating;
+  }
 
   /*--- Double Click Handler ---*/
   const navigate = useNavigate();
@@ -44,12 +97,16 @@ const Month = ({ m }) => {
         pointerDt.getDate() >= 10
           ? pointerDt.getDate()
           : "0" + pointerDt.getDate(),
+      erosion: logsMap[pointerDt.toLocaleDateString()]?.erosion,
+      rating: logsMap[pointerDt.toLocaleDateString()]?.rating,
     };
     pointerDt.setDate(pointerDt.getDate() + 1);
   }
 
+  /*We pass color settings to css through the html as vars on the 
+  'month-container' element*/
   return (
-    <div className='month-container'>
+    <div className='month-container' style={{ "--tooltip-color": "red" }}>
       <div className='month-name'>{monthTxt}</div>
       <div className='month-days'>
         <div className='month-week-day'>
@@ -85,7 +142,13 @@ const Month = ({ m }) => {
             className={`month-day ${
               el.month == m ? "cur-month-day" : "neighbor-month-day"
             }`}
-            date={`${el.year}-${el.month}-${el.day}`}
+            style={{
+              color: el.rating && dailyRColor["r" + el.rating],
+              borderColor: el.erosion && erosionColor,
+            }}
+            data-date={`${el.year}-${el.month}-${el.day}`}
+            data-erosion={el.erosion}
+            data-rating={el.rating}
             key={`${el.year}-${el.month}-${el.day}`}
             onDoubleClick={() => goToMulti(el)}
           >

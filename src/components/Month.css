@@ -79,6 +79,16 @@
   border-radius: 2px;
 }
 
+/*Erosion and Daily Review styles*/
+.month-day[data-rating] {
+  font-weight: bold;
+}
+
+.month-day[data-erosion] {
+  border-width: 1px;
+  border-style: solid;
+}
+
 /*Specifying hover vs. active pseudo classes on touch screen devices or laptops/desktops
 (using screen size of 800px as a proxy)*/
 @media (min-width: 801px) {

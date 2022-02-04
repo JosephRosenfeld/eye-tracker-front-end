@@ -15,7 +15,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 /*--- Action Imports ---*/
 
-const MultiDay = ({ newViewDt = null, redirect = false }) => {
+const MultiDay = ({ newViewDt = null }) => {
   /*We use a ref here so that if view changes to some non multi-day val (like if we
     switch to a year view) then it doesn't rerender the wrong amount of days right
     before switching to the new view */

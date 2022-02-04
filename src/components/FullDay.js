@@ -1,39 +1,54 @@
 import "./FullDay.css";
 
+/*--- Hooks Imports ---*/
+import { useSelector } from "react-redux";
+
 const FullDay = ({ year, month, day, first }) => {
-  const tempArr = new Array(26).fill(0);
-  const timeArr = tempArr.map((el, i) => {
+  /*Pull our logs for the day*/
+  const logs = useSelector((state) =>
+    state.logs.logs.filter((log) => {
+      let logDt = new Date(log.log_datetime);
+      return (
+        logDt.getFullYear() == year &&
+        logDt.getMonth() == month &&
+        logDt.getDate() == day
+      );
+    })
+  );
+  //Sort in increasing datetime order
+  logs.sort((logA, logB) => {
+    let logATime = new Date(logA.log_datetime).getTime();
+    let logBTime = new Date(logB.log_datetime).getTime();
+    return logATime - logBTime;
+  });
+
+  //Create an arr to loop thru and create grid cells
+  const timeArr = new Array(26).fill(0).map((el, i) => {
     return i;
   });
 
   return (
-    <>
+    <div
+      className='full-day'
+      data-date={`${year}-${month >= 10 ? month : "0" + month}-${
+        day >= 10 ? day : "0" + day
+      }`}
+    >
+      {/*Below div creates the multi-header vertical divider line*/}
       <div
-        className='full-day'
-        date={`${year}-${month >= 10 ? month : "0" + month}-${
-          day >= 10 ? day : "0" + day
-        }`}
-      >
-        {/*the first full day shouldn't have that upper border in the header*/}
+        className='multi-header-border'
+        key='cosmetic-child'
+        data-key='cosmetic-child'
+      ></div>
+      {/*the first full day should have side borders for the times*/}
+      {timeArr.map((el, i) => (
         <div
-          className={
-            !first
-              ? "multi-header-border"
-              : "multi-header-border first-day-border"
-          }
-          key='cosmetic-child'
-          data-key='cosmetic-child'
+          className={`full-day-hr ${first ? "first-full-day-hr" : ""}`}
+          key={i}
+          data-key={i}
         ></div>
-        {/*the first full day should also have side borders for the times*/}
-        {timeArr.map((el, i) => (
-          <div
-            className={`full-day-hr ${first ? "first-full-day-hr" : ""}`}
-            key={i}
-            data-key={i}
-          ></div>
-        ))}
-      </div>
-    </>
+      ))}
+    </div>
   );
 };
 
