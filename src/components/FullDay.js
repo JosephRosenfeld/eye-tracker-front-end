@@ -4,7 +4,7 @@ import "./FullDay.css";
 import { useSelector } from "react-redux";
 
 /*--- Components Imports ---*/
-import Log from "./Log";
+import Log from "./Log.js";
 
 const FullDay = ({ year, month, day, first }) => {
   /*Pull our logs for the day*/
