@@ -52,6 +52,7 @@ function App() {
   const auth = useSelector((state) => state.auth);
   const inWidth = useSelector((state) => state.screenSize);
   useEffect(() => {
+    console.log("Use effect for navigation is running");
     //If we're unauthorized and not at login page, then redirect there
     if (
       !auth.guestLoggedIn &&

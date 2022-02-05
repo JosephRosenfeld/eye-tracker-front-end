@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const url =
+const url =
   process.env.NODE_ENV == "production"
     ? process.env.REACT_APP_PROD_API_URI
     : process.env.REACT_APP_DEV_API_URI;
@@ -22,7 +22,7 @@ export const loginCheck = () => {
 
 /*--- Log Endpoints ---*/
 export const getLogs = () => {
-  return axios.get(`${url}/api/data/logs`, { withCredentials: true });
+  return axios.get(`${url}/api/data/logs/`, { withCredentials: true });
 };
 export const createLog = (log) => {
   return axios.post(`${url}/api/data/logs`, log, { withCredentials: true });
