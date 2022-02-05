@@ -52,7 +52,7 @@ const Log = ({ log, pos, z }) => {
     >
       {/*Needed to make three seperate components in order to get the borders to line up.
       hr element has a z-index greater than the log-label element. log-label has the border.
-      and on top of both of those is the log-label-txt*/}
+      and on top of both of those is the log-label-txt */}
       <hr
         className='log-line'
         style={{
