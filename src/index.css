@@ -1,7 +1,7 @@
 :root {
   --text-color: rgb(66, 66, 66);
   --logo-color: #34af4e;
-  --global-header-height: 71.96px;
+  --global-header-height: 65px;
   --header-border-color: #dadce0;
   --multi-header-height: 67.78px;
   --multi-hr-height: 60px;
@@ -11,13 +11,13 @@
 
 @media (max-width: 800px) {
   :root {
-    --global-header-height: 68px;
+    --global-header-height: 61px;
   }
 }
 
 @media (max-width: 600px) {
   :root {
-    --global-header-height: 57px;
+    --global-header-height: 56px;
     --multi-header-height: 59.48px;
     --popup-header-height: 65.5px;
   }
@@ -25,7 +25,7 @@
 
 @media (max-width: 450px) {
   :root {
-    --global-header-height: 61.5px;
+    --global-header-height: 60.5px;
     --popup-header-height: 65px;
   }
 }

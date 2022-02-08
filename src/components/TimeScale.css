@@ -1,3 +1,10 @@
+.time-scale,
+.time-scale *,
+.time-scale *:before,
+.time-scale *:after {
+  box-sizing: border-box;
+}
+
 .time-scale {
   display: flex;
   flex-direction: column;
@@ -42,11 +49,4 @@
   right: 15px;
   content: attr(time);
   transform: translateY(-50%);
-}
-
-/*Increasing 'buffer' hour at the bottom to accomodate for plus button*/
-@media (max-width: 800px) {
-  .time-scale-hr:last-child {
-    flex-grow: 1;
-  }
 }

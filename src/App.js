@@ -1,5 +1,4 @@
 /*--- Utilities Imports ---*/
-import Cookies from "js-cookie";
 
 /*--- Hooks Imports ---*/
 import { useEffect } from "react";
@@ -20,7 +19,6 @@ import MobileHeader from "./components/mobile/MobileHeader";
 import PopupPage from "./components/popup_pages/PopupPage";
 import PopupOverlay from "./components/popup_pages/PopupOverlay";
 import LoginPopup from "./components/popup_pages/LoginPopup";
-import TestingComp from "./components/TestingComp";
 import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -63,15 +61,18 @@ function App() {
     ) {
       //If we're unauthorized and not at login page, redirect to login
       navigate("/year/login", { replace: true });
-    } else if (loc.pathname == "/") {
+    } else if (loc.pathname === "/") {
       //If we're at the root, redirect to yearly
       navigate("/year", { replace: true });
-    } else if (inWidth > 800 && loc.pathname.match(/^\/[^\/]*/)[0] == "/3day") {
+    } else if (
+      inWidth > 800 &&
+      loc.pathname.match(/^\/[^\/]*/)[0] === "/3day"
+    ) {
       //If we're on the 3day with a big screen, redirect to weekly
       navigate("/week", { replace: true });
     } else if (
       inWidth <= 800 &&
-      loc.pathname.match(/^\/[^\/]*/)[0] == "/week"
+      loc.pathname.match(/^\/[^\/]*/)[0] === "/week"
     ) {
       //If we're on the weekly with a small screen, redirect to 3day
       navigate("/3day", { replace: true });
@@ -98,16 +99,52 @@ function App() {
       {inWidth > 800 ? <Header /> : <MobileHeader />}
       <AnimatePresence exitBeforeEnter>
         <Routes location={loc} key={loc.key}>
-          <Route path='testing' element={<TestingComp />} />
-          <Route path='/3day' element={<MultiDay />}>
-            <Route path='add' element={<PopupPage title='Add Item' />} />
+          <Route path='/year' element={<Yearly />}>
+            <Route
+              path='add'
+              element={
+                <>
+                  {inWidth > 800 && <PopupOverlay />}
+                  <PopupPage title='Add Item' />
+                </>
+              }
+            />
             <Route
               path='edit/:logId'
-              element={<PopupPage title='Edit Item' />}
+              element={
+                <>
+                  <PopupOverlay />
+                  <PopupPage title='Edit Item' />
+                </>
+              }
             />
-            {/* <Route path='reminders' element={<PopupPage title='Reminders' />} /> */}
-            <Route path='info' element={<PopupPage title='Information' />} />
-            <Route path='settings' element={<PopupPage title='Settings' />} />
+            {/* <Route
+              path='Reminders'
+              element={
+                <>
+                  {inWidth > 800 && <PopupOverlay />}
+                  <PopupPage title='Reminders' />
+                </>
+              }
+            /> */}
+            <Route
+              path='info'
+              element={
+                <>
+                  {inWidth > 800 && <PopupOverlay />}
+                  <PopupPage title='Information' />
+                </>
+              }
+            />
+            <Route
+              path='settings'
+              element={
+                <>
+                  {inWidth > 800 && <PopupOverlay />}
+                  <PopupPage title='Settings' />
+                </>
+              }
+            />
             <Route
               path='login'
               element={
@@ -178,52 +215,15 @@ function App() {
               }
             />
           </Route>
-          <Route path='/year' element={<Yearly />}>
-            <Route
-              path='add'
-              element={
-                <>
-                  {inWidth > 800 && <PopupOverlay />}
-                  <PopupPage title='Add Item' />
-                </>
-              }
-            />
+          <Route path='/3day' element={<MultiDay />}>
+            <Route path='add' element={<PopupPage title='Add Item' />} />
             <Route
               path='edit/:logId'
-              element={
-                <>
-                  <PopupOverlay />
-                  <PopupPage title='Edit Item' />
-                </>
-              }
+              element={<PopupPage title='Edit Item' />}
             />
-            {/* <Route
-              path='Reminders'
-              element={
-                <>
-                  {inWidth > 800 && <PopupOverlay />}
-                  <PopupPage title='Reminders' />
-                </>
-              }
-            /> */}
-            <Route
-              path='info'
-              element={
-                <>
-                  {inWidth > 800 && <PopupOverlay />}
-                  <PopupPage title='Information' />
-                </>
-              }
-            />
-            <Route
-              path='settings'
-              element={
-                <>
-                  {inWidth > 800 && <PopupOverlay />}
-                  <PopupPage title='Settings' />
-                </>
-              }
-            />
+            {/* <Route path='reminders' element={<PopupPage title='Reminders' />} /> */}
+            <Route path='info' element={<PopupPage title='Information' />} />
+            <Route path='settings' element={<PopupPage title='Settings' />} />
             <Route
               path='login'
               element={

@@ -30,7 +30,7 @@ const FullDay = ({ year, month, day, first }) => {
     return i;
   });
 
-  //# per row
+  //# of logs per row
   const rowCount = 5;
 
   return (
