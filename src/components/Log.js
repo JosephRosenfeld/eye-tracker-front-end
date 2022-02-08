@@ -1,6 +1,10 @@
 import "./Log.css";
 
+/*--- Hooks Imports ---*/
 import { useSelector } from "react-redux";
+
+/*--- Component Imports ---*/
+import { Link } from "react-router-dom";
 
 const Log = ({ log, pos, z }) => {
   /*Extract Settings*/
@@ -62,23 +66,25 @@ const Log = ({ log, pos, z }) => {
           zIndex: z * 3 + 1,
         }}
       ></hr>
-      <div
-        className='log-label'
-        style={{
-          backgroundColor: typeMap.colors[colorKey],
-          left: pos * 100 + "%",
-          zIndex: z * 3,
-        }}
-      ></div>
-      <div
-        className='log-label-txt'
-        style={{
-          left: pos * 100 + "%",
-          zIndex: z * 3 + 2,
-        }}
-      >
-        {typeMap.abrevs[log.log_type_name]}
-      </div>
+      <Link to={`edit/${log.log_id}`}>
+        <div
+          className='log-label'
+          style={{
+            backgroundColor: typeMap.colors[colorKey],
+            left: pos * 100 + "%",
+            zIndex: z * 3,
+          }}
+        ></div>
+        <div
+          className='log-label-txt'
+          style={{
+            left: pos * 100 + "%",
+            zIndex: z * 3 + 2,
+          }}
+        >
+          {typeMap.abrevs[log.log_type_name]}
+        </div>
+      </Link>
     </div>
   );
 };

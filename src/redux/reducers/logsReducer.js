@@ -26,9 +26,19 @@ export const logsReducer = (state = initialState, action) => {
         logsErrorTxt: "",
       };
     case UPDATE_LOG_SUCCESS:
-      return {};
+      return {
+        logsIsLoading: false,
+        logs: state.logs.map((log) =>
+          log.log_id === action.payload.log_id ? action.payload : log
+        ),
+        logsErrorTxt: "",
+      };
     case DELETE_LOG_SUCCESS:
-      return {};
+      return {
+        logsIsLoading: false,
+        logs: state.logs.filter((log) => log.log_id !== action.payload),
+        logsErrorTxt: "",
+      };
     case LOGS_ERROR:
       return {
         ...state,

@@ -27,13 +27,15 @@ export const getLogs = () => {
 export const createLog = (log) => {
   return axios.post(`${url}/api/data/logs`, log, { withCredentials: true });
 };
-export const updateLog = (log) => {
-  return axios.patch(`${url}/api/data/logs/:id`, log, {
+export const updateLog = (logId, log) => {
+  return axios.patch(`${url}/api/data/logs/${logId}`, log, {
     withCredentials: true,
   });
 };
-export const deleteLog = () => {
-  return axios.delete(`${url}/api/data/logs/:id`, { withCredentials: true });
+export const deleteLog = (logId) => {
+  return axios.delete(`${url}/api/data/logs/${logId}`, {
+    withCredentials: true,
+  });
 };
 
 /*--- Setting Endpoints ---*/

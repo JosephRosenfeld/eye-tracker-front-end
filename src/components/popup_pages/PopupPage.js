@@ -9,6 +9,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 /*--- Components Imports ---*/
 import AddSubPage from "./AddSubPage";
+import EditSubPage from "./EditSubPage";
 import RemindersSubPage from "./RemindersSubPage";
 import InfoSubPage from "./InfoSubPage";
 import SettingsSubPage from "./SettingsSubPage";
@@ -57,6 +58,8 @@ const PopupPage = ({ title }) => {
         </div>
         {title == "Add Item" ? (
           <AddSubPage />
+        ) : title == "Edit Item" ? (
+          <EditSubPage />
         ) : title == "Reminders" ? (
           <RemindersSubPage />
         ) : title == "Information" ? (

@@ -61,5 +61,57 @@ export const createLog = (newLog) => async (dispatch) => {
     });
   }
 };
-export const updateLog = () => async (dispatch) => {};
-export const deleteLog = () => async (dispatch) => {};
+
+export const updateLog = (logId, updatedLog) => async (dispatch) => {
+  try {
+    //Set loading before api call
+    dispatch({
+      type: LOGS_LOADING,
+    });
+
+    //Make api call
+    const { data } = await api.updateLog(logId, updatedLog);
+    console.log(data);
+
+    dispatch({
+      type: UPDATE_LOG_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: {
+        errorTxt:
+          (error.response && error.response.data.errorTxt) ||
+          "Unable to connect to server, please try again later",
+      },
+    });
+  }
+};
+
+export const deleteLog = (logId) => async (dispatch) => {
+  try {
+    //Set loading before api call
+    dispatch({
+      type: LOGS_LOADING,
+    });
+
+    //Make api call
+    const { data } = await api.deleteLog(logId);
+    console.log(data);
+
+    dispatch({
+      type: DELETE_LOG_SUCCESS,
+      payload: logId,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: {
+        errorTxt:
+          (error.response && error.response.data.errorTxt) ||
+          "Unable to connect to server, please try again later",
+      },
+    });
+  }
+};

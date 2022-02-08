@@ -19,7 +19,14 @@ const SettingsSubPage = () => {
   const savedSettings = useSelector((state) => state.settings.settings_obj);
 
   useEffect(() => {
-    console.log("use effect ran");
+    /*Although changes in the globaly stored settings will cause this component to 
+    rerender, that rerender won't change the local state variables to reflect the new
+    settings. Like for example on initial render the default settings state from the 
+    settings reducer might be loaded in and then once the api call for the updated 
+    settings is complete, then the redux state for settings changes value OUTSIDE of this
+    form and we want the form to update with that completed api call. We accomplish this
+    with this useEffect and including our 'savedSettings' global state in the dependency
+    array.*/
     setFormSettings(savedSettings);
   }, [savedSettings]);
 

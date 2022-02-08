@@ -21,7 +21,7 @@ import PopupPage from "./components/popup_pages/PopupPage";
 import PopupOverlay from "./components/popup_pages/PopupOverlay";
 import LoginPopup from "./components/popup_pages/LoginPopup";
 import TestingComp from "./components/TestingComp";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 function App() {
@@ -46,29 +46,34 @@ function App() {
     }
   }, []);
 
-  /*--- Redirect if unauthorized or wrong screen size ---*/
+  /*--- Redirect logic for: ---*/
+  // - Authentication
+  // - Screen size routing
+  // - Root page routing
   const navigate = useNavigate();
   const loc = useLocation();
   const auth = useSelector((state) => state.auth);
   const inWidth = useSelector((state) => state.screenSize);
   useEffect(() => {
     console.log("Use effect for navigation is running");
-    //If we're unauthorized and not at login page, then redirect there
     if (
       !auth.guestLoggedIn &&
       !auth.adminLoggedIn &&
       loc.pathname != "/year/login"
     ) {
-      console.log("before app navigate");
+      //If we're unauthorized and not at login page, redirect to login
       navigate("/year/login", { replace: true });
-      //If we're on too big a screen go to a smaller one
+    } else if (loc.pathname == "/") {
+      //If we're at the root, redirect to yearly
+      navigate("/year", { replace: true });
     } else if (inWidth > 800 && loc.pathname.match(/^\/[^\/]*/)[0] == "/3day") {
+      //If we're on the 3day with a big screen, redirect to weekly
       navigate("/week", { replace: true });
-      //If we're on too big a screen go to a bigger one
     } else if (
       inWidth <= 800 &&
       loc.pathname.match(/^\/[^\/]*/)[0] == "/week"
     ) {
+      //If we're on the weekly with a small screen, redirect to 3day
       navigate("/3day", { replace: true });
     }
   });
@@ -94,9 +99,12 @@ function App() {
       <AnimatePresence exitBeforeEnter>
         <Routes location={loc} key={loc.key}>
           <Route path='testing' element={<TestingComp />} />
-          <Route path='/' element={<Navigate to='/year' replace />} />
           <Route path='/3day' element={<MultiDay />}>
             <Route path='add' element={<PopupPage title='Add Item' />} />
+            <Route
+              path='edit/:logId'
+              element={<PopupPage title='Edit Item' />}
+            />
             {/* <Route path='reminders' element={<PopupPage title='Reminders' />} /> */}
             <Route path='info' element={<PopupPage title='Information' />} />
             <Route path='settings' element={<PopupPage title='Settings' />} />
@@ -119,6 +127,15 @@ function App() {
                 <>
                   <PopupOverlay />
                   <PopupPage title='Add Item' />
+                </>
+              }
+            />
+            <Route
+              path='edit/:logId'
+              element={
+                <>
+                  <PopupOverlay />
+                  <PopupPage title='Edit Item' />
                 </>
               }
             />
@@ -168,6 +185,15 @@ function App() {
                 <>
                   {inWidth > 800 && <PopupOverlay />}
                   <PopupPage title='Add Item' />
+                </>
+              }
+            />
+            <Route
+              path='edit/:logId'
+              element={
+                <>
+                  <PopupOverlay />
+                  <PopupPage title='Edit Item' />
                 </>
               }
             />

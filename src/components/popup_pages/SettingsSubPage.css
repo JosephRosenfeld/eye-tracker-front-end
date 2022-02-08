@@ -27,14 +27,14 @@
   color: var(--text-color);
 }
 
-.form-group {
+.settings-container .form-group {
   display: grid;
   row-gap: 10px;
   column-gap: 20px;
   width: 100%;
 }
 
-.form-group-title {
+.settings-container .form-group-title {
   grid-column: 1 / -1;
 
   padding: 10px;
@@ -44,26 +44,25 @@
   color: rgba(66, 66, 66, 0.7);
 }
 
-.optional-txt {
+.settings-container .optional-txt {
   padding-top: 4px;
   font-size: 15px;
 }
 
-.form-group-abbreviations {
+.settings-container .form-group-abbreviations {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.form-group-colors {
+.settings-container .form-group-colors {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.form-group-user-info {
+.settings-container .form-group-user-info {
   grid-template-columns: repeat(1, 1fr);
 }
 
 .abrev-item,
-.color-item,
-.user-item {
+.color-item {
   align-self: stretch;
   display: flex;
   flex-direction: column;
@@ -72,14 +71,14 @@
   padding: 10px 5px 3px;
 }
 
-.form-group label {
+.settings-container .form-group label {
   align-self: flex-start;
   padding-bottom: 2px;
   font-size: 13px;
   font-weight: bold;
 }
 
-.form-group input {
+.settings-container .form-group input {
   box-sizing: border-box;
   width: 100%;
   border: 1px solid var(--header-border-color);
@@ -88,53 +87,49 @@
   outline: none;
 }
 
-.form-group input:active,
-.form-group input:focus {
+.settings-container .form-group input:active,
+.settings-container .form-group input:focus {
   border: 1px solid var(--logo-color);
 }
 
-.form-group input[type="color"] {
+.settings-container .form-group input[type="color"] {
   height: 2em;
   background-color: rgba(180, 180, 180, 0.1);
 }
 
-.form-group input[type="text"] {
+.settings-container .form-group input[type="text"] {
   background-color: rgba(180, 180, 180, 0.014);
 }
 
-.abrev-item input {
+.settings-container .abrev-item input {
   padding: 2px 5px;
 }
 
-.user-item input {
+.settings-container .user-item input {
   padding: 4px 5px;
 }
 
-.form-group input[disabled],
-.form-group input[readonly] {
+.settings-container .form-group input[disabled],
+.settings-container .form-group input[readonly] {
   background-color: rgba(180, 180, 180, 0.14);
   border: 1px solid var(--header-border-color);
   cursor: auto;
 }
 
-.form-group input[disabled][type="color"] {
+.settings-container .form-group input[disabled][type="color"] {
   background-color: rgba(180, 180, 180, 01);
 }
 
-.form-group input[type="text"][data-error] {
+.settings-container .form-group input[type="text"][data-error] {
   border: 1px solid rgba(255, 0, 0, 0.829);
 }
 
-.abrev-item .error-txt,
-.user-item .error-txt {
+.settings-container .abrev-item .error-txt,
+.settings-container .user-item .error-txt {
   font-size: 13px;
   padding-top: 2px;
   color: rgba(255, 0, 0, 0.829);
   text-align: left;
-}
-
-.user-item input {
-  font-size: 20px;
 }
 
 /*--- Styling Daily Review Section ---*/
@@ -161,18 +156,17 @@
 }
 
 /*--- Buttons ---*/
-
-.settings-button-group {
+.settings-container .settings-button-group {
   align-self: stretch;
   display: flex;
   gap: 40px;
   justify-content: flex-end;
 }
 
-.settings-button {
+.settings-container .settings-button {
   width: max-content;
   margin-top: 10px;
-  padding: 11px 40px 11px;
+  padding: 11px 30px 11px;
   color: white;
   background-color: var(--logo-color);
   border: none;
@@ -183,22 +177,22 @@
   transition: background-color 0.15s;
 }
 
-.settings-button:hover,
-.settings-button:focus {
+.settings-container .settings-button:hover,
+.settings-container .settings-button:focus {
   background-color: #28853c;
 }
 
-.cancel-button {
+.settings-container .cancel-button {
   background-color: #a5a5a5;
 }
 
-.cancel-button:hover,
-.cancel-button:focus {
+.settings-container .cancel-button:hover,
+.settings-container .cancel-button:focus {
   background-color: #838383;
 }
 
 @media (max-width: 700px) {
-  .form-group-colors {
+  .settings-container .form-group-colors {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -210,12 +204,12 @@
 }
 
 @media (max-width: 450px) {
-  .form-group {
+  .settings-container .form-group {
     column-gap: 15px;
     row-gap: 5px;
   }
 
-  .form-group-title {
+  .settings-container .form-group-title {
     font-size: 22px;
     padding: 5px;
   }
@@ -223,20 +217,21 @@
   .settings-content {
     row-gap: 60px;
   }
-  .form-group-abbreviations {
+
+  .settings-container .form-group-abbreviations {
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .form-group-colors {
+  .settings-container .form-group-colors {
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .settings-button-group {
+  .settings-container .settings-button-group {
     flex-direction: column;
     gap: 10px;
   }
 
-  .settings-button-group > * {
+  .settings-container .settings-button-group > * {
     width: 100%;
     padding: 12px 30px 12px;
   }

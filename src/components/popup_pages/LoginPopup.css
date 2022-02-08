@@ -60,18 +60,18 @@
   padding: 20px;
 }
 
-.cheeky-section {
+.login-page-container .cheeky-section {
   font-size: 18px;
   color: var(--text-color);
 }
 
-.cheeky-q {
+.login-page-container .cheeky-q {
   padding: 10px 0px 15px;
   font-size: 1.22em;
   font-weight: bold;
 }
 
-.conditional-br {
+.login-page-container .conditional-br {
   display: none;
 }
 
@@ -112,12 +112,12 @@
   background-color: #28853c;
 }
 
-.disabled {
+.login-page-container .disabled {
   cursor: auto;
   background-color: #a5a5a5;
 }
 
-.error-txt {
+.login-page-container .error-txt {
   font-size: 15px;
   padding-top: 2px;
   color: rgba(255, 0, 0, 0.829);
@@ -133,7 +133,7 @@
     font-size: 23px;
   }
 
-  .cheeky-section {
+  .login-page-container .cheeky-section {
     font-size: 17px;
   }
 }
@@ -147,7 +147,7 @@
     font-size: 20px;
   }
 
-  .cheeky-section {
+  .login-page-container .cheeky-section {
     font-size: 15px;
   }
 

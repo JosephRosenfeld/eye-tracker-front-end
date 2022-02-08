@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import moment from "moment";
 
 /*--- Hooks imports ---*/
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 /*--- Actions Imports ---*/
@@ -31,6 +31,8 @@ const theme = createTheme({
 
 const AddSubPage = () => {
   console.log("rerender");
+
+  /*--- Initialization and Configuration ---*/
   const [editable, setEditable] = useState(true);
   const [formErrors, setFormErrors] = useState({});
   const [newLog, setNewLog] = useState({
@@ -58,7 +60,6 @@ const AddSubPage = () => {
     and update redux store*/
     if (Object.keys(errors).length === 0) {
       setEditable(false);
-      setHaveSubmitted(false);
 
       //update redux store
       dispatch(
@@ -140,23 +141,23 @@ const AddSubPage = () => {
 
   /*--- Scroll Up When Poppers Closed ---*/
   //Makes the UX feel less snappy
-  const containerRef = useRef();
-  const onClose = () => {
-    // console.log("onClose");
-    // if (
-    //   newLog.type != "Erosion" &&
-    //   newLog.type != "Note" &&
-    //   newLog.type != "Daily Review"
-    // ) {
-    //   containerRef.current.scrollTo({
-    //     top: 0,
-    //     behavior: "smooth",
-    //   });
-    // }
-  };
+  // const containerRef = useRef();
+  // const onClose = () => {
+  //   console.log("onClose");
+  //   if (
+  //     newLog.type != "Erosion" &&
+  //     newLog.type != "Note" &&
+  //     newLog.type != "Daily Review"
+  //   ) {
+  //     containerRef.current.scrollTo({
+  //       top: 0,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   return (
-    <div ref={containerRef} className='add-item-container'>
+    <div className='add-item-container'>
       <form className='add-item-content' onSubmit={onSubmit}>
         <div className='add-item-title'>Item Info</div>
         <ThemeProvider theme={theme}>
