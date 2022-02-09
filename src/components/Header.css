@@ -24,7 +24,19 @@
   align-items: center;
 }
 
-.header-left > * {
+/*Add 10px padding to els that aren't the brand home link*/
+.header-left > *:not(.brand-home-link) {
+  padding: 10px;
+}
+
+.brand-home-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.brand-home-link > * {
   padding: 10px;
 }
 

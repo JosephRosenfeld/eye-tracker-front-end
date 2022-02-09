@@ -51,9 +51,9 @@ const LoginPopup = ({ showExtraProp }) => {
 
   /*--- Handle Navigation after Login Click ---*/
   /*Essentially since redux updates are asynchronous (and its better to handle
-    them as such), we decided to wait until the global state update triggers
+    them as such), we decided to wait until the global auth state update triggers
     a rerender, at such time this useEffect will be triggered and then based on
-    some internal logic, will decide if we need to reroute*/
+    some internal logic, will decide if we need to reroute.*/
   useEffect(() => {
     //Handle admin form
     if (adminSubmitted) {
@@ -69,8 +69,8 @@ const LoginPopup = ({ showExtraProp }) => {
     } else if (guestSubmitted) {
       if (!haveNavigated && auth.guestLoggedIn) {
         setHaveNavigated(true);
-        console.log("before navigate");
-        navigate(view, {
+        console.log("before navigate", view);
+        navigate(`${view}/info`, {
           replace: true,
         });
       }

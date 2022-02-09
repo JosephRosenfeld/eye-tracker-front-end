@@ -43,8 +43,11 @@ const Header = () => {
   return (
     <header className='header'>
       <div className='header-left'>
-        <img className='logo' src='/assets/eye_tracker_logo.png'></img>
-        <div className='site-title'>Eye Tracker</div>
+        {/* Using an a tag here because we want the page to refresh on click */}
+        <a href='/year' className='brand-home-link'>
+          <img className='logo' src='/assets/eye_tracker_logo.png'></img>
+          <div className='site-title'>Eye Tracker</div>
+        </a>
         <DateViewer dateVisible={true} view={view} />
       </div>
       <div className='header-right'>
