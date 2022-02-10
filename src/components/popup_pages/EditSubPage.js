@@ -183,7 +183,7 @@ const EditSubPage = () => {
   return (
     <div className='edit-item-container'>
       <form className='edit-item-content' onSubmit={onSubmit}>
-        {!haveDeleted && (
+        {!haveDeleted && savedLog && (
           <>
             <div className='edit-item-title'>Item Info</div>
             <ThemeProvider theme={theme}>
@@ -294,7 +294,7 @@ const EditSubPage = () => {
             </ThemeProvider>
           </>
         )}
-        {!haveDeleted && !submitSuccess && (
+        {!haveDeleted && !submitSuccess && savedLog && (
           <div className='edit-page-button-group'>
             {!editable && (
               <>
