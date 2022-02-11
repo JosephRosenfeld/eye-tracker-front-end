@@ -6,14 +6,12 @@ const InfoSubPage = () => {
       <div className='info-content'>
         <div className='info-title'>Welcome to the Eye Tracker!</div>
         <div className='info-text'>
-          Hello, and welcome to the Eye Tracker, an application which makes it
-          easy to track your eye health as you go about your daily life.
+          Hello, and welcome to the Eye Tracker, an application that makes it
+          easy to track your eye health.
         </div>
         <div className='info-text'>
           The inspiration for this project actually came from my own experiences
-          after having eye surgery in 2020. I had this eye surgery to correct my
-          vision and allow me to see clearly without the aid of contacts or
-          glasses.
+          after having eye surgery in 2020.
         </div>
         <div className='info-text'>
           As with any surgery, there were several things that I needed to do
