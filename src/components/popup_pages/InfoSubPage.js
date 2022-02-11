@@ -4,69 +4,138 @@ const InfoSubPage = () => {
   return (
     <div className='info-container'>
       <div className='info-content'>
-        <div className='info-title'>Welcome to the Eye Tracker!</div>
+        <div className='info-title'>How the Eye Tracker was Created</div>
+        <div className='info-subtitle'>The Setup</div>
         <div className='info-text'>
-          Hello, and welcome to the Eye Tracker, an application that makes it
-          easy to track your eye health.
+          The inspiration for the Eye Tracker came from my own experiences after
+          having eye surgery in 2020.
         </div>
         <div className='info-text'>
-          The inspiration for this project actually came from my own experiences
-          after having eye surgery in 2020.
+          After my surgery I was prescribed several eye drops to ensure
+          everything healed properly.
         </div>
         <div className='info-text'>
-          As with any surgery, there were several things that I needed to do
-          after my operation in order to make sure everything healed properly.
-          This involved several eye drops and medications that I struggled to
-          keep track of.
+          But with so many different drops to take, I often forget which ones I
+          had or hadn't taken for that day.
         </div>
         <div className='info-text'>
-          To make matters worse, about 5 months after my surgery, I woke up in
-          the morning with an intense pain in my left eye, what we in the eye
-          business call an erosion. The erosions only last a few hours, however,
-          they do push your recovery date further back and require you to be
-          more aggressive with your post-operation eye drops and medication.
+          To make matters worse, I started getting erosions (small tears in the
+          eye). Erosions only last a few hours; however, they push back your
+          recovery by several months.
         </div>
         <div className='info-subtitle'>Problems</div>
         <div className='info-text'>
-          <strong>1. </strong>With so many different eye drops and medications
-          that need to be taken, it's easy to forget whether or not I've applied
-          the correct amount that day.
+          <strong>1. </strong>There are too many eye drops to take and no way to
+          track or make sure I took the right amount for that day.
           <br />
           <br />
-          <strong>2. </strong>I will often forget when my last erosion was or my
-          past erosion history. This makes it harder for me to track my progress
-          and see if my eyes are actually improving.
+          <strong>2. </strong>I often forget when my last erosion occurred,
+          making it hard for me to track if my eye health is improving.
           <br />
           <br />
-          <strong>3. </strong>Often times an erosion was preceded by a few days
-          where my eyes felt particularly irritated. This is great and can give
-          me a heads up that an erosion is on the way, however I tend to be
-          forgetful and might not remember that my eyes were feeling bad on
-          Monday, when I get my erosion on Friday.
+          <strong>3. </strong>An erosion is typically preceded by a few days
+          where the eyes feel irritated or dry. This is a good warning sign that
+          an erosion is on the way, but its tough to keep track of all this
+          data.
         </div>
         <div className='info-subtitle'>Solution</div>
         <div className='info-text'>
-          Design an application that allows me to track everything. Track my eye
-          drops, my medications, erosions, and even how my eyes were feeling
-          that day. If I could just track all of this data then all my problems
-          would be solved, and thus the Eye Tracker was born.
+          Design an application that can track everything. Track the eye drops,
+          the erosions, and even how my eyes were feeling that day. Thus the Eye
+          Tracker was born.
         </div>
-        <div className='info-title'>How to Use</div>
+        <div className='info-title'>How to Use the Eye Tracker</div>
+        <div className='info-subtitle'>General</div>
         <div className='info-text'>
-          The Eye Tracker is designed to be used in a similar way as one would
-          use Google Calendar. Except instead of different events, the things
-          being tracked and recorded are the different medications, conditions,
-          and notes concerning your eyes.
+          The Eye Tracker is designed in a calendar format with both a yearly
+          and daily view.
+        </div>
+        <div className='info-text'>
+          To navigate between different periods on either view, simply click the
+          left and right arrows shown in the header.
+        </div>
+        <div className='info-text'>
+          To navigate between either view, use the dropdown in the header or the
+          option in the side panel for mobile.
+        </div>
+        <div className='info-subtitle'>Yearly View</div>
+        <div className='info-text'>
+          On the yearly view, days are color coded based on the rating assigned
+          to that day.
+        </div>
+        <div className='info-text'>
+          Days with erosions can also be easily identified by their solid square
+          border.
+        </div>
+        <div className='info-text'>
+          In order to view a specific date on the daily view, simply find that
+          day on the yearly view and double-click it.
+        </div>
+        <div className='info-subtitle'>Daily View</div>
+        <div className='info-text'>
+          With the daily view one can easily see which eye drops have been taken
+          based on the different 'logs' shown.
+        </div>
+        <div className='info-text'>
+          Each log item has a customizable color and abbreviation that can be
+          changed in the settings pane.
+        </div>
+        <div className='info-text'>
+          To edit a log item, simply click on the circle containing it's
+          abbreviation.
+        </div>
+        <div className='info-subtitle'>Logs</div>
+        <div className='info-text'>
+          Log items are the cornerstone of this entire application.
+        </div>
+        <div className='info-text'>
+          In order to create a log item, simply navigate to the Add Item page
+          shown in the header or side panel if on mobile.
+        </div>
+        <div className='info-text'>
+          Log items can have one of 6 types:
           <br />
           <br />
-          Simply navigate to the 'Add Item' page in order to add any piece of
-          information you'd like to track.
+          1. Systane Eye Drop
           <br />
+          2. Muro Eye Drop
           <br />
-          If you wish to edit that information, you only need to click that item
-          on the calendar and you'll be navigated to the 'Edit Item' page. Here
-          you can make any changes to the item that you might need to or even
-          delete the item if need be.
+          3. Muro Ointment
+          <br />
+          4. Erosion
+          <br />
+          5. Note
+          <br />
+          6. Daily Review
+        </div>
+        <div className='info-text'>
+          Depending on which log item type is selected, additional fields may
+          display, however every log item will have a date and time field.
+        </div>
+        <div className='info-text'>
+          To log an item not listed above, select the Note log item and write
+          additional information as to what is being recorded in the description
+          field.
+        </div>
+        <div className='info-text'>
+          Utilize the Daily Review log item in order to assign a rating for that
+          specific day.
+        </div>
+        <div className='info-text'>
+          If multiple Daily Review log items are assigned to one day, the most
+          recent one will be color-coded onto the yearly view.
+        </div>
+        <div className='info-title'>Additional Information</div>
+        <div className='info-text'>
+          To read more technical notes concerning this project, such as
+          architecture decisions or tech stack, please review the README on
+          github linked here: {"  "}
+          <a
+            href='https://github.com/JosephRosenfeld/eye-tracker-front-end'
+            target='_blank'
+          >
+            https://github.com/JosephRosenfeld/eye-tracker-front-end
+          </a>
         </div>
       </div>
     </div>

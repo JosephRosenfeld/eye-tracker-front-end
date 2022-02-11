@@ -305,7 +305,7 @@ const EditSubPage = () => {
                     setEditable(true);
                   }}
                 >
-                  Edit Log
+                  Edit Item
                 </button>
                 <button
                   className='delete-button edit-page-button'
@@ -316,7 +316,7 @@ const EditSubPage = () => {
                     dispatch(deleteLog(formLog.logId));
                   }}
                 >
-                  Delete Log
+                  Delete Item
                 </button>
               </>
             )}
