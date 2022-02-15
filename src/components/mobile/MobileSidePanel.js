@@ -14,8 +14,6 @@ import { Link } from "react-router-dom";
 /*With Framer Motion
 const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {*/
 const MobileSidePanel = forwardRef(({ setIsSpOpen, view }, ref) => {
-  console.log("side panel rerender");
-
   //Define onclick function
   const spOnClick = (pause = false) => {
     //Pause to let delay go

@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateSettings } from "../../redux/actions/settingsActions";
 
 const SettingsSubPage = () => {
-  console.log("settings render");
   const [editable, setEditable] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [haveSaved, setHaveSaved] = useState(false);
@@ -32,7 +31,6 @@ const SettingsSubPage = () => {
 
   //Initialize form data with redux settings
   const [formSettings, setFormSettings] = useState(savedSettings);
-  console.log(formSettings);
 
   const onChange = (e) => {
     let { name, value } = e.target;
@@ -50,7 +48,6 @@ const SettingsSubPage = () => {
   };
 
   const onSubmit = (e) => {
-    console.log("submit");
     e.preventDefault();
     setHaveSaved(true);
     //update error state in order to rerender form
@@ -62,7 +59,6 @@ const SettingsSubPage = () => {
     if (Object.keys(errors).length === 0) {
       setEditable(false);
       setHaveSaved(false);
-      console.log(formSettings);
       dispatch(updateSettings(formSettings));
     }
   };

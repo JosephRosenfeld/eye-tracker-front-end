@@ -31,8 +31,6 @@ const theme = createTheme({
 });
 
 const EditSubPage = () => {
-  console.log("edit rerender");
-
   /*--- Initialization and Configuration ---*/
   const dispatch = useDispatch();
   //Get logId from url
@@ -49,7 +47,6 @@ const EditSubPage = () => {
   const savedLog = useSelector((state) =>
     state.logs.logs.find((log) => log.log_id === logId)
   );
-  console.log(savedLog);
   //Set local log from state based on global state
   const [formLog, setFormLog] = useState({
     logId: savedLog?.log_id,
@@ -59,7 +56,6 @@ const EditSubPage = () => {
     rating: savedLog?.rating,
     desc: savedLog?.log_description,
   });
-  console.log(formLog);
 
   useEffect(() => {
     //If redux log updates, reset form log with global state savedLog

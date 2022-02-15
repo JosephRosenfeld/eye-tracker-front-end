@@ -14,7 +14,6 @@ export const getSettings = () => async (dispatch) => {
       type: SETTINGS_LOADING,
     });
 
-    console.log("in get settings");
     //Make api call
     const { data } = await api.getSettings();
 
@@ -41,11 +40,8 @@ export const updateSettings = (settings_obj) => async (dispatch) => {
       type: SETTINGS_LOADING,
     });
 
-    console.log("in update settings");
     //Make api call
-    console.log(settings_obj);
     const { data } = await api.updateSettings(settings_obj);
-    console.log(data);
 
     dispatch({
       type: UPDATE_SETTINGS_SUCCESS,

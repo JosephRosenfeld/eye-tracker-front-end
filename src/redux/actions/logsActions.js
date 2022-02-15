@@ -44,7 +44,6 @@ export const createLog = (newLog) => async (dispatch) => {
 
     //Make api call
     const { data } = await api.createLog(newLog);
-    console.log(data);
 
     dispatch({
       type: CREATE_LOG_SUCCESS,
@@ -71,7 +70,6 @@ export const updateLog = (logId, updatedLog) => async (dispatch) => {
 
     //Make api call
     const { data } = await api.updateLog(logId, updatedLog);
-    console.log(data);
 
     dispatch({
       type: UPDATE_LOG_SUCCESS,
@@ -98,7 +96,6 @@ export const deleteLog = (logId) => async (dispatch) => {
 
     //Make api call
     const { data } = await api.deleteLog(logId);
-    console.log(data);
 
     dispatch({
       type: DELETE_LOG_SUCCESS,

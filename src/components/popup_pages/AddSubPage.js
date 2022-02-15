@@ -30,8 +30,6 @@ const theme = createTheme({
 });
 
 const AddSubPage = () => {
-  console.log("rerender");
-
   /*--- Initialization and Configuration ---*/
   const [editable, setEditable] = useState(true);
   const [formErrors, setFormErrors] = useState({});

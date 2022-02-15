@@ -24,7 +24,6 @@ export const loginAdmin = (pwd) => async (dispatch) => {
     //Make api call
     const { data } = await api.loginAdmin(pwd);
     //Set cookie
-    console.log(data);
     Cookie.set("loggedIn", "true", { expires: new Date(data.expires) });
 
     dispatch({
@@ -65,11 +64,8 @@ export const loginGuest = () => async (dispatch) => {
       payload: {},
     });
 
-    console.log("before getLogs");
-
     //Now that the login was a success lets get all the data we need
     dispatch(getLogs());
-    console.log("after getLogs before getSettings");
     dispatch(getSettings());
   } catch (error) {
     dispatch({

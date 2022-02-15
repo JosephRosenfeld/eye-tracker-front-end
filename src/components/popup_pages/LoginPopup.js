@@ -26,8 +26,6 @@ const theme = createTheme({
 });
 
 const LoginPopup = ({ showExtraProp }) => {
-  console.log("render login");
-
   /*--- Setting showExtra Val ---*/
   /*We store it as a state var so that its set once at initial render and doesn't
   change per each component update (like props would)*/
@@ -59,7 +57,6 @@ const LoginPopup = ({ showExtraProp }) => {
     if (adminSubmitted) {
       if (!haveNavigated && auth.adminLoggedIn) {
         setHaveNavigated(true);
-        console.log("before navigate");
         navigate(view, {
           replace: true,
         });
@@ -69,7 +66,6 @@ const LoginPopup = ({ showExtraProp }) => {
     } else if (guestSubmitted) {
       if (!haveNavigated && auth.guestLoggedIn) {
         setHaveNavigated(true);
-        console.log("before navigate", view);
         navigate(`${view}/info`, {
           replace: true,
         });

@@ -8,7 +8,6 @@ import { changeDt } from "../redux/actions/viewDateActions";
 import { drawerClasses } from "@mui/material";
 
 const Month = ({ m }) => {
-  console.log("month render");
   /*--- Extracting and Destructuring Global State Vars --- */
   const inWidth = useSelector((state) => state.screenSize);
   const viewDt = useSelector((state) => state.viewDt);

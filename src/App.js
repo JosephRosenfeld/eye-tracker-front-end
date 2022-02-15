@@ -24,7 +24,6 @@ import { AnimatePresence } from "framer-motion";
 
 function App() {
   const dispatch = useDispatch();
-  console.log("app rerender");
 
   /*--- Check Cookie Status ---*/
   /*We have a cookie, but does that cookie belong to an admin or a guest? We call
@@ -53,7 +52,6 @@ function App() {
   const auth = useSelector((state) => state.auth);
   const inWidth = useSelector((state) => state.screenSize);
   useEffect(() => {
-    console.log("Use effect for navigation is running");
     if (
       !auth.guestLoggedIn &&
       !auth.adminLoggedIn &&
