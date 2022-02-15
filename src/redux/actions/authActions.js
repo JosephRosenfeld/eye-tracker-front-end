@@ -24,7 +24,7 @@ export const loginAdmin = (pwd) => async (dispatch) => {
     //Make api call
     const { data } = await api.loginAdmin(pwd);
     //Set cookie
-    console.log();
+    console.log(data);
     Cookie.set("loggedIn", "true", { expires: new Date(data.expires) });
 
     dispatch({
